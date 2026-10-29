@@ -109,17 +109,27 @@ main{overflow-x:clip}
 .facts>div{padding:18px 18px 0 0;border-top:1px solid var(--line)}
 .facts b{display:block;font-family:var(--sans);text-transform:none;white-space:nowrap;font-weight:400;font-size:clamp(26px,2.6vw,40px);letter-spacing:-.04em;line-height:1;margin-top:10px}
 
-/* «Мы делаем …» — слово меняется с «жидким» переходом */
+/* «Мы делаем …» — слово всегда на второй строке, буквы поднимаются из размытия */
 .doing{padding-block:clamp(70px,10vw,140px);border-block:1px solid var(--line)}
 .doing-top{display:flex;justify-content:space-between}
-.doing-main{display:flex;flex-wrap:wrap;align-items:baseline;gap:.25em .4em;margin-top:clamp(26px,4vw,50px);min-height:1.9em;font-size:clamp(44px,8.4vw,150px);line-height:.95;letter-spacing:-.06em;text-transform:uppercase;font-weight:400}
-.doing-pre{color:var(--dim)}
-.doing-word{display:inline-block;color:var(--fg);filter:url(#liquid2);transition:opacity .6s var(--ease)}
-.doing-word.out{opacity:0}
-.doing-word::after{content:"";display:inline-block;width:.16em;height:.16em;border-radius:50%;background:var(--red);margin-left:.08em;box-shadow:0 0 18px var(--red);vertical-align:baseline}
-.doing-bar{height:1px;background:var(--line);margin-top:clamp(26px,4vw,48px);position:relative;overflow:hidden}
-.doing-bar i{position:absolute;inset:0;background:var(--red);transform-origin:left;transform:scaleX(0)}
-.doing-sub{margin-top:16px;transition:opacity .5s var(--ease)}
+.doing-main{margin-top:clamp(26px,4vw,50px);font-size:clamp(46px,11vw,170px);line-height:.92;letter-spacing:-.06em;text-transform:uppercase;font-weight:400}
+.doing-pre{display:block;color:var(--dim)}
+.doing-word{display:block;height:1.06em;overflow:hidden;white-space:nowrap;color:var(--fg)}
+.doing-word .ch{display:inline-block;will-change:transform,filter,opacity;transition:transform .9s var(--ease),filter .9s var(--ease),opacity .9s var(--ease)}
+.doing-word .ch.lo{transform:translateY(.45em);filter:blur(10px);opacity:0}
+.doing-word .ch.hi{transform:translateY(-.3em);filter:blur(10px);opacity:0;transition-duration:.5s}
+.doing-word .dot{display:inline-block;width:.15em;height:.15em;border-radius:50%;background:var(--red);margin-left:.06em;box-shadow:0 0 18px var(--red);transition:opacity .5s}
+.doing-list{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,28px);margin-top:clamp(36px,5vw,70px);list-style:none}
+.doing-list button{all:unset;cursor:pointer;display:grid;gap:10px;width:100%;color:var(--dim);transition:color .5s var(--ease)}
+.doing-list button:focus-visible{outline:1px solid var(--fg);outline-offset:6px}
+.doing-list .t{font:400 clamp(17px,1.5vw,22px)/1.2 var(--sans);letter-spacing:-.02em;text-transform:none}
+.doing-list .s{color:var(--dim);opacity:0;transition:opacity .6s var(--ease)}
+.doing-list .bar{height:1px;background:var(--line);position:relative;overflow:hidden;order:-1;margin-bottom:8px}
+.doing-list .bar i{position:absolute;inset:0;background:var(--red);transform-origin:left;transform:scaleX(0)}
+.doing-list li.on button{color:var(--fg)}
+.doing-list li.on .s{opacity:1}
+.doing-list li.on .bar i{animation:fill var(--dur,4.2s) linear forwards}
+@keyframes fill{to{transform:scaleX(1)}}
 
 /* 03 · работы — шапка проекта и три настоящих экрана */
 .works-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(30px,5vw,70px)}
@@ -136,21 +146,46 @@ main{overflow-x:clip}
 .screens{display:grid;grid-template-columns:repeat(3,minmax(0,300px));justify-content:center;gap:clamp(18px,4vw,70px);margin-top:clamp(30px,4vw,56px);position:relative}
 .screens::before{content:"";position:absolute;inset:-6% 10%;background:radial-gradient(closest-side,rgba(255,255,255,.13),transparent 75%);pointer-events:none}
 .screens .phone:nth-child(2){transform:translateY(-6%)}
-.phone{position:relative;aspect-ratio:585/1266;border-radius:clamp(22px,2.6vw,38px);overflow:hidden;border:6px solid #1b1b1b;margin:0;
-  box-shadow:0 50px 90px -40px rgba(0,0,0,.55);background:#111}
+/* телефон как iPhone 17 Pro: рамка-титан, экран 1206×2622, «островок» сверху */
+.phone{position:relative;isolation:isolate;margin:0;padding:3.4%;border-radius:15% / 6.9%;
+  background:linear-gradient(145deg,#3a3a3d,#141415 38%,#0b0b0c 62%,#2b2b2e);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),inset 0 0 0 3px #0a0a0a,0 50px 90px -40px rgba(0,0,0,.6),0 0 0 1px rgba(0,0,0,.5)}
+.phone::before,.phone::after{content:"";position:absolute;width:1.1%;border-radius:2px;background:#232325;z-index:-1}
+.phone::before{left:-1%;top:17%;height:31%;background:linear-gradient(#232325 0 17%,transparent 17% 30%,#232325 30% 60%,transparent 60% 68%,#232325 68%)}
+.phone::after{right:-1%;top:27%;height:11%}
+.phone .scr{position:relative;display:block;aspect-ratio:1206/2622;border-radius:12.4% / 5.7%;overflow:hidden;background:#000}
+.phone .scr::after{content:"";position:absolute;left:50%;top:1.6%;width:31%;height:3.3%;transform:translateX(-50%);border-radius:999px;background:#000;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
 .phone img{width:100%;height:100%;object-fit:cover;object-position:top}
 .case img.gs{filter:grayscale(1) contrast(1.04);transition:filter 1.2s var(--ease)}
 .case:hover img.gs,.case.lit img.gs{filter:none}
 .tlink{display:inline-flex;gap:10px;align-items:center;padding-bottom:5px;border-bottom:1px solid var(--line);transition:border-color .4s,color .4s}
 .tlink:hover{border-color:var(--red);color:#fff}
 
-/* 04 · цены — колонки без плашек */
-.plans{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:clamp(30px,5vw,70px)}
-.plan{padding:26px clamp(16px,2.4vw,36px) 0 0;display:flex;flex-direction:column;gap:16px;border-right:1px solid var(--line);margin-right:clamp(16px,2.4vw,36px);min-height:340px}
-.plan:last-child{border-right:0;margin-right:0}
-.plan h3{font-size:clamp(26px,2.4vw,36px);font-weight:400;letter-spacing:-.04em;line-height:1}
+/* карточки «Цены» и «Как это происходит»: скругление, по краю медленно идёт блик,
+   под курсором — мягкий свет */
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+.cards{display:grid;gap:clamp(12px,1.4vw,20px);margin-top:clamp(30px,5vw,70px)}
+.card{position:relative;isolation:isolate;border-radius:24px;padding:clamp(22px,2.2vw,32px);
+  background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.015) 60%);
+  box-shadow:inset 0 0 0 1px var(--line),0 30px 60px -40px rgba(0,0,0,.45);
+  transition:background .8s var(--ease),box-shadow .8s var(--ease)}
+.card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;z-index:-1;
+  background:conic-gradient(from var(--a),transparent 0deg,rgba(241,240,237,.7) 30deg,rgba(226,38,26,.55) 46deg,transparent 84deg,transparent 360deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:.6;animation:sweep 14s linear infinite;animation-delay:var(--d,0s);transition:opacity .8s var(--ease)}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;opacity:0;transition:opacity .8s var(--ease);
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.07),transparent 60%)}
+.card:hover,.card.lit{background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.02) 60%)}
+.card:hover::before,.card.lit::before{opacity:1}
+.card:hover::after{opacity:1}
+@keyframes sweep{to{--a:360deg}}
+
+.plans{grid-template-columns:repeat(3,1fr)}
+.plan{display:flex;flex-direction:column;gap:16px;min-height:380px}
+.plan h3{font-size:clamp(26px,2.4vw,36px);font-weight:400;letter-spacing:-.04em;line-height:1;margin-top:18px}
 .plan p{color:var(--muted)}
-.plan .price{font-size:clamp(46px,5vw,84px);font-weight:300;letter-spacing:-.06em;line-height:1;margin-top:auto}
+.plan .price{font-size:clamp(46px,4.6vw,80px);font-weight:300;letter-spacing:-.06em;line-height:1;margin-top:auto;white-space:nowrap}
 .plan .price small{font:400 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:10px;vertical-align:middle}
 .plan .tlink{align-self:flex-start;margin-top:6px}
 .plans-note{margin-top:26px}
@@ -163,11 +198,13 @@ main{overflow-x:clip}
 .founder .sign{width:min(240px,55%);margin-top:40px}
 
 /* 06 · как это происходит */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);margin-top:clamp(30px,5vw,70px)}
-.steps>div{padding:24px 24px 0 0;border-right:1px solid var(--line);margin-right:24px}
-.steps>div:last-child{border-right:0;margin-right:0}
-.steps h4{font-size:clamp(22px,2vw,28px);font-weight:400;letter-spacing:-.035em;margin:40px 0 10px}
-.steps p{color:var(--muted);max-width:260px}
+.steps{grid-template-columns:repeat(4,1fr)}
+.step{min-height:260px;display:flex;flex-direction:column}
+.step .num{display:flex;justify-content:space-between;align-items:center}
+.step .num::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--fg);opacity:.25;transition:background .8s,opacity .8s,box-shadow .8s}
+.step.lit .num::after,.step:hover .num::after{background:var(--red);opacity:1;box-shadow:0 0 10px var(--red)}
+.steps h4{font-size:clamp(22px,2vw,28px);font-weight:400;letter-spacing:-.035em;margin:0 0 10px;padding-top:64px}
+.steps p{color:var(--muted);max-width:280px}
 
 /* 07 · связь: широкий кадр со шлейфом, текст — на пустой части */
 .contact{min-height:100svh;display:flex;align-items:center;overflow:hidden}
@@ -189,6 +226,7 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
 /* появление при прокрутке */
 .rv{opacity:0;transform:translateY(26px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
 .rv.in{opacity:1;transform:none}
+.card.rv{transition:opacity 1.1s var(--ease),transform 1.1s var(--ease),background .8s var(--ease)}
 .mask{overflow:hidden;display:block}
 .mask>span{display:block;transform:translateY(102%);transition:transform 1.2s var(--ease)}
 .in .mask>span,.mask.in>span{transform:none}
@@ -209,14 +247,15 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
   .screens::-webkit-scrollbar{display:none}
   .screens .phone{flex:0 0 62vw;scroll-snap-align:center}
   .screens .phone:nth-child(2){transform:none}
-  .doing-main{min-height:2.9em}
+  .doing-list{grid-template-columns:1fr 1fr;row-gap:22px}
   .plans{grid-template-columns:1fr}
-  .plan{border-right:0;margin-right:0;border-bottom:1px solid var(--line);padding-bottom:28px;min-height:0}
+  .plan{min-height:0}
+  .plan .price{margin-top:22px}
   .founder{grid-template-columns:1fr}
   .founder .shot{height:auto;aspect-ratio:4/5}
-  .steps{grid-template-columns:1fr 1fr;row-gap:36px}
-  .steps>div:nth-child(2){border-right:0;margin-right:0}
-  .steps h4{margin-top:22px}
+  .steps{grid-template-columns:1fr 1fr}
+  .step{min-height:0}
+  .steps h4{padding-top:36px}
   .contact{min-height:0;flex-direction:column;align-items:stretch;padding-top:clamp(90px,20vw,140px)}
   .contact .shot{position:relative;inset:auto;width:auto;order:2;aspect-ratio:16/10;margin-top:30px}
   .contact .shot img{object-position:80% 50%}
@@ -226,6 +265,10 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
     transform:translateY(140%);transition:transform .7s var(--ease)}
   .dock.on{transform:none}
   footer{grid-template-columns:1fr 1fr;padding-bottom:90px}footer>:nth-child(2){display:none}
+}
+@media (max-width:560px){
+  .steps{grid-template-columns:1fr}
+  .steps h4{padding-top:26px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
@@ -238,10 +281,6 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="liquid" x="-20%" y="-40%" width="140%" height="180%">
     <feTurbulence type="fractalNoise" baseFrequency=".012 .03" numOctaves="2" seed="4" result="n"/>
-    <feDisplacementMap in="SourceGraphic" in2="n" scale="0" xChannelSelector="R" yChannelSelector="G"/>
-  </filter>
-  <filter id="liquid2" x="-10%" y="-30%" width="120%" height="160%">
-    <feTurbulence type="fractalNoise" baseFrequency=".01 .04" numOctaves="2" seed="7" result="n"/>
     <feDisplacementMap in="SourceGraphic" in2="n" scale="0" xChannelSelector="R" yChannelSelector="G"/>
   </filter>
 </svg>
@@ -288,12 +327,13 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
 
   <section class="doing wrap" aria-label="Чем занимаемся">
     <div class="doing-top mono"><span class="dim">Чем занимаемся</span><span class="dim"><span id="dNum">01</span> / 04</span></div>
-    <div class="doing-main">
-      <span class="doing-pre">Мы делаем</span>
-      <span class="doing-word" id="dWord">сайты</span>
-    </div>
-    <div class="doing-bar"><i id="dBar"></i></div>
-    <p class="mono muted doing-sub" id="dSub">Сайт под ваш бизнес — первая версия за 2 дня</p>
+    <h2 class="doing-main"><span class="doing-pre">Мы делаем</span><span class="doing-word" id="dWord" aria-live="polite">сайты</span></h2>
+    <ol class="doing-list mono" id="dList">
+      <li class="on"><button type="button"><span class="bar"><i></i></span><span>01</span><span class="t">Сайты</span><span class="s">Первая версия за 2 дня</span></button></li>
+      <li><button type="button"><span class="bar"><i></i></span><span>02</span><span class="t">Приложения в Telegram</span><span class="s">Запись, заявки, каталог</span></button></li>
+      <li><button type="button"><span class="bar"><i></i></span><span>03</span><span class="t">Реклама</span><span class="s">ВКонтакте и Яндекс</span></button></li>
+      <li><button type="button"><span class="bar"><i></i></span><span>04</span><span class="t">Дизайн</span><span class="s">Логотипы, обложки, стиль</span></button></li>
+    </ol>
   </section>
 
   <!-- 03 · работы -->
@@ -314,9 +354,9 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
         <div class="case-meta mono"><span class="ok">● Работает</span><a class="tlink" href="https://kuzovnoy25.ru" target="_blank" rel="noopener">kuzovnoy25.ru <span class="arr">↗</span></a></div>
       </header>
       <div class="screens">
-        <figure class="phone"><img class="gs" src="img/works/kuzov-1.jpg" alt="Кузовной 25 — главный экран" loading="lazy" decoding="async"></figure>
-        <figure class="phone"><img class="gs" src="img/works/kuzov-2.jpg" alt="Кузовной 25 — работы" loading="lazy" decoding="async"></figure>
-        <figure class="phone"><img class="gs" src="img/works/kuzov-3.jpg" alt="Кузовной 25 — отзывы" loading="lazy" decoding="async"></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/kuzov-1.jpg" alt="Кузовной 25 — главный экран" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/kuzov-2.jpg" alt="Кузовной 25 — работы" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/kuzov-3.jpg" alt="Кузовной 25 — отзывы" loading="lazy" decoding="async"></span></figure>
       </div>
     </article>
 
@@ -328,9 +368,9 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
         <div class="case-meta mono"><span class="ok">● Работает</span></div>
       </header>
       <div class="screens">
-        <figure class="phone"><img class="gs" src="img/works/nastya-1.jpg" alt="Статистика доходов" loading="lazy" decoding="async"></figure>
-        <figure class="phone"><img class="gs" src="img/works/nastya-2.jpg" alt="Настройки онлайн-записи" loading="lazy" decoding="async"></figure>
-        <figure class="phone"><img class="gs" src="img/works/nastya-3.jpg" alt="База клиентов" loading="lazy" decoding="async"></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/nastya-1.jpg" alt="Статистика доходов" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/nastya-2.jpg" alt="Настройки онлайн-записи" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/nastya-3.jpg" alt="База клиентов" loading="lazy" decoding="async"></span></figure>
       </div>
     </article>
 
@@ -342,9 +382,9 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
         <div class="case-meta mono"><span class="ok">● Запущен</span><a class="tlink" href="https://car-tuning.brows-booking.workers.dev" target="_blank" rel="noopener">Открыть <span class="arr">↗</span></a></div>
       </header>
       <div class="screens">
-        <figure class="phone"><img class="gs" src="img/works/fit-1.jpg" alt="FITMENT — главный экран" loading="lazy" decoding="async"></figure>
-        <figure class="phone"><img class="gs" src="img/works/fit-2.jpg" alt="FITMENT — до и после" loading="lazy" decoding="async"></figure>
-        <figure class="phone"><img class="gs" src="img/works/fit-3.jpg" alt="FITMENT — студия подбора" loading="lazy" decoding="async"></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/fit-1.jpg" alt="FITMENT — главный экран" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/fit-2.jpg" alt="FITMENT — до и после" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/fit-3.jpg" alt="FITMENT — студия подбора" loading="lazy" decoding="async"></span></figure>
       </div>
     </article>
   </section>
@@ -352,22 +392,22 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
   <!-- 04 · цены -->
   <section class="sec wrap" id="price" style="padding-top:0">
     <span class="label mono">Услуги и цены · (04)</span>
-    <div class="plans">
-      <article class="plan rv">
+    <div class="cards plans">
+      <article class="card plan rv">
         <span class="mono muted">01</span>
         <h3>Сайт</h3>
         <p>Сайт под ваш бизнес: работы, цены, отзывы, кнопки связи. Первая версия за 2–3 дня, неделя правок — бесплатно</p>
         <div class="price"><small>от</small>4 500 ₽</div>
         <a class="tlink mono tg" href="#">Обсудить <span class="arr">→</span></a>
       </article>
-      <article class="plan rv">
+      <article class="card plan rv">
         <span class="mono muted">02</span>
         <h3>Приложение в Telegram</h3>
         <p>Запись, заявки или каталог прямо в Telegram. Клиенту ничего не нужно скачивать, вам приходят уведомления</p>
         <div class="price"><small>от</small>8 000 ₽</div>
         <a class="tlink mono tg" href="#">Обсудить <span class="arr">→</span></a>
       </article>
-      <article class="plan rv">
+      <article class="card plan rv">
         <span class="mono muted">03</span>
         <h3>Реклама</h3>
         <p>Реклама ВКонтакте и в Яндексе: картинки, тексты, запуск. Дальнейшее ведение — от 5 000 ₽ в месяц</p>
@@ -380,7 +420,7 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
 
   <!-- 05 · кто делает -->
   <section class="founder corners">
-    <figure class="shot fade-r parallax"><img src="img/gen/t-face-web.jpg" alt="ORIEN" loading="lazy" decoding="async"></figure>
+    <figure class="shot fade-r parallax"><img src="img/gen/q-squat-web.jpg" alt="Основатель ORIEN" loading="lazy" decoding="async"></figure>
     <div class="txt">
       <span class="label mono">Кто делает · (05)</span>
       <div class="rv" style="margin-top:28px">
@@ -395,11 +435,11 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
   <!-- 06 · как это происходит -->
   <section class="sec wrap">
     <span class="label mono">Как это происходит · (06)</span>
-    <div class="steps">
-      <div class="rv"><span class="mono muted">01</span><h4>Разговор</h4><p>Вы рассказываете о деле. Пятнадцать минут переписки — и нам понятно, что нужно</p></div>
-      <div class="rv"><span class="mono muted">02</span><h4>Первая версия</h4><p>Через пару дней вы видите готовый сайт. До оплаты</p></div>
-      <div class="rv"><span class="mono muted">03</span><h4>Доводка</h4><p>Правим тексты, фото и детали, пока не станет «то самое»</p></div>
-      <div class="rv"><span class="mono muted">04</span><h4>Запуск</h4><p>Свой адрес, открывается в России без VPN. Дальше мы на связи</p></div>
+    <div class="cards steps">
+      <div class="card step rv"><span class="mono muted num">01</span><h4>Разговор</h4><p>Вы рассказываете о деле. Пятнадцать минут переписки — и нам понятно, что нужно</p></div>
+      <div class="card step rv"><span class="mono muted num">02</span><h4>Первая версия</h4><p>Через пару дней вы видите готовый сайт. До оплаты</p></div>
+      <div class="card step rv"><span class="mono muted num">03</span><h4>Доводка</h4><p>Правим тексты, фото и детали, пока не станет «то самое»</p></div>
+      <div class="card step rv"><span class="mono muted num">04</span><h4>Запуск</h4><p>Свой адрес, открывается в России без VPN. Дальше мы на связи</p></div>
     </div>
   </section>
 
@@ -476,26 +516,48 @@ if (lg && disp && !reduce) {
   requestAnimationFrame(step);
 }
 
-// «Мы делаем …»: слово растекается, меняется и собирается обратно
-const dWord = document.getElementById("dWord"), dSub = document.getElementById("dSub"), dNum = document.getElementById("dNum"), dBar = document.getElementById("dBar");
-const dDisp = document.querySelector("#liquid2 feDisplacementMap");
-const DOING = [
-  ["сайты", "Сайт под ваш бизнес — первая версия за 2 дня"],
-  ["приложения в Telegram", "Запись, заявки и каталог — прямо в мессенджере"],
-  ["рекламу", "ВКонтакте и Яндекс: картинки, тексты, запуск"],
-  ["дизайн", "Логотипы, обложки, визуальный стиль бренда"],
-];
-let dI = 0;
-const melt = (from, to, ms) => new Promise(res => { const t0 = performance.now(); const f = t => { const k = Math.min(1, (t - t0) / ms); dDisp.setAttribute("scale", (from + (to - from) * k).toFixed(1)); k < 1 ? requestAnimationFrame(f) : res(); }; requestAnimationFrame(f); });
-function barRun() { dBar.style.transition = "none"; dBar.style.transform = "scaleX(0)"; requestAnimationFrame(() => requestAnimationFrame(() => { dBar.style.transition = "transform 3.4s linear"; dBar.style.transform = "scaleX(1)"; })); }
-async function doingNext() {
-  dI = (dI + 1) % DOING.length;
-  if (!reduce) { await melt(0, 70, 450); dWord.classList.add("out"); dSub.style.opacity = 0; await new Promise(r => setTimeout(r, 250)); }
-  dWord.textContent = DOING[dI][0]; dSub.textContent = DOING[dI][1]; dNum.textContent = String(dI + 1).padStart(2, "0");
-  dWord.classList.remove("out"); dSub.style.opacity = 1; barRun();
-  if (!reduce) await melt(70, 0, 650);
+// «Мы делаем …»: буквы уходят вверх и поднимаются снизу из размытия; слово всегда на одном месте
+const dWord = document.getElementById("dWord"), dNum = document.getElementById("dNum");
+const dItems = [...document.querySelectorAll("#dList li")];
+const DOING = ["сайты", "приложения", "рекламу", "дизайн"];
+const DUR = 4200;
+let dI = 0, dTimer = null, dBusy = false;
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const chars = w => [...w].map(c => `<span class="ch">${c === " " ? "&nbsp;" : c}</span>`).join("") + '<span class="ch"><span class="dot"></span></span>';
+function mark() {
+  dNum.textContent = String(dI + 1).padStart(2, "0");
+  dItems.forEach((li, i) => { li.classList.toggle("on", i === dI); const b = li.querySelector(".bar i"); b.style.animation = "none"; b.offsetWidth; b.style.animation = ""; });
 }
-barRun(); setInterval(doingNext, 3800);
+async function doingGo(n) {
+  if (dBusy || n === dI) return; dBusy = true;
+  clearTimeout(dTimer); dI = n; mark();
+  if (!reduce) {
+    const old = [...dWord.querySelectorAll(".ch")];
+    old.forEach((c, i) => { c.style.transitionDelay = (i * 0.025) + "s"; c.classList.add("hi"); });
+    await wait(420 + old.length * 25);
+  }
+  dWord.innerHTML = chars(DOING[dI]);
+  if (!reduce) {
+    const nw = [...dWord.querySelectorAll(".ch")];
+    nw.forEach((c, i) => { c.classList.add("lo"); c.style.transitionDelay = (i * 0.035) + "s"; });
+    dWord.offsetWidth;
+    nw.forEach(c => c.classList.remove("lo"));
+  }
+  dBusy = false; dTimer = setTimeout(() => doingGo((dI + 1) % DOING.length), DUR);
+}
+dWord.innerHTML = chars(DOING[0]); mark();
+dItems.forEach((li, i) => li.querySelector("button").addEventListener("click", () => doingGo(i)));
+dTimer = setTimeout(() => doingGo(1), DUR);
+
+// карточки: свет под курсором, на телефоне — подсветка, когда карточка в центре экрана
+document.querySelectorAll(".card").forEach((c, i) => {
+  c.style.setProperty("--d", (-i * 3.3) + "s");
+  c.addEventListener("pointermove", e => { const r = c.getBoundingClientRect(); c.style.setProperty("--mx", (e.clientX - r.left) + "px"); c.style.setProperty("--my", (e.clientY - r.top) + "px"); });
+});
+if (matchMedia("(hover: none)").matches) {
+  const ioC = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle("lit", e.isIntersecting)), { rootMargin: "-40% 0px -40% 0px" });
+  document.querySelectorAll(".card").forEach(c => ioC.observe(c));
+}
 
 // работы: цвет появляется, когда проект в центре экрана
 const ioW = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle("lit", e.isIntersecting)), { rootMargin: "-35% 0px -35% 0px" });
