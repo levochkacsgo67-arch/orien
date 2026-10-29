@@ -6,7 +6,14 @@
 <title>ORIEN</title>
 <meta name="description" content="ORIEN — цифровая студия. Сайты, приложения в Telegram и реклама. Сахалин">
 <meta name="theme-color" content="#5a5a5a">
-<link rel="icon" href="img/orien.png">
+<link rel="icon" href="img/icon-180.png">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ORIEN — цифровая студия">
+<meta property="og:description" content="Сайты, приложения в Telegram и реклама для живого бизнеса. Первая версия — через 2 дня">
+<meta property="og:image" content="https://levochkacsgo67-arch.github.io/orien/img/og.jpg">
+<meta property="og:url" content="https://levochkacsgo67-arch.github.io/orien/">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap&subset=cyrillic" rel="stylesheet">
@@ -59,8 +66,9 @@ img{display:block;max-width:100%}
   opacity:0;filter:blur(18px);transform:scale(1.06);animation:photoIn 2.2s var(--ease) .2s forwards}
 @keyframes photoIn{to{opacity:1;filter:blur(0);transform:none}}
 .poster .logo{position:absolute;left:50%;top:47%;width:80%;transform:translate(-50%,-50%) scale(1.08);
-  opacity:0;filter:blur(30px);animation:logoIn 1.8s var(--ease) 1s forwards}
+  opacity:0;filter:blur(8px);animation:logoIn 1.8s var(--ease) 1s forwards}
 @keyframes logoIn{to{opacity:1;filter:blur(0);transform:translate(-50%,-50%)}}
+.poster .logo.liquid{filter:url(#liquid)}
 .poster .logo img{width:100%;animation:breathe 7s ease-in-out 3s infinite}
 @keyframes breathe{50%{filter:drop-shadow(0 0 22px rgba(226,38,26,.55))}}
 .corner{position:absolute;z-index:2;color:#ececec}
@@ -68,6 +76,11 @@ img{display:block;max-width:100%}
 .c-br{right:var(--pad);bottom:clamp(18px,3vw,32px);text-align:right}
 .fade-in{opacity:0;animation:fade 1.2s var(--ease) 2s forwards}
 @keyframes fade{to{opacity:1}}
+
+.poster .logo .drop{position:absolute;left:90.9%;top:86%;width:3.2%;aspect-ratio:1;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:var(--red);
+  box-shadow:0 0 14px rgba(226,38,26,.6);transform:translate(-50%,0) scale(0);opacity:0;animation:drop 9s cubic-bezier(.55,0,.75,.3) 4s infinite}
+@keyframes drop{0%,62%{transform:translate(-50%,0) scale(0);opacity:0}70%{transform:translate(-50%,0) scale(1,1.15);opacity:1}
+  78%{transform:translate(-50%,40%) scale(.85,1.35);opacity:1}100%{transform:translate(-50%,900%) scale(.7,1.1);opacity:0}}
 
 /* сетка с крестиками */
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
@@ -122,6 +135,8 @@ section{position:relative}
   box-shadow:0 40px 80px -30px rgba(0,0,0,.7);background:#000;transition:transform 1.2s var(--ease);will-change:transform;position:relative}
 .phone img{width:100%;height:100%;object-fit:cover;object-position:top}
 .work:hover .phone{transform:translateY(-8px)}
+.work-media img{filter:grayscale(1) contrast(1.05) brightness(.92);transition:filter 1.2s var(--ease)}
+.work:hover .work-media img,.work.lit .work-media img{filter:none}
 .ba{position:absolute;inset:0}
 .ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ba .after{animation:baSwap 9s var(--ease) infinite}
@@ -135,6 +150,21 @@ section{position:relative}
 .facts b{display:block;font:500 14px/1.4 var(--sans);letter-spacing:0;text-transform:none;color:var(--fg)}
 .link{display:inline-flex;gap:8px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:4px;transition:border-color .4s,color .4s}
 .link:hover{border-color:var(--red);color:var(--red)}
+
+/* услуги и цены */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.plan{position:relative;border:1px solid var(--line);border-radius:22px;padding:28px 26px 26px;display:flex;flex-direction:column;gap:18px;min-height:360px;
+  background:linear-gradient(180deg,rgba(255,255,255,.025),transparent 60%);transition:border-color .6s var(--ease),transform .8s var(--ease)}
+.plan:hover{border-color:rgba(226,38,26,.55);transform:translateY(-4px)}
+.plan h3{font-size:clamp(26px,2.4vw,34px);font-weight:500;letter-spacing:-.035em;line-height:1}
+.plan .price{font-size:clamp(34px,3.4vw,48px);font-weight:500;letter-spacing:-.05em;line-height:1;margin-top:auto}
+.plan .price small{font:400 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:8px}
+.plan p{color:var(--muted)}
+.plan .go{align-self:flex-start}
+.plans-note{margin-top:22px}
+
+/* кнопка на телефоне */
+.dock{display:none}
 
 /* основатель: серый блок с портретом-негативом */
 .face{display:grid;grid-template-columns:1fr 1fr;min-height:100svh}
@@ -169,6 +199,13 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
 .in .mask>span,.mask.in>span{transform:none}
 
 @media (max-width:900px){
+  .plans{grid-template-columns:1fr}
+  .plan{min-height:0}
+  .dock{display:flex;position:fixed;left:16px;right:16px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:60;height:54px;border-radius:999px;
+    align-items:center;justify-content:center;gap:10px;background:var(--red);color:#fff;font:500 16px var(--sans);box-shadow:0 12px 40px -10px rgba(226,38,26,.7);
+    transform:translateY(140%);transition:transform .7s var(--ease)}
+  .dock.on{transform:none}
+  footer{padding-bottom:90px}
   .nav{grid-template-columns:1fr auto}.nav ul{display:none}
   .nav .brand img{height:20px}
   .poster{top:45%;width:132vw}
@@ -200,11 +237,18 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="liquid" x="-20%" y="-40%" width="140%" height="180%">
+    <feTurbulence type="fractalNoise" baseFrequency=".012 .03" numOctaves="2" seed="4" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
 
 <header class="nav mono">
   <a href="#top" class="brand" aria-label="ORIEN"><img src="img/orien.png" alt="orien"><span style="opacity:.75">Цифровая студия</span></a>
   <ul>
     <li><a href="#works">Работы</a></li>
+    <li><a href="#price">Цены</a></li>
     <li><a href="#approach">Подход</a></li>
     <li><a href="#contact">Связь</a></li>
   </ul>
@@ -215,7 +259,7 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
   <section class="hero">
     <h1 class="poster" aria-label="ORIEN — цифровая студия">
       <img class="photo" src="img/gen/hero-neg.jpg" alt="Лев Плотницкий, основатель ORIEN">
-      <span class="logo"><img src="img/orien.png" alt=""></span>
+      <span class="logo" id="heroLogo"><img src="img/orien.png" alt=""><i class="drop"></i></span>
     </h1>
     <div class="corner c-bl mono fade-in">
       <span>Собираем цифровое лицо для живого дела — тихо, точно и без лишнего</span>
@@ -236,7 +280,7 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
     <div class="manifest">
       <p data-words>Мы делаем меньше, но лучше. Разбираемся, как устроено ваше дело, убираем всё лишнее и собираем вещь, которая просто работает</p>
       <figure class="rv">
-        <div class="neg parallax"><img src="img/gen/desk-neg-web.jpg" alt="Основатель ORIEN за работой"></div>
+        <div class="neg parallax"><img src="img/gen/desk-neg-web.jpg" loading="lazy" decoding="async" alt="Основатель ORIEN за работой"></div>
         <figcaption class="mono muted">Лев Плотницкий, основатель</figcaption>
       </figure>
     </div>
@@ -265,7 +309,7 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
 
     <article class="work rv">
       <div class="work-media">
-        <div class="phone" data-py="-30"><img src="img/kuzov-m.png" alt="Сайт Кузовной 25"></div>
+        <div class="phone" data-py="-30"><img src="img/kuzov-m.png" loading="lazy" decoding="async" alt="Сайт Кузовной 25"></div>
       </div>
       <div class="work-info">
         <div>
@@ -282,7 +326,7 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
 
     <article class="work rv">
       <div class="work-media">
-        <div class="phone" data-py="-30"><img src="img/anastasia-m.png" alt="Запись к мастеру"></div>
+        <div class="phone" data-py="-30"><img src="img/anastasia-m.png" loading="lazy" decoding="async" alt="Запись к мастеру"></div>
       </div>
       <div class="work-info">
         <div>
@@ -296,7 +340,7 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
 
     <article class="work rv">
       <div class="work-media">
-        <div class="ba"><img src="img/chaser-before.jpg" alt="Машина до"><img class="after" src="img/chaser-after.jpg" alt="Машина после примерки"><span class="mono ba-l">До</span><span class="mono ba-r">После</span></div>
+        <div class="ba"><img src="img/chaser-before.jpg" loading="lazy" decoding="async" alt="Машина до"><img class="after" src="img/chaser-after.jpg" loading="lazy" decoding="async" alt="Машина после примерки"><span class="mono ba-l">До</span><span class="mono ba-r">После</span></div>
       </div>
       <div class="work-info">
         <div>
@@ -309,14 +353,42 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
     </article>
   </section>
 
+  <section class="sec wrap" id="price" style="padding-top:0">
+    <div class="label mono">Услуги и цены</div>
+    <div class="plans">
+      <article class="plan rv">
+        <span class="mono muted">01</span>
+        <h3>Сайт</h3>
+        <p>Сайт под ваш бизнес: работы, цены, отзывы, кнопки связи. Первая версия за 2–3 дня, неделя правок — бесплатно</p>
+        <div class="price"><small>от</small>4 500 ₽</div>
+        <a class="btn mono tg go" href="#">Обсудить <span class="arr">→</span></a>
+      </article>
+      <article class="plan rv">
+        <span class="mono muted">02</span>
+        <h3>Приложение в Telegram</h3>
+        <p>Запись, заявки или каталог прямо в Telegram. Клиенту ничего не нужно скачивать, вам приходят уведомления</p>
+        <div class="price"><small>от</small>8 000 ₽</div>
+        <a class="btn mono tg go" href="#">Обсудить <span class="arr">→</span></a>
+      </article>
+      <article class="plan rv">
+        <span class="mono muted">03</span>
+        <h3>Реклама</h3>
+        <p>Реклама ВКонтакте и в Яндексе: картинки, тексты, запуск. Дальнейшее ведение — от 5 000 ₽ в месяц</p>
+        <div class="price"><small>от</small>7 000 ₽</div>
+        <a class="btn mono tg go" href="#">Обсудить <span class="arr">→</span></a>
+      </article>
+    </div>
+    <p class="plans-note mono muted rv">Свой адрес в сети .ru — от 500 ₽ в год · точная цена — после разговора, до начала работы</p>
+  </section>
+
   <section class="face gray">
-    <div class="neg parallax"><img src="img/gen/face-neg-web.jpg" alt="Лев Плотницкий"></div>
+    <div class="neg parallax"><img src="img/gen/face-neg-web.jpg" loading="lazy" decoding="async" alt="Лев Плотницкий"></div>
     <div class="txt">
       <div class="label mono">Основатель</div>
       <div class="rv">
         <h2 class="h2">Лицо,<br>а не логотип</h2>
         <p>За ORIEN стоит живой человек — Лев Плотницкий. Вы пишете основателю напрямую, без менеджеров и посредников, и он лично отвечает за результат</p>
-        <img class="sign" src="img/orien.png" alt="">
+        <img class="sign" src="img/orien.png" alt="" loading="lazy">
       </div>
       <span class="mono muted">Сахалин · <span id="clock">--:--</span></span>
     </div>
@@ -341,6 +413,8 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
     </div>
   </section>
 </main>
+
+<a class="dock tg" href="#">Написать в Telegram <span>→</span></a>
 
 <footer class="mono muted">
   <span>© 2026 ORIEN · основатель Лев Плотницкий</span>
@@ -422,6 +496,32 @@ function onScroll() {
 addEventListener("scroll", onScroll, { passive: true });
 if (lenis) lenis.on("scroll", onScroll);
 onScroll();
+
+// логотип «стекает» на место: волна искажения затухает
+const lg = document.getElementById("heroLogo");
+const disp = document.querySelector("#liquid feDisplacementMap");
+if (lg && disp && !reduce) {
+  lg.classList.add("liquid");
+  const t0 = performance.now() + 1000, dur = 2200;
+  const step = t => {
+    const k = Math.min(1, Math.max(0, (t - t0) / dur));
+    disp.setAttribute("scale", (90 * Math.pow(1 - k, 3)).toFixed(1));
+    if (k < 1) requestAnimationFrame(step); else lg.classList.remove("liquid");
+  };
+  requestAnimationFrame(step);
+}
+
+// работы: цвет появляется, когда карточка в центре экрана
+const ioW = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle("lit", e.isIntersecting)), { rootMargin: "-35% 0px -35% 0px" });
+document.querySelectorAll(".work").forEach(w => ioW.observe(w));
+
+// кнопка внизу на телефоне: после первого экрана, прячется у блока «Связь»
+const dock = document.querySelector(".dock"), contact = document.getElementById("contact");
+function dockUpdate() {
+  const past = scrollY > innerHeight * 0.8, nearContact = contact.getBoundingClientRect().top < innerHeight * 0.9;
+  dock.classList.toggle("on", past && !nearContact);
+}
+addEventListener("scroll", dockUpdate, { passive: true }); dockUpdate();
 
 // время на Сахалине
 const clock = document.getElementById("clock");
