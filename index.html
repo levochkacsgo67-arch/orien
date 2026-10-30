@@ -76,7 +76,7 @@ a:hover .arr{transform:translateX(4px)}
   -webkit-mask-image:radial-gradient(closest-side,#000 82%,transparent 100%);mask-image:radial-gradient(closest-side,#000 82%,transparent 100%);
   opacity:0;filter:blur(18px);transform:scale(1.06);animation:photoIn 2.2s var(--ease) .2s forwards}
 @keyframes photoIn{to{opacity:1;filter:blur(0);transform:none}}
-.poster .logo{position:absolute;left:50%;top:47%;width:80%;transform:translate(-50%,-50%) scale(1.08);
+.poster .logo{position:absolute;left:50%;top:58%;width:80%;transform:translate(-50%,-50%) scale(1.08);
   opacity:0;filter:blur(8px);animation:logoIn 1.8s var(--ease) 1s forwards}
 @keyframes logoIn{to{opacity:1;filter:blur(0);transform:translate(-50%,-50%)}}
 .poster .logo.liquid{filter:url(#liquid)}
@@ -112,16 +112,17 @@ main{overflow-x:clip}
 /* «Мы делаем …» — слово всегда на второй строке, буквы поднимаются из размытия */
 .doing{padding-block:clamp(70px,10vw,140px);border-block:1px solid var(--line)}
 .doing-top{display:flex;justify-content:space-between}
-.doing-main{margin-top:clamp(26px,4vw,50px);font-size:clamp(46px,11vw,170px);line-height:.92;letter-spacing:-.06em;text-transform:uppercase;font-weight:400}
-.doing-pre{display:block;color:var(--dim)}
-.doing-word{display:block;height:1.06em;overflow:hidden;white-space:nowrap;color:var(--fg)}
+.doing-main{margin-top:clamp(26px,4vw,50px);font-size:clamp(46px,10.5vw,164px);line-height:1;letter-spacing:-.045em;text-transform:uppercase;font-weight:400}
+.doing-pre{display:block;color:#acacaa;word-spacing:.12em;margin-bottom:.14em}
+.doing-word{display:block;height:1.22em;line-height:1.22;white-space:nowrap;color:var(--fg)}
 .doing-word .ch{display:inline-block;will-change:transform,filter,opacity;transition:transform .9s var(--ease),filter .9s var(--ease),opacity .9s var(--ease)}
 .doing-word .ch.lo{transform:translateY(.45em);filter:blur(10px);opacity:0}
 .doing-word .ch.hi{transform:translateY(-.3em);filter:blur(10px);opacity:0;transition-duration:.5s}
 .doing-word .dot{display:inline-block;width:.15em;height:.15em;border-radius:50%;background:var(--red);margin-left:.06em;box-shadow:0 0 18px var(--red);transition:opacity .5s}
 .doing-list{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,28px);margin-top:clamp(36px,5vw,70px);list-style:none}
 .doing-list button{all:unset;cursor:pointer;display:grid;gap:10px;width:100%;color:var(--dim);transition:color .5s var(--ease)}
-.doing-list button:focus-visible{outline:1px solid var(--fg);outline-offset:6px}
+.doing-list button:focus{outline:none}
+.doing-list button:focus-visible .t{text-decoration:underline;text-underline-offset:6px}
 .doing-list .t{font:400 clamp(17px,1.5vw,22px)/1.2 var(--sans);letter-spacing:-.02em;text-transform:none}
 .doing-list .s{color:var(--dim);opacity:0;transition:opacity .6s var(--ease)}
 .doing-list .bar{height:1px;background:var(--line);position:relative;overflow:hidden;order:-1;margin-bottom:8px}
@@ -143,7 +144,7 @@ main{overflow-x:clip}
 .case-head p{color:var(--muted);max-width:460px;font-size:17px}
 .case-meta{display:flex;flex-direction:column;align-items:flex-end;gap:12px;text-align:right}
 .ok{color:var(--fg)}.ok::first-letter{color:#58d26b}
-.screens{display:grid;grid-template-columns:repeat(3,minmax(0,300px));justify-content:center;gap:clamp(18px,4vw,70px);margin-top:clamp(30px,4vw,56px);position:relative}
+.screens{display:grid;grid-template-columns:repeat(3,minmax(0,360px));justify-content:center;gap:clamp(18px,4vw,70px);margin-top:clamp(30px,4vw,56px);position:relative}
 .screens::before{content:"";position:absolute;inset:-6% 10%;background:radial-gradient(closest-side,rgba(255,255,255,.13),transparent 75%);pointer-events:none}
 .screens .phone:nth-child(2){transform:translateY(-6%)}
 /* телефон как iPhone 17 Pro: рамка-титан, экран 1206×2622, «островок» сверху */
@@ -153,10 +154,9 @@ main{overflow-x:clip}
 .phone::before,.phone::after{content:"";position:absolute;width:1.1%;border-radius:2px;background:#232325;z-index:-1}
 .phone::before{left:-1%;top:17%;height:31%;background:linear-gradient(#232325 0 17%,transparent 17% 30%,#232325 30% 60%,transparent 60% 68%,#232325 68%)}
 .phone::after{right:-1%;top:27%;height:11%}
+/* экран: только скриншот в своих пропорциях 1206×2622, без строки состояния и «островка» */
 .phone .scr{position:relative;display:block;aspect-ratio:1206/2622;border-radius:12.4% / 5.7%;overflow:hidden;background:#000}
-.phone .scr::after{content:"";position:absolute;left:50%;top:1.6%;width:31%;height:3.3%;transform:translateX(-50%);border-radius:999px;background:#000;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
-.phone img{width:100%;height:100%;object-fit:cover;object-position:top}
+.phone img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
 .case img.gs{filter:grayscale(1) contrast(1.04);transition:filter 1.2s var(--ease)}
 .case:hover img.gs,.case.lit img.gs{filter:none}
 .tlink{display:inline-flex;gap:10px;align-items:center;padding-bottom:5px;border-bottom:1px solid var(--line);transition:border-color .4s,color .4s}
@@ -191,11 +191,23 @@ main{overflow-x:clip}
 .plans-note{margin-top:26px}
 
 /* 05 · основатель */
-.founder{display:grid;grid-template-columns:1fr 1fr;align-items:center;min-height:100svh}
-.founder .shot{height:100svh;max-height:1100px}
-.founder .txt{padding:clamp(28px,4vw,56px) var(--pad)}
-.founder .txt p{max-width:420px;color:var(--muted);font-size:17px;margin-top:24px}
-.founder .sign{width:min(240px,55%);margin-top:40px}
+.founder{padding-block:clamp(110px,14vw,200px) clamp(80px,9vw,140px)}
+.f-head{margin-top:clamp(24px,3vw,40px);font-size:clamp(54px,11vw,190px);font-weight:400;letter-spacing:-.05em;line-height:.92;text-transform:uppercase}
+.f-head>span{display:block}
+.f-l2{display:flex!important;align-items:center;gap:.28em}
+.f-rule{flex:1;height:1px;background:rgba(241,240,237,.45);position:relative;transform:scaleX(0);transform-origin:left;transition:transform 2.2s var(--ease) .5s}
+.f-rule::after{content:"";position:absolute;right:-4px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:var(--red);box-shadow:0 0 14px var(--red)}
+.f-head.in .f-rule{transform:none}
+.f-body{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(30px,7vw,140px);align-items:center;margin-top:clamp(50px,7vw,110px)}
+.f-badge{position:relative;width:clamp(150px,17vw,280px);aspect-ratio:1;order:2;margin-right:clamp(0px,6vw,120px)}
+.f-badge svg{width:100%;height:100%;animation:spin 32s linear infinite;fill:var(--muted)}
+.f-badge text{font:500 10.4px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.f-badge img{position:absolute;left:50%;top:50%;width:46%;transform:translate(-50%,-50%)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.f-txt p{max-width:620px;color:var(--muted);font-size:clamp(17px,1.35vw,21px)}
+.f-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,28px);margin-top:clamp(30px,4vw,50px);max-width:720px}
+.f-facts>div{border-top:1px solid var(--line);padding-top:14px}
+.f-facts b{display:block;font:300 clamp(34px,3.4vw,54px)/1 var(--sans);letter-spacing:-.05em;margin-bottom:8px;text-transform:none}
 
 /* 06 · как это происходит */
 .steps{grid-template-columns:repeat(4,1fr)}
@@ -251,8 +263,8 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
   .plans{grid-template-columns:1fr}
   .plan{min-height:0}
   .plan .price{margin-top:22px}
-  .founder{grid-template-columns:1fr}
-  .founder .shot{height:auto;aspect-ratio:4/5}
+  .f-body{grid-template-columns:1fr;gap:36px}
+  .f-badge{width:140px;order:0;margin-right:0}
   .steps{grid-template-columns:1fr 1fr}
   .step{min-height:0}
   .steps h4{padding-top:36px}
@@ -300,7 +312,7 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
   <!-- 01 -->
   <section class="hero">
     <h1 class="poster" aria-label="ORIEN — цифровая студия">
-      <img class="photo" src="img/gen/hero-neg.jpg" alt="ORIEN">
+      <img class="photo" src="img/gen/hero-neg2.jpg" alt="ORIEN">
       <span class="logo" id="heroLogo"><img src="img/orien.png" alt=""><i class="drop"></i></span>
     </h1>
     <div class="cn bl mono" style="display:grid;gap:6px;max-width:300px">
@@ -354,9 +366,9 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
         <div class="case-meta mono"><span class="ok">● Работает</span><a class="tlink" href="https://kuzovnoy25.ru" target="_blank" rel="noopener">kuzovnoy25.ru <span class="arr">↗</span></a></div>
       </header>
       <div class="screens">
-        <figure class="phone"><span class="scr"><img class="gs" src="img/works/kuzov-1.jpg" alt="Кузовной 25 — главный экран" loading="lazy" decoding="async"></span></figure>
-        <figure class="phone"><span class="scr"><img class="gs" src="img/works/kuzov-2.jpg" alt="Кузовной 25 — работы" loading="lazy" decoding="async"></span></figure>
-        <figure class="phone"><span class="scr"><img class="gs" src="img/works/kuzov-3.jpg" alt="Кузовной 25 — отзывы" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/kuzov-1.jpg?v=2" alt="Кузовной 25 — главный экран" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/kuzov-2.jpg?v=2" alt="Кузовной 25 — работы" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/kuzov-3.jpg?v=2" alt="Кузовной 25 — отзывы" loading="lazy" decoding="async"></span></figure>
       </div>
     </article>
 
@@ -368,9 +380,9 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
         <div class="case-meta mono"><span class="ok">● Работает</span></div>
       </header>
       <div class="screens">
-        <figure class="phone"><span class="scr"><img class="gs" src="img/works/nastya-1.jpg" alt="Статистика доходов" loading="lazy" decoding="async"></span></figure>
-        <figure class="phone"><span class="scr"><img class="gs" src="img/works/nastya-2.jpg" alt="Настройки онлайн-записи" loading="lazy" decoding="async"></span></figure>
-        <figure class="phone"><span class="scr"><img class="gs" src="img/works/nastya-3.jpg" alt="База клиентов" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/nastya-1.jpg?v=2" alt="Статистика доходов" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/nastya-2.jpg?v=2" alt="Настройки онлайн-записи" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/nastya-3.jpg?v=2" alt="База клиентов" loading="lazy" decoding="async"></span></figure>
       </div>
     </article>
 
@@ -382,9 +394,9 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
         <div class="case-meta mono"><span class="ok">● Запущен</span><a class="tlink" href="https://car-tuning.brows-booking.workers.dev" target="_blank" rel="noopener">Открыть <span class="arr">↗</span></a></div>
       </header>
       <div class="screens">
-        <figure class="phone"><span class="scr"><img class="gs" src="img/works/fit-1.jpg" alt="FITMENT — главный экран" loading="lazy" decoding="async"></span></figure>
-        <figure class="phone"><span class="scr"><img class="gs" src="img/works/fit-2.jpg" alt="FITMENT — до и после" loading="lazy" decoding="async"></span></figure>
-        <figure class="phone"><span class="scr"><img class="gs" src="img/works/fit-3.jpg" alt="FITMENT — студия подбора" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/fit-1.jpg?v=2" alt="FITMENT — главный экран" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/fit-2.jpg?v=2" alt="FITMENT — до и после" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/fit-3.jpg?v=2" alt="FITMENT — студия подбора" loading="lazy" decoding="async"></span></figure>
       </div>
     </article>
   </section>
@@ -419,14 +431,22 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
   </section>
 
   <!-- 05 · кто делает -->
-  <section class="founder corners">
-    <figure class="shot fade-r parallax"><img src="img/gen/q-squat-web.jpg" alt="Основатель ORIEN" loading="lazy" decoding="async"></figure>
-    <div class="txt">
-      <span class="label mono">Кто делает · (05)</span>
-      <div class="rv" style="margin-top:28px">
-        <h2 class="h2">Делаем сами.<br>От и до</h2>
+  <section class="founder wrap corners">
+    <span class="label mono">Кто делает · (05)</span>
+    <h2 class="f-head rv"><span>Делаем сами.</span><span class="f-l2">От и до <i class="f-rule" aria-hidden="true"></i></span></h2>
+    <div class="f-body">
+      <div class="f-badge rv" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><defs><path id="fCircle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+          <text><textPath href="#fCircle" textLength="488" lengthAdjust="spacing">Один человек · от идеи до запуска · Один человек · от идеи до запуска · </textPath></text></svg>
+        <img src="img/orien.png" alt="" loading="lazy">
+      </div>
+      <div class="f-txt rv">
         <p>Никаких подрядчиков и цепочек из пяти менеджеров. Тот, кто с вами переписывается, сам придумывает, собирает и запускает ваш проект — поэтому решения принимаются за минуты, а не за неделю</p>
-        <img class="sign" src="img/orien.png" alt="" loading="lazy">
+        <div class="f-facts mono">
+          <div><b>1</b><span class="muted">человек на связи</span></div>
+          <div><b>0</b><span class="muted">подрядчиков</span></div>
+          <div><b>2 дня</b><span class="muted">до первой версии</span></div>
+        </div>
       </div>
     </div>
     <span class="cn br mono dim">Сахалин · <span id="clock">--:--</span></span>
@@ -593,6 +613,9 @@ function onScroll() {
 addEventListener("scroll", onScroll, { passive: true });
 if (lenis) lenis.on("scroll", onScroll);
 onScroll();
+
+// если картинка не догрузилась — пробуем ещё раз
+document.querySelectorAll("img").forEach(im => im.addEventListener("error", () => { if (im.dataset.retry) return; im.dataset.retry = 1; setTimeout(() => { im.src = im.src.split("?")[0] + "?r=" + Date.now(); }, 800); }));
 
 // время на Сахалине
 const clock = document.getElementById("clock");
