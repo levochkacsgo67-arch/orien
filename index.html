@@ -180,32 +180,25 @@ main{overflow-x:clip}
 
 .price-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-top:22px}
 .price-head p{max-width:320px}
-.plans{grid-template-columns:repeat(3,1fr);align-items:stretch}
-.tier{display:flex;flex-direction:column;min-height:560px;padding:clamp(24px,2.4vw,36px)}
-.tier-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.tier-tag{border:1px solid var(--line);border-radius:999px;padding:6px 12px;white-space:nowrap}
-.tier h3{font-size:clamp(28px,2.6vw,40px);font-weight:400;letter-spacing:-.04em;line-height:1;margin-top:clamp(40px,5vw,72px)}
-.tier .price{display:flex;align-items:baseline;gap:10px;margin-top:18px;font-size:clamp(56px,5.6vw,96px);font-weight:300;letter-spacing:-.06em;line-height:.9;white-space:nowrap}
-.tier .price small{font:400 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.tier .price .cur{font-size:.55em;letter-spacing:0;color:var(--muted)}
-.tier ul{list-style:none;margin:clamp(26px,3vw,40px) 0 30px;border-top:1px solid var(--line)}
-.tier li{display:flex;gap:14px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line);color:var(--muted);font-size:15.5px;line-height:1.35}
-.tier li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);transform:translateY(-2px)}
-.tier-btn{margin-top:auto;display:flex;justify-content:space-between;align-items:center;height:56px;padding:0 22px;border-radius:999px;border:1px solid rgba(241,240,237,.35);
-  font:500 15px var(--sans);position:relative;overflow:hidden;isolation:isolate;transition:color .5s var(--ease),border-color .5s var(--ease)}
-.tier-btn::before{content:"";position:absolute;inset:0;background:var(--red);transform:translateY(101%);transition:transform .5s var(--ease);z-index:-1}
-.tier-btn:hover{color:#fff;border-color:var(--red)}
-.tier-btn:hover::before{transform:none}
-.tier-btn .arr{transition:transform .5s var(--ease)}
-.tier-btn:hover .arr{transform:translateX(4px)}
-/* главный тариф — светлый */
-.tier.hot{background:var(--fg);color:#1b1b1b}
-.tier.hot::after{display:none}
-.tier.hot .muted,.tier.hot li,.tier.hot .price small,.tier.hot .price .cur{color:#5b5b58}
-.tier.hot .tier-tag{border-color:rgba(0,0,0,.18);color:#1b1b1b}
-.tier.hot ul,.tier.hot li{border-color:rgba(0,0,0,.12)}
-.tier.hot .tier-btn{background:#1b1b1b;color:var(--fg);border-color:#1b1b1b}
-.tier.hot:hover,.tier.hot.lit{background:var(--fg)}
+/* цены: переключатель «Сайт / Приложение / Реклама» и одна большая панель */
+.pp{margin-top:clamp(30px,5vw,60px);border-radius:28px;background:rgba(0,0,0,.14);box-shadow:inset 0 0 0 1px var(--line);padding:clamp(18px,3vw,40px)}
+.seg{position:relative;display:inline-flex;padding:5px;border-radius:999px;background:rgba(0,0,0,.2);box-shadow:inset 0 0 0 1px var(--line);max-width:100%}
+.seg button{all:unset;cursor:pointer;position:relative;z-index:2;padding:12px clamp(14px,2vw,26px);border-radius:999px;font:500 15px var(--sans);color:var(--muted);transition:color .5s var(--ease);white-space:nowrap}
+.seg button.on{color:#1b1b1b}
+.seg button:focus-visible{outline:1px solid var(--fg);outline-offset:2px}
+.seg .pill{position:absolute;z-index:1;top:5px;bottom:5px;left:0;width:0;border-radius:999px;background:var(--fg);transition:transform .6s cubic-bezier(.76,0,.24,1),width .6s cubic-bezier(.76,0,.24,1)}
+.pp-body{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,5vw,80px);margin-top:clamp(30px,5vw,60px);align-items:end}
+.pp-big{font-size:clamp(72px,11vw,190px);font-weight:300;letter-spacing:-.07em;line-height:.85;white-space:nowrap}
+.pp-big small{font:400 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:12px;vertical-align:top;position:relative;top:.6em}
+.pp-big .cur{font-size:.42em;letter-spacing:0;color:var(--muted)}
+.pp-meta{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:22px}
+.pp ul{list-style:none;border-top:1px solid var(--line)}
+.pp li{padding:14px 0;border-bottom:1px solid var(--line);color:var(--muted);display:flex;gap:14px;align-items:baseline}
+.pp li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);transform:translateY(-2px)}
+.pp-swap{transition:opacity .35s var(--ease),transform .5s var(--ease),filter .35s}
+.pp-swap.hide{opacity:0;transform:translateY(14px);filter:blur(6px)}
+.pp-btn{display:flex;justify-content:space-between;align-items:center;height:58px;padding:0 24px;border-radius:999px;background:var(--fg);color:#1b1b1b;font:500 16px var(--sans);margin-top:26px;transition:background .4s,color .4s}
+.pp-btn:hover{background:var(--red);color:#fff}
 .plans-note{margin-top:26px}
 
 /* 05 · основатель */
@@ -283,8 +276,8 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
   .case.lit .screens .phone:nth-child(2){transform:rotate(-5deg) translate(0,3%) scale(.92)}
   .case.lit .screens .phone:nth-child(3){transform:rotate(5deg) translate(0,3%) scale(.92)}
   .plans{grid-template-columns:1fr}
-  .tier{min-height:0}
-  .tier h3{margin-top:34px}
+  .pp-body{grid-template-columns:1fr}
+  .seg button{padding:11px 13px;font-size:14px}
   .f-body{grid-template-columns:1fr;gap:36px}
   .f-badge{width:140px;order:0;margin-right:0}
   .steps{grid-template-columns:1fr 1fr}
@@ -300,32 +293,17 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
   .dock.on{transform:none}
   footer{grid-template-columns:1fr 1fr;padding-bottom:90px}footer>:nth-child(2){display:none}
 }
-/* загрузочный экран: кадры мелькают в рамке, рамка схлопывается в красную линию,
-   логотип «стекает» на место, экран раскрывается по линии вверх и вниз */
-.loader{position:fixed;inset:0;z-index:200;pointer-events:none;animation:ldKill 0s 8s forwards}
+/* загрузочный экран «Капля»: падает красная капля, расходятся круги, логотип «растекается»,
+   потом экран открывается кругом из центра */
+.loader{position:fixed;inset:0;z-index:200;pointer-events:none;background:var(--gray);--r:0px;
+  -webkit-mask:radial-gradient(circle at 50% 50%,transparent var(--r),#000 calc(var(--r) + 1px));mask:radial-gradient(circle at 50% 50%,transparent var(--r),#000 calc(var(--r) + 1px));
+  animation:ldKill 0s 9s forwards}
 @keyframes ldKill{to{visibility:hidden}}
-.ld-pan{position:absolute;left:0;right:0;height:50.5%;background:var(--gray);transition:transform 1.2s cubic-bezier(.76,0,.24,1)}
-.ld-a{top:0}.ld-b{bottom:0}
-.ld-row{position:absolute;left:var(--pad);right:var(--pad);z-index:3;display:flex;justify-content:space-between;align-items:center;gap:24px;transition:opacity .5s}
-.ld-top{top:22px}
-.ld-bot{bottom:22px;align-items:end}
-.ld-n{font:300 clamp(56px,8vw,112px)/.8 var(--sans);letter-spacing:-.05em;font-variant-numeric:tabular-nums;min-width:2.1ch}
-.ld-w{flex:1;text-align:center;color:var(--muted)}
-.ld-frame{position:absolute;z-index:2;left:50%;top:50%;width:clamp(200px,26vw,360px);aspect-ratio:4/5;transform:translate(-50%,-50%);border-radius:14px;overflow:hidden;
-  background:#333;clip-path:inset(50% 0 50% 0 round 14px);transition:clip-path .9s cubic-bezier(.76,0,.24,1)}
-.ld-frame.open{clip-path:inset(0 0 0 0 round 14px)}
-.ld-frame.shut{clip-path:inset(50% 0 50% 0 round 14px);transition-duration:.55s}
-.ld-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(1) contrast(1.1);opacity:0;transform:scale(1.12);transition:transform 2s var(--ease)}
-.ld-frame img.on{opacity:1;transform:none}
-.ld-line{position:absolute;z-index:2;left:0;right:0;top:50%;height:1px;background:rgba(241,240,237,.12);transition:opacity .4s}
-.ld-line b{position:absolute;inset:0;background:var(--red);box-shadow:0 0 14px var(--red),0 0 2px var(--red);transform:scaleX(0)}
-.ld-logo{position:absolute;z-index:3;left:50%;top:50%;width:min(56vw,440px);transform:translate(-50%,-50%) scale(1.15);opacity:0;filter:url(#ldLiquid) blur(6px);
-  transition:opacity .9s var(--ease),transform 1.4s var(--ease)}
-.ld-logo.in{opacity:1;transform:translate(-50%,-50%);filter:url(#ldLiquid)}
-.loader.out .ld-a{transform:translateY(-100%)}
-.loader.out .ld-b{transform:translateY(100%)}
-.loader.out .ld-row,.loader.out .ld-line{opacity:0}
-.loader.out .ld-logo{opacity:0;transform:translate(-50%,-50%) scale(1.6);transition:opacity .7s,transform 1.2s cubic-bezier(.76,0,.24,1)}
+.ld-drop{position:absolute;left:50%;top:0;width:16px;height:16px;margin-left:-8px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:var(--red);box-shadow:0 0 18px var(--red);transform:translateY(-40px)}
+.ld-ring{position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;border:1px solid var(--red);opacity:0}
+.ld-logo{position:absolute;left:50%;top:50%;width:min(64vw,480px);transform:translate(-50%,-50%) scale(.6);opacity:0;filter:url(#ldLiquid)}
+.ld-n{position:absolute;left:var(--pad);bottom:22px}
+.ld-cap{position:absolute;right:var(--pad);bottom:22px}
 html.ld{overflow:hidden}
 html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
 
@@ -373,21 +351,15 @@ html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
 <body>
 <div class="grain" aria-hidden="true"></div>
 <div class="loader" id="loader" aria-hidden="true">
-  <i class="ld-pan ld-a"></i><i class="ld-pan ld-b"></i>
-  <div class="ld-row ld-top mono"><span>Цифровая студия</span><span class="dim">Sakhalin · 46°57′N</span></div>
-  <div class="ld-frame" id="ldFrame">
-    <img src="img/gen/hero-neg3.jpg" alt=""><img src="img/works/kuzov-1.jpg?v=2" alt=""><img src="img/gen/t-top-web.jpg" alt="">
-    <img src="img/works/fit-1.jpg?v=2" alt=""><img src="img/gen/t-move-web.jpg" alt=""><img src="img/works/nastya-1.jpg?v=2" alt="">
-  </div>
-  <i class="ld-line"><b id="ldBar"></b></i>
+  <i class="ld-drop" id="ldDrop"></i><i class="ld-ring"></i><i class="ld-ring"></i>
   <img class="ld-logo" id="ldLogo" src="img/orien.png" alt="">
-  <div class="ld-row ld-bot mono"><span class="ld-n" id="ldN">000</span><span class="ld-w" id="ldW">Сайты</span><span class="dim">Est. 2026</span></div>
+  <span class="ld-n mono" id="ldN">000</span><span class="ld-cap mono dim">Цифровая студия · Сахалин</span>
 </div>
 <script>document.documentElement.classList.add("ld")</script>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="ldLiquid" x="-30%" y="-80%" width="160%" height="260%">
-    <feTurbulence type="fractalNoise" baseFrequency=".01 .045" numOctaves="2" seed="9" result="n"/>
-    <feDisplacementMap in="SourceGraphic" in2="n" scale="140" xChannelSelector="R" yChannelSelector="G"/>
+    <feTurbulence type="fractalNoise" baseFrequency=".012 .05" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="160" xChannelSelector="R" yChannelSelector="G"/>
   </filter>
   <filter id="liquid" x="-20%" y="-40%" width="140%" height="180%">
     <feTurbulence type="fractalNoise" baseFrequency=".012 .03" numOctaves="2" seed="4" result="n"/>
@@ -505,43 +477,12 @@ html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
       <h2 class="h2 rv"><span class="mask"><span>Сколько</span></span><span class="mask"><span>стоит</span></span></h2>
       <p class="mono muted rv">Точная цена — после разговора и до начала работы. Никаких доплат по ходу</p>
     </div>
-    <div class="cards plans">
-      <article class="card tier hot rv">
-        <div class="tier-top mono"><span class="muted">01</span><span class="tier-tag">Первая версия — до оплаты</span></div>
-        <h3>Сайт</h3>
-        <div class="price"><small>от</small><span data-count="4500">4 500</span><span class="cur">₽</span></div>
-        <ul>
-          <li>Первая версия за 2–3 дня</li>
-          <li>Работы, цены, отзывы, кнопки связи</li>
-          <li>Неделя правок — бесплатно</li>
-          <li>Свой адрес .ru — от 500 ₽ в год</li>
-        </ul>
-        <a class="tier-btn tg" href="#">Обсудить сайт <span class="arr">→</span></a>
-      </article>
-      <article class="card tier rv">
-        <div class="tier-top mono"><span class="muted">02</span><span class="tier-tag">Внутри Telegram</span></div>
-        <h3>Приложение</h3>
-        <div class="price"><small>от</small><span data-count="8000">8 000</span><span class="cur">₽</span></div>
-        <ul>
-          <li>Запись, заявки или каталог</li>
-          <li>Клиенту ничего не нужно скачивать</li>
-          <li>Вам — уведомления о каждой заявке</li>
-          <li>Кабинет со статистикой</li>
-        </ul>
-        <a class="tier-btn tg" href="#">Обсудить приложение <span class="arr">→</span></a>
-      </article>
-      <article class="card tier rv">
-        <div class="tier-top mono"><span class="muted">03</span><span class="tier-tag">ВКонтакте и Яндекс</span></div>
-        <h3>Реклама</h3>
-        <div class="price"><small>от</small><span data-count="7000">7 000</span><span class="cur">₽</span></div>
-        <ul>
-          <li>Картинки и тексты объявлений</li>
-          <li>Настройка и запуск</li>
-          <li>Отчёт: сколько стоила заявка</li>
-          <li>Дальше ведение — от 5 000 ₽ в месяц</li>
-        </ul>
-        <a class="tier-btn tg" href="#">Обсудить рекламу <span class="arr">→</span></a>
-      </article>
+    <div class="pp rv">
+      <div class="seg" id="seg" role="tablist" aria-label="Услуга"><i class="pill"></i></div>
+      <div class="pp-body">
+        <div class="pp-swap" id="ppA"></div>
+        <div class="pp-swap" id="ppB"></div>
+      </div>
     </div>
   </section>
 
@@ -573,7 +514,7 @@ html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
     <div class="cards steps">
       <div class="card step rv"><span class="mono muted num">01</span><h4>Разговор</h4><p>Вы рассказываете о деле. Пятнадцать минут переписки — и нам понятно, что нужно</p></div>
       <div class="card step rv"><span class="mono muted num">02</span><h4>Первая версия</h4><p>Через пару дней — рабочая первая версия проекта: можно открыть и попробовать. До оплаты</p></div>
-      <div class="card step rv"><span class="mono muted num">03</span><h4>Доводка</h4><p>Правим тексты, фото и детали, пока не станет «то самое»</p></div>
+      <div class="card step rv"><span class="mono muted num">03</span><h4>Правки</h4><p>Меняем тексты, фото и детали, пока не станет «то самое»</p></div>
       <div class="card step rv"><span class="mono muted num">04</span><h4>Запуск</h4><p>Свой адрес, открывается в России без VPN. Дальше мы на связи</p></div>
     </div>
   </section>
@@ -607,50 +548,48 @@ document.querySelectorAll(".tg").forEach(a => { a.href = TG; a.target = "_blank"
 
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// загрузочный экран: счётчик и красная линия растут, в рамке мелькают кадры,
-// рамка схлопывается в линию, логотип «стекает» на место, экран раскрывается по линии
-const afterLoad = new Promise(done => {
+// загрузочный экран «Капля»: ждёт фото первого экрана (не дольше 4,5 с)
+const afterLoad = new Promise(async done => {
   const L = document.getElementById("loader");
   if (!L) return done();
   const $ = id => document.getElementById(id);
-  const num = $("ldN"), bar = $("ldBar"), word = $("ldW"), frame = $("ldFrame"), logo = $("ldLogo"), img = document.querySelector(".hero .photo");
-  const frames = [...frame.querySelectorAll("img")], ldDisp = document.querySelector("#ldLiquid feDisplacementMap");
-  const WORDS = ["Сайты", "Приложения", "Реклама", "Дизайн"];
-  const t0 = performance.now(), RUN = reduce ? 300 : 2300;
-  let ready = !img || img.complete, fi = -1, wi = 0, stage = 0, finished = false;
+  const drop = $("ldDrop"), logo = $("ldLogo"), num = $("ldN"), rings = [...L.querySelectorAll(".ld-ring")], img = document.querySelector(".hero .photo");
+  const disp = document.querySelector("#ldLiquid feDisplacementMap");
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const anim = (dur, fn, ease = t => 1 - Math.pow(1 - t, 3)) => new Promise(res => {
+    const t0 = performance.now();
+    const st = t => { const k = Math.min(1, (t - t0) / dur); fn(ease(k), k); k < 1 ? requestAnimationFrame(st) : res(); };
+    requestAnimationFrame(st);
+  });
+  let ready = !img || img.complete;
   const ok = () => ready = true;
   if (!ready) { img.addEventListener("load", ok); img.addEventListener("error", ok); }
   setTimeout(ok, 4500);
-  if (!reduce) setTimeout(() => frame.classList.add("open"), 150);
-  const flick = setInterval(() => {
-    if (reduce) return;
-    frames.forEach(f => f.classList.remove("on"));
-    fi = (fi + 1) % frames.length; frames[fi].classList.add("on");
-  }, 140);
-  const wTimer = setInterval(() => { wi = (wi + 1) % WORDS.length; word.textContent = WORDS[wi]; }, 420);
-  function melt() {
-    logo.classList.add("in");
-    if (!ldDisp) return;
-    const m0 = performance.now();
-    const st = t => { const k = Math.min(1, (t - m0) / 1300); ldDisp.setAttribute("scale", (140 * Math.pow(1 - k, 3)).toFixed(1)); if (k < 1) requestAnimationFrame(st); else logo.style.filter = "none"; };
+  const finish = () => { document.documentElement.classList.remove("ld"); done(); setTimeout(() => L.remove(), 1300); };
+  if (reduce) { await wait(300); L.style.transition = "opacity .4s"; L.style.opacity = 0; return finish(); }
+  // счётчик: 2,6 с, но 100 — только когда фото готово
+  const count = new Promise(res => {
+    const t0 = performance.now();
+    const st = t => { const k = Math.min(1, (t - t0) / 2600), p = ready ? k : Math.min(k, .96);
+      num.textContent = String(Math.round(p * 100)).padStart(3, "0"); p < 1 ? requestAnimationFrame(st) : res(); };
     requestAnimationFrame(st);
-  }
-  const tick = now => {
-    const el = now - t0, k = Math.min(1, el / RUN), p = ready ? k : Math.min(k, .96), e = 1 - Math.pow(1 - p, 3);
-    num.textContent = String(Math.round(e * 100)).padStart(3, "0");
-    bar.style.transform = `scaleX(${e})`;
-    if (!reduce && stage === 0 && el > 1500) { stage = 1; clearInterval(flick); frame.classList.add("shut"); }
-    if (!reduce && stage === 1 && el > 1850) { stage = 2; melt(); }
-    if (p < 1) return requestAnimationFrame(tick);
-    if (finished) return; finished = true;
-    clearInterval(flick); clearInterval(wTimer); word.textContent = "ORIEN";
-    if (stage < 2) melt();
-    setTimeout(() => {
-      L.classList.add("out"); document.documentElement.classList.remove("ld"); done();
-      setTimeout(() => L.remove(), 1400);
-    }, reduce ? 0 : 900);
-  };
-  requestAnimationFrame(tick);
+  });
+  await wait(250);
+  const H = innerHeight;
+  await anim(650, e => { drop.style.transform = `translateY(${-40 + e * (H / 2 + 32)}px) scale(${1 - e * .25},${1 + e * .6})`; }, t => t * t);
+  drop.style.opacity = 0;
+  rings[0].animate([{ transform: "scale(1)", opacity: 1 }, { transform: "scale(16)", opacity: 0 }], { duration: 900, easing: "cubic-bezier(.22,.8,.2,1)", fill: "forwards" });
+  rings[1].animate([{ transform: "scale(1)", opacity: .6 }, { transform: "scale(28)", opacity: 0 }], { duration: 1300, delay: 120, easing: "cubic-bezier(.22,.8,.2,1)", fill: "forwards" });
+  logo.style.opacity = 1;
+  await anim(1500, e => { disp && disp.setAttribute("scale", (160 * (1 - e)).toFixed(1)); logo.style.transform = `translate(-50%,-50%) scale(${.6 + .4 * e})`; });
+  logo.style.filter = "none";
+  await count; await wait(300);
+  logo.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, fill: "forwards" });
+  num.style.opacity = 0; L.querySelector(".ld-cap").style.opacity = 0;
+  done(); document.documentElement.classList.remove("ld");
+  const R = Math.hypot(innerWidth, innerHeight);
+  await anim(1100, e => L.style.setProperty("--r", (e * R / 2 + 1) + "px"), t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  L.remove();
 });
 
 // слова «Подхода» загораются при прокрутке; «лишнее» — красным
@@ -715,15 +654,40 @@ function svcScroll(vh) {
 svcSet(0);
 if (matchMedia("(hover: hover)").matches) svc.forEach((r, i) => r.addEventListener("pointerenter", () => svcSet(i)));
 
-// цены набегают от нуля, когда карточка появляется
-const ioC = new IntersectionObserver(es => es.forEach(e => {
-  if (!e.isIntersecting) return; ioC.unobserve(e.target);
-  const el = e.target, to = +el.dataset.count, t0 = performance.now(), fmt = n => n.toLocaleString("ru-RU").replace(/\u00a0|\u202f/g, " ");
-  if (reduce) return;
-  const step = t => { const k = Math.min(1, (t - t0) / 1400), v = Math.round(to * (1 - Math.pow(1 - k, 4)) / 100) * 100; el.textContent = fmt(v); if (k < 1) requestAnimationFrame(step); };
-  requestAnimationFrame(step);
-}), { threshold: .6 });
-document.querySelectorAll("[data-count]").forEach(el => ioC.observe(el));
+// цены: переключатель услуг, панель меняется плавно
+const PRICES = [
+  { name: "Сайт", price: 4500, note: "Первая версия за 2–3 дня — до оплаты",
+    inc: ["Работы, цены, отзывы, кнопки связи", "Удобно с телефона и компьютера", "Неделя правок — бесплатно", "Свой адрес .ru — от 500 ₽ в год"] },
+  { name: "Приложение", price: 8000, note: "Внутри Telegram — ничего не нужно скачивать",
+    inc: ["Запись, заявки или каталог", "Клиенту ничего не нужно скачивать", "Уведомления о каждой заявке", "Кабинет со статистикой"] },
+  { name: "Реклама", price: 7000, note: "ВКонтакте и Яндекс",
+    inc: ["Картинки и тексты объявлений", "Настройка и запуск", "Отчёт: сколько стоила заявка", "Дальше ведение — от 5 000 ₽ в месяц"] }
+];
+const seg = document.getElementById("seg"), pill = seg.querySelector(".pill"), ppA = document.getElementById("ppA"), ppB = document.getElementById("ppB");
+const fmtR = n => n.toLocaleString("ru-RU").replace(/\u00a0|\u202f/g, " ");
+PRICES.forEach((p, i) => { const b = document.createElement("button"); b.type = "button"; b.setAttribute("role", "tab"); b.textContent = p.name; b.onclick = () => ppShow(i); seg.append(b); });
+const segBtns = [...seg.querySelectorAll("button")];
+let ppI = -1;
+function ppPaint(i) {
+  const p = PRICES[i];
+  ppA.innerHTML = `<div class="pp-big"><small>от</small>${fmtR(p.price)}<span class="cur">₽</span></div><div class="pp-meta mono"><span class="muted">${p.note}</span></div>`;
+  ppB.innerHTML = `<ul>${p.inc.map(x => `<li>${x}</li>`).join("")}</ul><a class="pp-btn" href="${TG}" target="_blank" rel="noopener">Обсудить — ${p.name.toLowerCase()} <span>→</span></a>`;
+}
+function ppPill() { const b = segBtns[ppI]; pill.style.width = b.offsetWidth + "px"; pill.style.transform = `translateX(${b.offsetLeft}px)`; }
+async function ppShow(i) {
+  if (i === ppI) return;
+  const first = ppI < 0; ppI = i;
+  segBtns.forEach((b, k) => { b.classList.toggle("on", k === i); b.setAttribute("aria-selected", k === i); });
+  ppPill();
+  if (first || reduce) return ppPaint(i);
+  ppA.classList.add("hide"); ppB.classList.add("hide");
+  await new Promise(r => setTimeout(r, 330));
+  ppPaint(i);
+  ppA.classList.remove("hide"); setTimeout(() => ppB.classList.remove("hide"), 80);
+}
+ppShow(0);
+addEventListener("resize", ppPill);
+document.fonts && document.fonts.ready.then(ppPill);
 
 // карточки: свет под курсором, на телефоне — подсветка, когда карточка в центре экрана
 document.querySelectorAll(".card").forEach((c, i) => {
