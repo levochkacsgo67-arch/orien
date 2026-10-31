@@ -48,7 +48,8 @@ img{display:block;max-width:100%}
 .nav ul{display:flex;gap:28px;list-style:none}
 .nav ul a{opacity:.75;transition:opacity .3s}
 .nav ul a:hover{opacity:1}
-.nav .right{justify-self:end}
+.nav .right{justify-self:end;transition:opacity .4s var(--ease)}
+.nav.at-contact .right{opacity:0;pointer-events:none}
 .btn{display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 18px;border-radius:999px;border:1px solid currentColor;
   position:relative;overflow:hidden;isolation:isolate;transition:color .5s var(--ease),border-color .5s}
 .btn::before{content:"";position:absolute;inset:0;background:var(--red);transform:translateY(101%);transition:transform .5s var(--ease);z-index:-1;border-radius:inherit}
@@ -109,28 +110,24 @@ main{overflow-x:clip}
 .facts>div{padding:18px 18px 0 0;border-top:1px solid var(--line)}
 .facts b{display:block;font-family:var(--sans);text-transform:none;white-space:nowrap;font-weight:400;font-size:clamp(26px,2.6vw,40px);letter-spacing:-.04em;line-height:1;margin-top:10px}
 
-/* «Мы делаем …» — слово всегда на второй строке, стирается и печатается красной кареткой */
-.doing{padding-block:clamp(70px,10vw,140px);border-block:1px solid var(--line)}
-.doing-top{display:flex;justify-content:space-between}
-.doing-main{margin-top:clamp(26px,4vw,50px);font-size:clamp(46px,10.5vw,164px);line-height:1;letter-spacing:-.045em;text-transform:uppercase;font-weight:400}
-.doing-pre{display:block;color:#acacaa;word-spacing:.12em;margin-bottom:.14em}
-.doing-word{display:block;height:1.22em;line-height:1.22;white-space:nowrap;color:var(--fg)}
-.doing-word{position:relative}
-.dw-t{display:inline-block;clip-path:inset(-.25em -.3em -.25em -.1em)}
-.dw-cur{position:absolute;left:0;top:.2em;width:max(2px,.028em);height:.84em;background:var(--red);box-shadow:0 0 16px var(--red);opacity:0;pointer-events:none}
-.doing-word .dot{display:inline-block;width:.15em;height:.15em;border-radius:50%;background:var(--red);margin-left:.06em;box-shadow:0 0 18px var(--red);transition:opacity .5s}
-.doing-list{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,28px);margin-top:clamp(36px,5vw,70px);list-style:none}
-.doing-list button{all:unset;cursor:pointer;display:grid;gap:10px;width:100%;color:var(--dim);transition:color .5s var(--ease)}
-.doing-list button:focus{outline:none}
-.doing-list button:focus-visible .t{text-decoration:underline;text-underline-offset:6px}
-.doing-list .t{font:400 clamp(17px,1.5vw,22px)/1.2 var(--sans);letter-spacing:-.02em;text-transform:none}
-.doing-list .s{color:var(--dim);opacity:0;transition:opacity .6s var(--ease)}
-.doing-list .bar{height:1px;background:var(--line);position:relative;overflow:hidden;order:-1;margin-bottom:8px}
-.doing-list .bar i{position:absolute;inset:0;background:var(--red);transform-origin:left;transform:scaleX(0)}
-.doing-list li.on button{color:var(--fg)}
-.doing-list li.on .s{opacity:1}
-.doing-list li.on .bar i{animation:fill var(--dur,4.2s) linear forwards}
-@keyframes fill{to{transform:scaleX(1)}}
+/* «Что мы делаем» — список-указатель: слова контуром, активное заливается слева направо */
+.doing{padding-block:clamp(70px,9vw,130px);border-block:1px solid var(--line)}
+.doing-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:clamp(26px,4vw,50px)}
+.svc{list-style:none;border-bottom:1px solid var(--line)}
+.svc-row{position:relative;display:grid;grid-template-columns:clamp(50px,6vw,110px) minmax(0,1fr) minmax(0,300px);align-items:center;gap:20px;
+  padding-block:clamp(10px,1.4vw,22px);border-top:1px solid var(--line);cursor:default}
+.svc-row::before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:var(--red);box-shadow:0 0 10px var(--red);
+  transform:scaleX(0);transform-origin:left;transition:transform 1.1s var(--ease)}
+.svc-n{color:var(--dim);transition:color .6s var(--ease)}
+.svc-w{justify-self:start;font-size:clamp(44px,8.6vw,156px);font-weight:400;line-height:1.02;letter-spacing:-.05em;text-transform:uppercase;white-space:nowrap;
+  color:transparent;-webkit-text-stroke:1px rgba(241,240,237,.34);
+  background:linear-gradient(90deg,var(--fg) 0 50%,transparent 50% 100%);background-size:200.5% 100%;background-position:100% 0;
+  -webkit-background-clip:text;background-clip:text;transition:background-position 1.1s var(--ease),-webkit-text-stroke-color .8s var(--ease)}
+.svc-d{color:var(--dim);opacity:.45;transform:translateX(-10px);transition:opacity .7s var(--ease),transform .7s var(--ease),color .7s}
+.svc-row.on::before{transform:none}
+.svc-row.on .svc-n{color:var(--red)}
+.svc-row.on .svc-w{background-position:0 0;-webkit-text-stroke-color:rgba(241,240,237,0)}
+.svc-row.on .svc-d{opacity:1;transform:none;color:var(--fg)}
 
 /* 03 · работы — шапка проекта и три настоящих экрана */
 .works-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(30px,5vw,70px)}
@@ -227,7 +224,6 @@ main{overflow-x:clip}
 .fade-l img{-webkit-mask-image:linear-gradient(90deg,transparent,#000 30%);mask-image:linear-gradient(90deg,transparent,#000 30%)}
 .contact .inner{position:relative;z-index:2;padding-inline:var(--pad);width:48%}
 .big{font-size:clamp(48px,7.6vw,145px);font-weight:400;letter-spacing:-.07em;line-height:.84;text-transform:uppercase;display:block;transition:color .6s var(--ease)}
-.big:hover{color:var(--red)}
 .contact .row{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-top:clamp(28px,4vw,48px)}
 .btn.solid{height:56px;padding:0 28px;font:500 16px var(--sans);background:var(--fg);color:#222;border-color:var(--fg)}
 .btn.solid:hover{color:#fff}
@@ -259,13 +255,12 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
   .case-meta{flex-direction:row;align-items:center;justify-content:space-between;text-align:left}
   /* три экрана веером: главный в центре, два по бокам чуть позади — без листания */
   .screens{display:flex;justify-content:center;align-items:center;margin-inline:calc(var(--pad) * -1);padding:26px 0 10px}
-  .screens .phone{flex:0 0 30vw;transition:transform .9s var(--ease)}
-  .screens .phone:nth-child(1){order:2;flex-basis:50vw;z-index:2;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+  .screens .phone{flex:0 0 30vw;padding:1.02vw;transition:transform .9s var(--ease)}
+  .screens .phone:nth-child(1){order:2;flex-basis:50vw;padding:1.7vw;z-index:2;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
   .screens .phone:nth-child(2){order:1;margin-right:-10vw;transform:rotate(-4deg) translateY(4%) scale(.92)}
   .screens .phone:nth-child(3){order:3;margin-left:-10vw;transform:rotate(4deg) translateY(4%) scale(.92)}
   .case.lit .screens .phone:nth-child(2){transform:rotate(-5deg) translate(0,3%) scale(.92)}
   .case.lit .screens .phone:nth-child(3){transform:rotate(5deg) translate(0,3%) scale(.92)}
-  .doing-list{grid-template-columns:1fr 1fr;row-gap:22px}
   .plans{grid-template-columns:1fr}
   .plan{min-height:0}
   .plan .price{margin-top:22px}
@@ -306,7 +301,6 @@ html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
   .only-d{display:none}.only-m{display:inline}
   .nav{padding-block:14px}
   .nav .btn{height:34px;padding:0 14px}
-  .nav .right{transition:opacity .4s var(--ease)}
   .nav.solid .right{opacity:0;pointer-events:none}
   .poster{width:118vw;top:46%}
   .poster .logo{width:72%}
@@ -320,8 +314,10 @@ html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
   .contact{padding-top:36px!important}
   .approach .shot{display:none}
   .doing{padding-block:48px}
-  .doing-main{font-size:clamp(40px,12vw,64px)}
-  .doing-list{margin-top:28px}
+  .svc-row{grid-template-columns:auto minmax(0,1fr);gap:4px 14px;padding-block:14px 16px}
+  .svc-n{align-self:start;padding-top:.9em}
+  .svc-w{font-size:clamp(40px,11.4vw,80px)}
+  .svc-d{grid-column:2;font-size:11px}
   .f-head{font-size:clamp(46px,14vw,80px)}
   .f-body{gap:26px;margin-top:30px}
   .f-badge{width:120px;justify-self:end}
@@ -395,14 +391,13 @@ html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
     <figure class="shot fade-r parallax rv"><img src="img/gen/t-top-web.jpg" alt="ORIEN" loading="lazy" decoding="async"></figure>
   </section>
 
-  <section class="doing wrap" aria-label="Чем занимаемся">
-    <div class="doing-top mono"><span class="dim">Чем занимаемся</span><span class="dim"><span id="dNum">01</span> / 04</span></div>
-    <h2 class="doing-main"><span class="doing-pre">Мы делаем</span><span class="doing-word" id="dWord" aria-live="polite">сайты</span></h2>
-    <ol class="doing-list mono" id="dList">
-      <li class="on"><button type="button"><span class="bar"><i></i></span><span>01</span><span class="t">Сайты</span><span class="s">Первая версия за 2 дня</span></button></li>
-      <li><button type="button"><span class="bar"><i></i></span><span>02</span><span class="t">Приложения в Telegram</span><span class="s">Запись, заявки, каталог</span></button></li>
-      <li><button type="button"><span class="bar"><i></i></span><span>03</span><span class="t">Реклама</span><span class="s">ВКонтакте и Яндекс</span></button></li>
-      <li><button type="button"><span class="bar"><i></i></span><span>04</span><span class="t">Дизайн</span><span class="s">Логотипы, обложки, стиль</span></button></li>
+  <section class="doing wrap" aria-label="Что мы делаем">
+    <div class="doing-top mono"><span class="label">Мы делаем</span><span class="dim"><span id="dNum">01</span> / 04</span></div>
+    <ol class="svc" id="svc">
+      <li class="svc-row"><span class="svc-n mono">01</span><span class="svc-w">Сайты</span><span class="svc-d mono">Первая версия за 2 дня, свой адрес .ru</span></li>
+      <li class="svc-row"><span class="svc-n mono">02</span><span class="svc-w">Приложения</span><span class="svc-d mono">В Telegram: запись, заявки, каталог</span></li>
+      <li class="svc-row"><span class="svc-n mono">03</span><span class="svc-w">Рекламу</span><span class="svc-d mono">ВКонтакте и Яндекс, под ключ</span></li>
+      <li class="svc-row"><span class="svc-n mono">04</span><span class="svc-w">Дизайн</span><span class="svc-d mono">Логотипы, обложки, фирменный стиль</span></li>
     </ol>
   </section>
 
@@ -515,7 +510,7 @@ html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
     <span class="label mono">Как это происходит · (06)</span>
     <div class="cards steps">
       <div class="card step rv"><span class="mono muted num">01</span><h4>Разговор</h4><p>Вы рассказываете о деле. Пятнадцать минут переписки — и нам понятно, что нужно</p></div>
-      <div class="card step rv"><span class="mono muted num">02</span><h4>Первая версия</h4><p>Через пару дней вы видите готовый сайт. До оплаты</p></div>
+      <div class="card step rv"><span class="mono muted num">02</span><h4>Первая версия</h4><p>Через пару дней — рабочая первая версия проекта: можно открыть и попробовать. До оплаты</p></div>
       <div class="card step rv"><span class="mono muted num">03</span><h4>Доводка</h4><p>Правим тексты, фото и детали, пока не станет «то самое»</p></div>
       <div class="card step rv"><span class="mono muted num">04</span><h4>Запуск</h4><p>Свой адрес, открывается в России без VPN. Дальше мы на связи</p></div>
     </div>
@@ -526,7 +521,7 @@ html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
     <figure class="shot fade-l"><img src="img/gen/t-move-web.jpg" alt="" loading="lazy" decoding="async"></figure>
     <div class="inner">
       <span class="label mono">Связь · (07)</span>
-      <a class="big tg rv" href="#" style="margin-top:26px"><span class="mask"><span>Напишите</span></span><span class="mask"><span>нам</span></span></a>
+      <h2 class="big rv" style="margin-top:26px"><span class="mask"><span>Напишите</span></span><span class="mask"><span>нам</span></span></h2>
       <div class="row rv">
         <a class="btn solid tg" href="#">Написать в Telegram <span class="arr">→</span></a>
         <span class="mono muted">@ceoorien · отвечаем в тот же вечер</span>
@@ -617,46 +612,23 @@ if (lg && disp && !reduce) afterLoad.then(() => {
   requestAnimationFrame(step);
 });
 
-// «Мы делаем …»: красная каретка стирает слово справа налево и «печатает» следующее
-const dWord = document.getElementById("dWord"), dNum = document.getElementById("dNum");
-const dItems = [...document.querySelectorAll("#dList li")];
-const DOING = ["сайты", "приложения", "рекламу", "дизайн"];
-const DUR = 4200;
-let dI = 0, dTimer = null, dBusy = false;
-const wait = ms => new Promise(r => setTimeout(r, ms));
-const render = w => `<span class="dw-t">${w}<span class="dot"></span></span><i class="dw-cur" aria-hidden="true"></i>`;
-const clip = r => `inset(-.25em ${r} -.25em -.1em)`;
-function mark() {
-  dNum.textContent = String(dI + 1).padStart(2, "0");
-  dItems.forEach((li, i) => { li.classList.toggle("on", i === dI); const b = li.querySelector(".bar i"); b.style.animation = "none"; b.offsetWidth; b.style.animation = ""; });
+// «Что мы делаем»: заливается строка, ближайшая к середине экрана; на компьютере — и под курсором
+const svc = [...document.querySelectorAll(".svc-row")], dNum = document.getElementById("dNum");
+let sI = -1;
+function svcSet(i) {
+  if (i === sI) return; sI = i;
+  svc.forEach((r, k) => r.classList.toggle("on", k === i));
+  dNum.textContent = String(i + 1).padStart(2, "0");
 }
-async function doingGo(n) {
-  if (dBusy || n === dI) return; dBusy = true;
-  clearTimeout(dTimer); dI = n; mark();
-  if (!reduce) {
-    const t = dWord.querySelector(".dw-t"), cur = dWord.querySelector(".dw-cur"), w = t.offsetWidth;
-    const o = { duration: 560, easing: "cubic-bezier(.65,0,.35,1)", fill: "forwards" };
-    cur.style.opacity = 1;
-    await Promise.all([
-      t.animate([{ clipPath: clip("-.3em") }, { clipPath: clip(w + "px") }], o).finished,
-      cur.animate([{ transform: `translateX(${w}px)` }, { transform: "translateX(0)" }], o).finished
-    ]);
-    await wait(160);
-  }
-  dWord.innerHTML = render(DOING[dI]);
-  if (!reduce) {
-    const t = dWord.querySelector(".dw-t"), cur = dWord.querySelector(".dw-cur"), w = t.offsetWidth;
-    const o = { duration: 820, easing: "cubic-bezier(.22,.8,.2,1)", fill: "forwards" };
-    cur.style.opacity = 1;
-    t.animate([{ clipPath: clip(w + "px") }, { clipPath: clip("-.3em") }], o);
-    cur.animate([{ transform: "translateX(0)" }, { transform: `translateX(${w}px)` }], o).finished
-      .then(() => cur.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 600, delay: 300, fill: "forwards" }));
-  }
-  dBusy = false; dTimer = setTimeout(() => doingGo((dI + 1) % DOING.length), DUR);
+function svcScroll(vh) {
+  const box = svc[0].parentElement.getBoundingClientRect();
+  if (box.bottom < 0 || box.top > vh) return;
+  let best = 0, d = Infinity;
+  svc.forEach((r, k) => { const b = r.getBoundingClientRect(), m = Math.abs(b.top + b.height / 2 - vh * 0.52); if (m < d) { d = m; best = k; } });
+  svcSet(best);
 }
-dWord.innerHTML = render(DOING[0]); mark();
-dItems.forEach((li, i) => li.querySelector("button").addEventListener("click", () => doingGo(i)));
-dTimer = setTimeout(() => doingGo(1), DUR);
+svcSet(0);
+if (matchMedia("(hover: hover)").matches) svc.forEach((r, i) => r.addEventListener("pointerenter", () => svcSet(i)));
 
 // карточки: свет под курсором, на телефоне — подсветка, когда карточка в центре экрана
 document.querySelectorAll(".card").forEach((c, i) => {
@@ -678,7 +650,9 @@ const par = [...document.querySelectorAll(".parallax img")];
 const phones = [...document.querySelectorAll("[data-py]")];
 function onScroll() {
   const vh = innerHeight, y = scrollY;
+  if (svc.length) svcScroll(vh);
   nav.classList.toggle("solid", y > vh * 0.6);
+  nav.classList.toggle("at-contact", contact.getBoundingClientRect().top < vh * 0.7);
   if (!reduce && lg && y < vh) lg.style.translate = `0 ${(y * 0.25).toFixed(1)}px`;
   dock.classList.toggle("on", y > vh * 0.8 && contact.getBoundingClientRect().top > vh * 0.9);
   if (words.length) {
