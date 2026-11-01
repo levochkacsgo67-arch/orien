@@ -4,19 +4,109 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ORIEN</title>
-<meta name="description" content="ORIEN — цифровая студия. Сайты, приложения в Telegram и реклама. Сахалин">
+<meta name="description" content="ORIEN - цифровая студия. Сайты, приложения в Telegram и реклама. Сахалин">
 <meta name="theme-color" content="#5a5a5a">
 <link rel="icon" href="img/icon-180.png">
 <link rel="apple-touch-icon" href="img/icon-180.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="ORIEN — цифровая студия">
-<meta property="og:description" content="Сайты, приложения в Telegram и реклама для живого бизнеса. Первая версия — через 2 дня">
+<meta property="og:title" content="ORIEN - цифровая студия">
+<meta property="og:description" content="Сайты, приложения в Telegram и реклама для живого бизнеса. Первая версия - через 2 дня">
 <meta property="og:image" content="https://levochkacsgo67-arch.github.io/orien/img/og.jpg">
 <meta property="og:url" content="https://levochkacsgo67-arch.github.io/orien/">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap&subset=cyrillic" rel="stylesheet">
+<link rel="preload" href="fonts/InterTight-cyrillic-0.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* cyrillic */
+@font-face {
+  font-family: 'Inter Tight';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(fonts/InterTight-cyrillic-0.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter Tight';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(fonts/InterTight-latin-1.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter Tight';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/InterTight-cyrillic-0.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter Tight';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/InterTight-latin-1.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter Tight';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/InterTight-cyrillic-0.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter Tight';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/InterTight-latin-1.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/JetBrainsMono-cyrillic-2.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/JetBrainsMono-latin-3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/JetBrainsMono-cyrillic-2.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/JetBrainsMono-latin-3.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
 <style>
 :root{
   --gray:#5a5a5a; --fg:#f1f0ed; --muted:#d0d0cb; --dim:rgba(241,240,237,.55);
@@ -110,7 +200,7 @@ main{overflow-x:clip}
 .facts>div{padding:18px 18px 0 0;border-top:1px solid var(--line)}
 .facts b{display:block;font-family:var(--sans);text-transform:none;white-space:nowrap;font-weight:400;font-size:clamp(26px,2.6vw,40px);letter-spacing:-.04em;line-height:1;margin-top:10px}
 
-/* «Что мы делаем» — список-указатель: слова бледные, активное заливается слева направо */
+/* «Что мы делаем» - список-указатель: слова бледные, активное заливается слева направо */
 .doing{padding-block:clamp(70px,9vw,130px);border-block:1px solid var(--line)}
 .doing-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:clamp(26px,4vw,50px)}
 .svc{list-style:none;border-bottom:1px solid var(--line)}
@@ -129,7 +219,7 @@ main{overflow-x:clip}
 .svc-row.on .svc-w{background-position:0 0}
 .svc-row.on .svc-d{opacity:1;transform:none;color:var(--fg)}
 
-/* 03 · работы — шапка проекта и три настоящих экрана */
+/* 03 · работы - шапка проекта и три настоящих экрана */
 .works-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(30px,5vw,70px)}
 .works-head p{max-width:340px}
 .case{padding-block:clamp(36px,5vw,70px);border-top:1px solid var(--line)}
@@ -160,7 +250,7 @@ main{overflow-x:clip}
 .tlink:hover{border-color:var(--red);color:#fff}
 
 /* карточки «Цены» и «Как это происходит»: скругление, по краю медленно идёт блик,
-   под курсором — мягкий свет */
+   под курсором - мягкий свет */
 @property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
 .cards{display:grid;gap:clamp(12px,1.4vw,20px);margin-top:clamp(30px,5vw,70px)}
 .card{position:relative;isolation:isolate;border-radius:24px;padding:clamp(22px,2.2vw,32px);
@@ -231,7 +321,7 @@ main{overflow-x:clip}
 .steps h4{font-size:clamp(22px,2vw,28px);font-weight:400;letter-spacing:-.035em;margin:0 0 10px;padding-top:64px}
 .steps p{color:var(--muted);max-width:280px}
 
-/* 07 · связь: широкий кадр со шлейфом, текст — на пустой части */
+/* 07 · связь: широкий кадр со шлейфом, текст - на пустой части */
 .contact{min-height:100svh;display:flex;align-items:center;overflow:hidden}
 .contact .shot{position:absolute;top:0;bottom:0;right:0;width:68%}
 .contact .shot img{object-position:85% 50%}
@@ -267,7 +357,7 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
   .case-head{grid-template-columns:auto 1fr;gap:14px 18px}
   .case-head p,.case-meta{grid-column:1/-1}
   .case-meta{flex-direction:row;align-items:center;justify-content:space-between;text-align:left}
-  /* три экрана веером: главный в центре, два по бокам чуть позади — без листания */
+  /* три экрана веером: главный в центре, два по бокам чуть позади - без листания */
   .screens{display:flex;justify-content:center;align-items:center;margin-inline:calc(var(--pad) * -1);padding:26px 0 10px}
   .screens .phone{flex:0 0 30vw;padding:1.02vw;transition:transform .9s var(--ease)}
   .screens .phone:nth-child(1){order:2;flex-basis:50vw;padding:1.7vw;z-index:2;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
@@ -307,6 +397,54 @@ footer>:nth-child(2){text-align:center}footer>:last-child{text-align:right}
 html.ld{overflow:hidden}
 html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
 
+
+/* калькулятор */
+.calc{margin-top:clamp(14px,1.6vw,20px);border-radius:28px;background:rgba(0,0,0,.14);box-shadow:inset 0 0 0 1px var(--line);padding:clamp(18px,3vw,40px);display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(24px,5vw,80px);align-items:end}
+.calc h3{font-size:clamp(26px,3vw,40px);font-weight:400;letter-spacing:-.04em;line-height:1;margin:14px 0 26px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{all:unset;cursor:pointer;display:inline-flex;align-items:baseline;gap:10px;padding:12px 18px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);color:var(--muted);font:400 15px var(--sans);transition:background .5s var(--ease),color .5s var(--ease),box-shadow .5s var(--ease)}
+.chip small{font:400 11px var(--mono);letter-spacing:.06em;color:var(--dim);transition:color .5s var(--ease)}
+.chip:hover{box-shadow:inset 0 0 0 1px rgba(241,240,237,.5);color:var(--fg)}
+.chip.on{background:var(--fg);color:#1b1b1b;box-shadow:inset 0 0 0 1px var(--fg)}
+.chip.on small{color:rgba(27,27,27,.6)}
+.chip:focus-visible{outline:1px solid var(--fg);outline-offset:3px}
+.calc-sum{font-size:clamp(56px,7vw,110px);font-weight:300;letter-spacing:-.07em;line-height:.85;white-space:nowrap;font-variant-numeric:tabular-nums}
+.calc-sum .cur{font-size:.42em;letter-spacing:0;color:var(--muted)}
+.calc-mo{margin-top:16px;min-height:1.6em;transition:opacity .4s var(--ease)}
+.calc .pp-btn{margin-top:22px}
+.calc .pp-btn.off{opacity:.35;pointer-events:none}
+/* заявка */
+.lead{display:grid;gap:10px;margin-top:clamp(28px,4vw,44px);max-width:460px}
+.lead input{all:unset;box-sizing:border-box;width:100%;height:54px;padding:0 22px;border-radius:999px;background:rgba(0,0,0,.18);box-shadow:inset 0 0 0 1px var(--line);font:400 16px var(--sans);color:var(--fg);transition:box-shadow .4s var(--ease)}
+.lead input::placeholder{color:var(--dim)}
+.lead input:focus{box-shadow:inset 0 0 0 1px rgba(241,240,237,.6)}
+.lead .btn.solid{justify-content:space-between;width:100%;box-sizing:border-box;margin-top:4px}
+.lead-or{margin-top:22px}
+.lead-or a{border-bottom:1px solid var(--line);transition:border-color .4s}
+.lead-or a:hover{border-color:var(--fg)}
+/* вопросы */
+.faq{margin-top:clamp(30px,5vw,60px);border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:clamp(14px,3vw,40px);align-items:baseline;padding:clamp(20px,2.4vw,30px) 0;font-size:clamp(20px,2.4vw,32px);font-weight:400;letter-spacing:-.03em;line-height:1.15;transition:color .4s}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{color:#fff}
+.faq summary:focus-visible{outline:1px solid var(--fg);outline-offset:4px}
+.faq .q-x{position:relative;width:14px;height:14px;align-self:center}
+.faq .q-x::before,.faq .q-x::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:currentColor;transition:transform .5s var(--ease)}
+.faq .q-x::after{transform:rotate(90deg)}
+.faq details[open] .q-x::after{transform:rotate(0)}
+.faq details[open] .q-x::before{background:var(--red)}
+.faq .a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s var(--ease)}
+.faq details.op .a{grid-template-rows:1fr}
+.faq .a>div{overflow:hidden}
+.faq .a p{max-width:640px;color:var(--muted);padding:0 0 clamp(22px,2.4vw,30px) calc(2ch + clamp(14px,3vw,40px));opacity:0;transform:translateY(8px);filter:blur(4px);transition:opacity .5s var(--ease) .1s,transform .6s var(--ease) .1s,filter .5s .1s}
+.faq details.op .a p{opacity:1;transform:none;filter:none}
+@media (max-width:900px){
+  .calc{grid-template-columns:1fr}
+  .chip{padding:11px 15px;font-size:14px}
+  .faq .a p{padding-left:0}
+  .faq summary{grid-template-columns:auto 1fr auto}
+}
 /* телефон: аккуратная вёрстка */
 .only-m{display:none}
 @media (max-width:900px){
@@ -381,12 +519,12 @@ html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
 <main id="top">
   <!-- 01 -->
   <section class="hero">
-    <h1 class="poster" aria-label="ORIEN — цифровая студия">
+    <h1 class="poster" aria-label="ORIEN - цифровая студия">
       <img class="photo" src="img/gen/hero-neg3.jpg" alt="ORIEN">
       <span class="logo" id="heroLogo"><img src="img/orien.png" alt=""><i class="drop"></i></span>
     </h1>
     <div class="cn bl mono" style="display:grid;gap:6px;max-width:300px">
-      <span>Собираем цифровое лицо для живого дела — тихо, точно и без лишнего</span>
+      <span>Сайты, приложения и реклама для малого бизнеса. Первая версия за 2 дня</span>
       <span class="dim">Sakhalin · 46°57′N</span>
     </div>
     <div class="cn br mono">(01)<br>Est. 2026</div>
@@ -396,7 +534,7 @@ html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
   <section class="wrap approach" id="approach">
     <div>
       <span class="label mono">Подход · (02)</span>
-      <p class="big-txt" data-words style="margin-top:clamp(24px,3vw,40px)">Мы делаем меньше, но лучше. Разбираемся, как устроено ваше дело, убираем всё лишнее и собираем вещь, которая просто работает</p>
+      <p class="big-txt" data-words style="margin-top:clamp(24px,3vw,40px)">Разбираемся, как устроено ваше дело, и делаем только то, что приводит клиентов. Всё лишнее убираем</p>
       <div class="facts mono">
         <div class="rv"><span class="muted">Первая версия</span><b>2 дня</b></div>
         <div class="rv"><span class="muted">Проектов</span><b>20+</b></div>
@@ -424,7 +562,7 @@ html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
         <span class="label mono">Работы · (03)</span>
         <h2 class="h2 rv" style="margin-top:22px"><span class="mask"><span>Что мы</span></span><span class="mask"><span>уже сделали</span></span></h2>
       </div>
-      <p class="mono muted rv">Настоящие экраны настоящих проектов. <span class="only-d">Наведите — появится цвет</span><span class="only-m">Три экрана из каждого проекта</span></p>
+      <p class="mono muted rv">Настоящие экраны настоящих проектов. <span class="only-d">Наведите, и появится цвет</span><span class="only-m">Три экрана из каждого проекта</span></p>
     </div>
 
     <article class="case rv">
@@ -435,9 +573,9 @@ html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
         <div class="case-meta mono"><span class="ok">● Работает</span><a class="tlink" href="https://kuzovnoy25.ru" target="_blank" rel="noopener">kuzovnoy25.ru <span class="arr">↗</span></a></div>
       </header>
       <div class="screens">
-        <figure class="phone"><span class="scr"><img class="gs" src="img/works/kuzov-1.jpg?v=2" alt="Кузовной 25 — главный экран" loading="lazy" decoding="async"></span></figure>
-        <figure class="phone"><span class="scr"><img class="gs" src="img/works/kuzov-2.jpg?v=2" alt="Кузовной 25 — работы" loading="lazy" decoding="async"></span></figure>
-        <figure class="phone"><span class="scr"><img class="gs" src="img/works/kuzov-3.jpg?v=2" alt="Кузовной 25 — отзывы" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/kuzov-1.jpg?v=2" alt="Кузовной 25 - главный экран" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/kuzov-2.jpg?v=2" alt="Кузовной 25 - работы" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/kuzov-3.jpg?v=2" alt="Кузовной 25 - отзывы" loading="lazy" decoding="async"></span></figure>
       </div>
     </article>
 
@@ -445,7 +583,7 @@ html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
       <header class="case-head">
         <span class="case-n">02</span>
         <div><h3>Запись к мастеру</h3><span class="mono muted">Приложение в Telegram</span></div>
-        <p>Приложение для мастера бровей и ресниц: онлайн-запись, база клиентов, напоминания и статистика доходов — всё внутри Telegram</p>
+        <p>Приложение для мастера бровей и ресниц: онлайн-запись, база клиентов, напоминания и статистика доходов. Всё внутри Telegram</p>
         <div class="case-meta mono"><span class="ok">● Работает</span></div>
       </header>
       <div class="screens">
@@ -459,13 +597,13 @@ html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
       <header class="case-head">
         <span class="case-n">03</span>
         <div><h3>FITMENT</h3><span class="mono muted">Свой продукт · нейросети</span></div>
-        <p>Загружаешь фото своей машины — и через минуту видно, как она будет выглядеть с новыми дисками, обвесом и занижением. 91 модель дисков</p>
+        <p>Загружаете фото машины, и через минуту видно, как она будет выглядеть с новыми дисками, обвесом и занижением. 91 модель дисков</p>
         <div class="case-meta mono"><span class="ok">● Запущен</span><a class="tlink" href="https://car-tuning.brows-booking.workers.dev" target="_blank" rel="noopener">Открыть <span class="arr">↗</span></a></div>
       </header>
       <div class="screens">
-        <figure class="phone"><span class="scr"><img class="gs" src="img/works/fit-1.jpg?v=2" alt="FITMENT — главный экран" loading="lazy" decoding="async"></span></figure>
-        <figure class="phone"><span class="scr"><img class="gs" src="img/works/fit-2.jpg?v=2" alt="FITMENT — до и после" loading="lazy" decoding="async"></span></figure>
-        <figure class="phone"><span class="scr"><img class="gs" src="img/works/fit-3.jpg?v=2" alt="FITMENT — студия подбора" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/fit-1.jpg?v=2" alt="FITMENT - главный экран" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/fit-2.jpg?v=2" alt="FITMENT - до и после" loading="lazy" decoding="async"></span></figure>
+        <figure class="phone"><span class="scr"><img class="gs" src="img/works/fit-3.jpg?v=2" alt="FITMENT - студия подбора" loading="lazy" decoding="async"></span></figure>
       </div>
     </article>
   </section>
@@ -475,13 +613,25 @@ html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
     <span class="label mono">Услуги и цены · (04)</span>
     <div class="price-head">
       <h2 class="h2 rv"><span class="mask"><span>Сколько</span></span><span class="mask"><span>стоит</span></span></h2>
-      <p class="mono muted rv">Точная цена — после разговора и до начала работы. Никаких доплат по ходу</p>
+      <p class="mono muted rv">Точную цену называем после разговора, до начала работы. Никаких доплат по ходу</p>
     </div>
     <div class="pp rv">
       <div class="seg" id="seg" role="tablist" aria-label="Услуга"><i class="pill"></i></div>
       <div class="pp-body">
         <div class="pp-swap" id="ppA"></div>
         <div class="pp-swap" id="ppB"></div>
+      </div>
+    </div>
+    <div class="calc rv" id="calc">
+      <div>
+        <span class="mono muted">Соберите заказ</span>
+        <h3>Отметьте, что нужно, и цена посчитается сразу</h3>
+        <div class="chips" id="chips"></div>
+      </div>
+      <div>
+        <div class="calc-sum"><span id="cSum">0</span><span class="cur"> ₽</span></div>
+        <div class="calc-mo mono muted" id="cMo"></div>
+        <a class="pp-btn off" id="cBtn" href="#" target="_blank" rel="noopener">Отправить расчёт в Telegram <span>→</span></a>
       </div>
     </div>
   </section>
@@ -497,7 +647,7 @@ html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
         <img src="img/orien.png" alt="" loading="lazy">
       </div>
       <div class="f-txt rv">
-        <p>Никаких подрядчиков и цепочек из пяти менеджеров. Тот, кто с вами переписывается, сам придумывает, собирает и запускает ваш проект — поэтому решения принимаются за минуты, а не за неделю</p>
+        <p>Никаких подрядчиков и цепочек из пяти менеджеров. Тот, кто с вами переписывается, сам придумывает, собирает и запускает ваш проект. Поэтому любой вопрос решается за минуты</p>
         <div class="f-facts mono">
           <div><b>1</b><span class="muted">человек на связи</span></div>
           <div><b>0</b><span class="muted">подрядчиков</span></div>
@@ -512,23 +662,38 @@ html.ld .hero,html.ld .hero *{animation-play-state:paused!important}
   <section class="sec wrap">
     <span class="label mono">Как это происходит · (06)</span>
     <div class="cards steps">
-      <div class="card step rv"><span class="mono muted num">01</span><h4>Разговор</h4><p>Вы рассказываете о деле. Пятнадцать минут переписки — и нам понятно, что нужно</p></div>
-      <div class="card step rv"><span class="mono muted num">02</span><h4>Первая версия</h4><p>Через пару дней — рабочая первая версия проекта: можно открыть и попробовать. До оплаты</p></div>
+      <div class="card step rv"><span class="mono muted num">01</span><h4>Разговор</h4><p>Вы рассказываете о деле. Пятнадцати минут переписки хватает, чтобы понять задачу</p></div>
+      <div class="card step rv"><span class="mono muted num">02</span><h4>Первая версия</h4><p>Через 2 дня у вас рабочая первая версия: можно открыть и попробовать. До оплаты</p></div>
       <div class="card step rv"><span class="mono muted num">03</span><h4>Правки</h4><p>Меняем тексты, фото и детали, пока не станет «то самое»</p></div>
       <div class="card step rv"><span class="mono muted num">04</span><h4>Запуск</h4><p>Свой адрес, открывается в России без VPN. Дальше мы на связи</p></div>
     </div>
   </section>
 
-  <!-- 07 · связь -->
+  <!-- 07 · вопросы -->
+  <section class="sec wrap" style="padding-top:0">
+    <span class="label mono">Частые вопросы · (07)</span>
+    <div class="faq rv" id="faq">
+      <details><summary><span class="mono muted">01</span>А если не понравится?<i class="q-x"></i></summary><div class="a"><div><p>Первую версию вы видите до оплаты. Не понравилась - переделаем или разойдёмся, и вы ничего не платите</p></div></div></details>
+      <details><summary><span class="mono muted">02</span>Нужно платить заранее?<i class="q-x"></i></summary><div class="a"><div><p>Нет. Оплата, когда сайт готов и вас всё устраивает</p></div></div></details>
+      <details><summary><span class="mono muted">03</span>Что нужно от меня?<i class="q-x"></i></summary><div class="a"><div><p>Ссылка на вашу карточку в 2ГИС или Яндекс Картах и несколько фото работ. Тексты, цены и оформление соберём сами, вам останется только поправить</p></div></div></details>
+      <details><summary><span class="mono muted">04</span>Кто будет вносить правки потом?<i class="q-x"></i></summary><div class="a"><div><p>Мы. Неделя правок после запуска бесплатно. Дальше просто пишите: поменять фото, цены или тексты - дело одного вечера</p></div></div></details>
+      <details><summary><span class="mono muted">05</span>Сайт откроется у всех?<i class="q-x"></i></summary><div class="a"><div><p>Да. Свой адрес .ru, сайт открывается в России без VPN, с телефона и компьютера</p></div></div></details>
+    </div>
+  </section>
+
+  <!-- 08 · связь -->
   <section class="contact" id="contact">
     <figure class="shot fade-l"><img src="img/gen/t-move-web.jpg" alt="" loading="lazy" decoding="async"></figure>
     <div class="inner">
-      <span class="label mono">Связь · (07)</span>
+      <span class="label mono">Связь · (08)</span>
       <h2 class="big rv" style="margin-top:26px"><span class="mask"><span>Напишите</span></span><span class="mask"><span>нам</span></span></h2>
-      <div class="row rv">
-        <a class="btn solid tg" href="#">Написать в Telegram <span class="arr">→</span></a>
-        <span class="mono muted">@ceoorien · отвечаем в тот же вечер</span>
-      </div>
+      <form class="lead rv" id="lead" autocomplete="off">
+        <span class="mono muted">Первая версия за 2 дня. Платите, только если понравится</span>
+        <input name="n" placeholder="Название вашего дела" aria-label="Название вашего дела" required>
+        <input name="l" placeholder="Ссылка на 2ГИС или Яндекс Карты" aria-label="Ссылка на 2ГИС или Яндекс Карты" inputmode="url">
+        <button class="btn solid" type="submit">Хочу сайт за 2 дня <span class="arr">→</span></button>
+      </form>
+      <p class="lead-or mono muted rv">Или просто <a class="tg" href="#">напишите в Telegram</a> · @ceoorien · отвечаем в тот же вечер</p>
     </div>
   </section>
 </main>
@@ -567,7 +732,7 @@ const afterLoad = new Promise(async done => {
   setTimeout(ok, 4500);
   const finish = () => { document.documentElement.classList.remove("ld"); done(); setTimeout(() => L.remove(), 1300); };
   if (reduce) { await wait(300); L.style.transition = "opacity .4s"; L.style.opacity = 0; return finish(); }
-  // счётчик: 2,6 с, но 100 — только когда фото готово
+  // счётчик: 2,6 с, но 100 - только когда фото готово
   const count = new Promise(res => {
     const t0 = performance.now();
     const st = t => { const k = Math.min(1, (t - t0) / 2600), p = ready ? k : Math.min(k, .96);
@@ -592,7 +757,7 @@ const afterLoad = new Promise(async done => {
   L.remove();
 });
 
-// слова «Подхода» загораются при прокрутке; «лишнее» — красным
+// слова «Подхода» загораются при прокрутке; «лишнее» - красным
 const words = [];
 document.querySelectorAll("[data-words]").forEach(p => {
   p.innerHTML = p.textContent.trim().split(/\s+/).map(w => `<span class="wd${/лишнее/.test(w) ? " red" : ""}">${w}</span>`).join(" ");
@@ -636,7 +801,7 @@ if (lg && disp && !reduce) afterLoad.then(() => {
   requestAnimationFrame(step);
 });
 
-// «Что мы делаем»: заливается строка, ближайшая к середине экрана; на компьютере — и под курсором
+// «Что мы делаем»: заливается строка, ближайшая к середине экрана; на компьютере - и под курсором
 const svc = [...document.querySelectorAll(".svc-row")], dNum = document.getElementById("dNum");
 let sI = -1;
 function svcSet(i) {
@@ -656,12 +821,12 @@ if (matchMedia("(hover: hover)").matches) svc.forEach((r, i) => r.addEventListen
 
 // цены: переключатель услуг, панель меняется плавно
 const PRICES = [
-  { name: "Сайт", price: 4500, note: "Первая версия за 2–3 дня — до оплаты",
-    inc: ["Работы, цены, отзывы, кнопки связи", "Удобно с телефона и компьютера", "Неделя правок — бесплатно", "Свой адрес .ru — от 500 ₽ в год"] },
-  { name: "Приложение", price: 8000, note: "Внутри Telegram — ничего не нужно скачивать",
+  { name: "Сайт", price: 4500, note: "Первая версия за 2 дня, до оплаты",
+    inc: ["Работы, цены, отзывы, кнопки связи", "Удобно с телефона и компьютера", "Неделя правок бесплатно", "Свой адрес .ru от 500 ₽ в год"] },
+  { name: "Приложение", price: 8000, note: "Внутри Telegram, ничего не нужно скачивать",
     inc: ["Запись, заявки или каталог", "Клиенту ничего не нужно скачивать", "Уведомления о каждой заявке", "Кабинет со статистикой"] },
   { name: "Реклама", price: 7000, note: "ВКонтакте и Яндекс",
-    inc: ["Картинки и тексты объявлений", "Настройка и запуск", "Отчёт: сколько стоила заявка", "Дальше ведение — от 5 000 ₽ в месяц"] }
+    inc: ["Картинки и тексты объявлений", "Настройка и запуск", "Отчёт: сколько стоила заявка", "Дальше ведение от 5 000 ₽ в месяц"] }
 ];
 const seg = document.getElementById("seg"), pill = seg.querySelector(".pill"), ppA = document.getElementById("ppA"), ppB = document.getElementById("ppB");
 const fmtR = n => n.toLocaleString("ru-RU").replace(/\u00a0|\u202f/g, " ");
@@ -671,7 +836,7 @@ let ppI = -1;
 function ppPaint(i) {
   const p = PRICES[i];
   ppA.innerHTML = `<div class="pp-big"><small>от</small>${fmtR(p.price)}<span class="cur">₽</span></div><div class="pp-meta mono"><span class="muted">${p.note}</span></div>`;
-  ppB.innerHTML = `<ul>${p.inc.map(x => `<li>${x}</li>`).join("")}</ul><a class="pp-btn" href="${TG}" target="_blank" rel="noopener">Обсудить — ${p.name.toLowerCase()} <span>→</span></a>`;
+  ppB.innerHTML = `<ul>${p.inc.map(x => `<li>${x}</li>`).join("")}</ul><a class="pp-btn" href="${TG}" target="_blank" rel="noopener">Обсудить: ${p.name.toLowerCase()} <span>→</span></a>`;
 }
 function ppPill() { const b = segBtns[ppI]; pill.style.width = b.offsetWidth + "px"; pill.style.transform = `translateX(${b.offsetLeft}px)`; }
 async function ppShow(i) {
@@ -689,7 +854,53 @@ ppShow(0);
 addEventListener("resize", ppPill);
 document.fonts && document.fonts.ready.then(ppPill);
 
-// карточки: свет под курсором, на телефоне — подсветка, когда карточка в центре экрана
+// калькулятор: отмеченные услуги складываются, сумма плавно докручивается
+const CALC = [
+  { n: "Сайт", p: 4500, on: true }, { n: "Свой адрес .ru", p: 500, s: "в год" },
+  { n: "Приложение в Telegram", p: 8000 }, { n: "Запуск рекламы", p: 7000 },
+  { n: "Карточки 2ГИС и Яндекс Карт", p: 1500 }, { n: "Ведение рекламы", p: 5000, m: 1 }, { n: "Поддержка сайта", p: 700, m: 1 }
+];
+const chips = document.getElementById("chips"), cSum = document.getElementById("cSum"), cMo = document.getElementById("cMo"), cBtn = document.getElementById("cBtn");
+let cShown = 0, cRaf = 0;
+CALC.forEach(c => {
+  const b = document.createElement("button"); b.type = "button"; b.className = "chip" + (c.on ? " on" : "");
+  b.setAttribute("aria-pressed", !!c.on);
+  b.innerHTML = `${c.n}<small>${fmtR(c.p)} ₽${c.m ? " / мес" : c.s ? " / год" : ""}</small>`;
+  b.onclick = () => { c.on = !c.on; b.classList.toggle("on", c.on); b.setAttribute("aria-pressed", c.on); calcPaint(); };
+  chips.append(b);
+});
+function calcPaint() {
+  const sel = CALC.filter(c => c.on), once = sel.filter(c => !c.m).reduce((a, c) => a + c.p, 0), mo = sel.filter(c => c.m).reduce((a, c) => a + c.p, 0);
+  cMo.textContent = mo ? `+ ${fmtR(mo)} ₽ в месяц` : "";
+  cBtn.classList.toggle("off", !sel.length);
+  const msg = `Здравствуйте! Посчитал на сайте ORIEN:\n${sel.map(c => "- " + c.n).join("\n")}\nИтого от ${fmtR(once)} ₽${mo ? ` + ${fmtR(mo)} ₽/мес` : ""}`;
+  cBtn.href = TG + "?text=" + encodeURIComponent(msg);
+  cancelAnimationFrame(cRaf);
+  const from = cShown, t0 = performance.now(), d = reduce ? 1 : 700;
+  const tick = t => { const k = Math.min(1, (t - t0) / d), e = 1 - Math.pow(1 - k, 3); cShown = Math.round(from + (once - from) * e); cSum.textContent = fmtR(cShown); if (k < 1) cRaf = requestAnimationFrame(tick); };
+  cRaf = requestAnimationFrame(tick);
+}
+calcPaint();
+
+// заявка: ничего не уходит на сервер - открывается Telegram с готовым сообщением
+document.getElementById("lead").addEventListener("submit", e => {
+  e.preventDefault();
+  const f = e.target, n = f.n.value.trim(), l = f.l.value.trim();
+  const msg = `Здравствуйте! Хочу сайт за 2 дня.\nНазвание: ${n}${l ? "\nКарточка: " + l : ""}`;
+  window.open(TG + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
+});
+
+// вопросы: ответ раскрывается плавно, открыт только один
+const faqD = [...document.querySelectorAll(".faq details")];
+faqD.forEach(d => d.querySelector("summary").addEventListener("click", e => {
+  e.preventDefault();
+  const open = !d.open;
+  faqD.forEach(x => { if (x !== d && x.open) { x.classList.remove("op"); setTimeout(() => { if (!x.classList.contains("op")) x.open = false; }, 600); } });
+  if (open) { d.open = true; requestAnimationFrame(() => requestAnimationFrame(() => d.classList.add("op"))); }
+  else { d.classList.remove("op"); setTimeout(() => { if (!d.classList.contains("op")) d.open = false; }, 600); }
+}));
+
+// карточки: свет под курсором, на телефоне - подсветка, когда карточка в центре экрана
 document.querySelectorAll(".card").forEach((c, i) => {
   c.style.setProperty("--d", (-i * 3.3) + "s");
   c.addEventListener("pointermove", e => { const r = c.getBoundingClientRect(); c.style.setProperty("--mx", (e.clientX - r.left) + "px"); c.style.setProperty("--my", (e.clientY - r.top) + "px"); });
@@ -736,7 +947,7 @@ addEventListener("scroll", onScroll, { passive: true });
 if (lenis) lenis.on("scroll", onScroll);
 onScroll();
 
-// если картинка не догрузилась — пробуем ещё раз
+// если картинка не догрузилась - пробуем ещё раз
 document.querySelectorAll("img").forEach(im => im.addEventListener("error", () => { if (im.dataset.retry) return; im.dataset.retry = 1; setTimeout(() => { im.src = im.src.split("?")[0] + "?r=" + Date.now(); }, 800); }));
 
 // время на Сахалине
