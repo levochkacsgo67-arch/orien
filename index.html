@@ -659,6 +659,7 @@ body{background:linear-gradient(180deg,#c9d2d5 0%,#d3dbdc 40%,#d6e2de 100%)}
 .chat::before,.calc::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;
   background:linear-gradient(115deg,rgba(255,255,255,.28),rgba(255,255,255,0) 32%,rgba(255,255,255,0) 70%,rgba(255,255,255,.12))}
 .chat>*,.calc>*{position:relative;z-index:1}
+.chip{flex-wrap:wrap;row-gap:3px}.chip small{white-space:nowrap}
 </style>
 </head>
 <body>
@@ -1038,11 +1039,11 @@ if (matchMedia("(hover: hover)").matches) svc.forEach((r, i) => r.addEventListen
 // цены: переключатель услуг, панель меняется плавно
 const PRICES = [
   { name: "Сайт", price: 4500, note: "Первая версия за 2 дня, до оплаты",
-    inc: ["Работы, цены, отзывы, кнопки связи", "Удобно с телефона и компьютера", "Неделя правок бесплатно", "Свой адрес .ru от 500 ₽ в год"] },
-  { name: "Приложение", price: 8000, note: "Внутри Telegram, ничего не нужно скачивать",
+    inc: ["Работы, цены, отзывы, кнопки связи", "Удобно с телефона и компьютера", "Неделя правок бесплатно", "Свой адрес .ru и хостинг - 1 500 ₽ в год"] },
+  { name: "Приложение", price: 12000, note: "Внутри Telegram, ничего не нужно скачивать",
     inc: ["Запись, заявки или каталог", "Клиенту ничего не нужно скачивать", "Уведомления о каждой заявке", "Кабинет со статистикой"] },
   { name: "Реклама", price: 7000, note: "ВКонтакте и Яндекс",
-    inc: ["Картинки и тексты объявлений", "Настройка и запуск", "Отчёт: сколько стоила заявка", "Дальше ведение от 5 000 ₽ в месяц"] }
+    inc: ["Картинки и тексты объявлений", "Настройка и запуск", "Отчёт: сколько стоила заявка", "Дальше ведение - 5 000 ₽ в месяц, бюджет на рекламу отдельно"] }
 ];
 const seg = document.getElementById("seg"), pill = seg.querySelector(".pill"), ppA = document.getElementById("ppA"), ppB = document.getElementById("ppB");
 const fmtR = n => n.toLocaleString("ru-RU").replace(/\u00a0|\u202f/g, " ");
@@ -1072,16 +1073,16 @@ document.fonts && document.fonts.ready.then(ppPill);
 
 // калькулятор: отмеченные услуги складываются, сумма плавно докручивается
 const CALC = [
-  { n: "Сайт", p: 4500, on: true }, { n: "Свой адрес .ru", p: 500, s: "в год" },
-  { n: "Приложение в Telegram", p: 8000 }, { n: "Запуск рекламы", p: 7000 },
-  { n: "Карточки 2ГИС и Яндекс Карт", p: 1500 }, { n: "Ведение рекламы", p: 5000, m: 1 }, { n: "Поддержка сайта", p: 700, m: 1 }
+  { n: "Сайт", p: 4500, on: true }, { n: "Свой адрес .ru и хостинг", p: 1500, s: "в год" },
+  { n: "Приложение в Telegram", p: 12000 }, { n: "Запуск рекламы", p: 7000 },
+  { n: "Карточки 2ГИС и Яндекс Карт", p: 2000 }, { n: "Ведение рекламы", p: 5000, m: 1, t: "без бюджета" }, { n: "Поддержка сайта", p: 700, m: 1, t: "до 3 правок" }
 ];
 const chips = document.getElementById("chips"), cSum = document.getElementById("cSum"), cMo = document.getElementById("cMo"), cBtn = document.getElementById("cBtn");
 let cShown = 0, cRaf = 0;
 CALC.forEach(c => {
   const b = document.createElement("button"); b.type = "button"; b.className = "chip" + (c.on ? " on" : "");
   b.setAttribute("aria-pressed", !!c.on);
-  b.innerHTML = `${c.n}<small>${fmtR(c.p)} ₽${c.m ? " / мес" : c.s ? " / год" : ""}</small>`;
+  b.innerHTML = `${c.n}<small>${fmtR(c.p)} ₽${c.m ? " / мес" : c.s ? " / год" : ""}${c.t ? " · " + c.t : ""}</small>`;
   b.onclick = () => { c.on = !c.on; b.classList.toggle("on", c.on); b.setAttribute("aria-pressed", c.on); calcPaint(); };
   chips.append(b);
 });
