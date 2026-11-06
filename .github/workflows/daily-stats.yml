@@ -1,0 +1,15 @@
+name: daily-stats
+on:
+  schedule:
+    - cron: "0 22 * * *"   # 09:00 по Сахалину
+  workflow_dispatch:
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 .github/scripts/daily_stats.py
+        env:
+          METRIKA_TOKEN: ${{ secrets.METRIKA_TOKEN }}
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT: ${{ vars.TG_CHAT }}
