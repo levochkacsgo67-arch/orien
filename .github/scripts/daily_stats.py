@@ -56,4 +56,4 @@ except Exception as e:
     text = f"Не получилось взять статистику из Метрики: {e}"
 
 tg("sendMessage", {"chat_id": CHAT, "text": text, "disable_web_page_preview": "true"})
-print("sent")
+print("sent:", text.splitlines()[0], "|", text.splitlines()[2] if len(text.splitlines())>2 else "")
