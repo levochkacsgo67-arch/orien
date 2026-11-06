@@ -2,6 +2,8 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ORIEN</title>
 <meta name="description" content="ORIEN - цифровая студия. Сайты, приложения в Telegram и реклама. Сахалин">
@@ -671,7 +673,8 @@ body{background:linear-gradient(180deg,#c9d2d5 0%,#d3dbdc 40%,#d6e2de 100%)}
   <img class="ld-logo" id="ldLogo" src="img/orien-ink.png" alt="">
   <span class="ld-n mono" id="ldN">000</span><span class="ld-cap mono dim">Цифровая студия · Сахалин</span>
 </div>
-<script>document.documentElement.classList.add("ld")</script>
+<script>if (window.top !== window.self) { try { window.top.location = window.self.location; } catch (e) { document.documentElement.style.display = "none"; } }
+document.documentElement.classList.add("ld")</script>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="ldLiquid" x="-30%" y="-80%" width="160%" height="260%">
     <feTurbulence type="fractalNoise" baseFrequency=".012 .05" numOctaves="2" seed="7" result="n"/>
@@ -903,7 +906,7 @@ body{background:linear-gradient(180deg,#c9d2d5 0%,#d3dbdc 40%,#d6e2de 100%)}
   <a href="#top">Наверх ↑</a>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/lenis.min.js"></script>
 <script>
 const TG = "https://t.me/ceoorien";
 document.querySelectorAll(".tg").forEach(a => { a.href = TG; a.target = "_blank"; a.rel = "noopener"; });
