@@ -213,6 +213,8 @@ section{position:relative}
 .msg.out{align-self:flex-end;background:var(--fg);color:var(--on);border-bottom-right-radius:6px}
 .msg.show,.chat-day.show{opacity:1;transform:none}
 .chat-day{align-self:center;margin:8px 0;opacity:0;transition:opacity .5s var(--ease)}
+.chat-body{position:relative}
+.typing{position:absolute;right:18px;top:0;margin:0}
 .typing span{display:flex;gap:4px;padding:4px 0}
 .typing b{width:6px;height:6px;border-radius:50%;background:var(--on);opacity:.35;animation:tdot 1.2s infinite}
 .typing b:nth-child(2){animation-delay:.15s}.typing b:nth-child(3){animation-delay:.3s}
@@ -991,7 +993,7 @@ document.querySelectorAll(".rv").forEach(el => {
     let t = 300;
     items.forEach(m => {
       const out = m.classList.contains("out");
-      if (out) { setTimeout(() => { m.before(typing); typing.classList.add("show"); }, t); t += 900; }
+      if (out) { setTimeout(() => { typing.style.top = (m.offsetTop + m.offsetHeight - typing.offsetHeight) + "px"; typing.classList.add("show"); }, t); t += 900; }
       setTimeout(() => { if (out) typing.classList.remove("show"); m.classList.add("show"); }, t);
       t += m.classList.contains("chat-day") ? 700 : 650;
     });
