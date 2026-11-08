@@ -7,6 +7,8 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const afterLoad = new Promise(async done => {
   const L = document.getElementById("loader");
   if (!L) return done();
+  if (document.documentElement.classList.contains("seen")) { L.remove(); return done(); }
+  try { localStorage.setItem("orien-intro", "1"); } catch (e) {}
   const $ = id => document.getElementById(id);
   const drop = $("ldDrop"), logo = $("ldLogo"), num = $("ldN"), rings = [...L.querySelectorAll(".ld-ring")], img = document.querySelector(".hero .photo");
   const disp = document.querySelector("#ldLiquid feDisplacementMap");
@@ -272,6 +274,16 @@ function onScroll() {
 addEventListener("scroll", onScroll, { passive: true });
 if (lenis) lenis.on("scroll", onScroll);
 onScroll();
+
+// меню на телефоне
+(() => {
+  const btn = document.getElementById("mMenu");
+  const set = o => { nav.classList.toggle("open", o); btn.setAttribute("aria-expanded", o); btn.textContent = o ? "Закрыть" : "Меню"; };
+  btn.addEventListener("click", () => set(!nav.classList.contains("open")));
+  document.getElementById("navList").addEventListener("click", e => { if (e.target.closest("a")) set(false); });
+  document.addEventListener("click", e => { if (nav.classList.contains("open") && !nav.contains(e.target)) set(false); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && nav.classList.contains("open")) { set(false); btn.focus(); } });
+})();
 
 // если картинка не догрузилась - пробуем ещё раз
 document.querySelectorAll("img").forEach(im => im.addEventListener("error", () => { if (im.dataset.retry) return; im.dataset.retry = 1; setTimeout(() => { im.src = im.src.split("?")[0] + "?r=" + Date.now(); }, 800); }));

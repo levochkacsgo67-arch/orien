@@ -2,20 +2,23 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://mc.yandex.ru https://mc.yandex.com https://yastatic.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://mc.yandex.ru https://mc.yandex.com; font-src 'self'; connect-src 'self' https://mc.yandex.ru https://mc.yandex.com wss://mc.yandex.ru wss://mc.yandex.com; frame-src blob: https://mc.yandex.ru https://mc.yandex.com; child-src blob: https://mc.yandex.ru https://mc.yandex.com; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://mc.yandex.ru https://mc.yandex.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://mc.yandex.ru https://mc.yandex.com; font-src 'self'; connect-src 'self' https://mc.yandex.ru https://mc.yandex.com wss://mc.yandex.ru wss://mc.yandex.com; frame-src blob: https://mc.yandex.ru https://mc.yandex.com; child-src blob: https://mc.yandex.ru https://mc.yandex.com; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ORIEN</title>
-<meta name="description" content="ORIEN - цифровая студия. Сайты, приложения в Telegram и реклама. Сахалин">
+<title>ORIEN - сайты, приложения в Telegram и реклама для бизнеса</title>
+<meta name="description" content="Сайт для бизнеса: первая версия за 2 дня, от 4 500 ₽, платите после просмотра. Приложения в Telegram, реклама ВКонтакте и Яндекс. Работаю по всей России.">
+<link rel="canonical" href="https://orien-studio.ru/">
 <meta name="theme-color" content="#cdd5d7">
 <link rel="icon" href="img/icon-180.png">
 <link rel="apple-touch-icon" href="img/icon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ORIEN - цифровая студия">
-<meta property="og:description" content="Сайты, приложения в Telegram и реклама для живого бизнеса. Первая версия - через 2 дня">
-<meta property="og:image" content="https://levochkacsgo67-arch.github.io/orien/img/og.jpg">
-<meta property="og:url" content="https://levochkacsgo67-arch.github.io/orien/">
+<meta property="og:description" content="Сайты, приложения в Telegram и реклама. Первая версия сайта за 2 дня">
+<meta property="og:image" content="https://orien-studio.ru/img/og.jpg">
+<meta property="og:url" content="https://orien-studio.ru/">
 <meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"ORIEN","url":"https://orien-studio.ru/","image":"https://orien-studio.ru/img/og.jpg","description":"Сайты, приложения в Telegram и реклама для бизнеса","priceRange":"от 4500 ₽","address":{"@type":"PostalAddress","addressLocality":"Южно-Сахалинск","addressCountry":"RU"},"areaServed":"RU","sameAs":["https://t.me/ceoorien"]}</script>
+<noscript><style>.rv,.msg,.chat-day{opacity:1!important;transform:none!important}.mask>span{transform:none!important}.h-flow,.photo-cut{display:none}</style></noscript>
 <link rel="preload" href="fonts/InterTight-cyrillic-0.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Unbounded-800.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -707,6 +710,21 @@ body{background:linear-gradient(180deg,#c9d2d5 0%,#d3dbdc 40%,#d6e2de 100%)}
 .hero::before{display:none}
 .hero::after{z-index:1;background:linear-gradient(180deg,rgba(20,28,31,.38),transparent 22%),linear-gradient(0deg,rgba(20,28,31,.62),transparent 26%),linear-gradient(90deg,transparent 30%,rgba(20,28,31,.34) 62%,rgba(20,28,31,.46))}
 @media (max-width:900px){.hero::after{background:linear-gradient(180deg,rgba(20,28,31,.38),transparent 18%),linear-gradient(180deg,transparent 28%,rgba(20,28,31,.35) 55%,rgba(20,28,31,.72))}}
+
+/* меню на телефоне */
+.m-menu{display:none}
+@media (max-width:900px){
+  .nav{grid-template-columns:1fr auto auto;gap:8px;align-items:center}
+  .m-menu{all:unset;display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:999px;cursor:pointer;font-weight:600;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;box-shadow:inset 0 0 0 1px currentColor}
+  .m-menu:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+  .nav .btn{height:40px}
+  .nav.open ul{display:flex;position:absolute;top:calc(100% + 4px);left:var(--pad);right:var(--pad);flex-direction:column;gap:0;align-items:stretch;padding:10px 20px;border-radius:24px;background:#111517;color:#e8f2ed;box-shadow:0 24px 60px -24px rgba(0,0,0,.65);animation:mIn .4s var(--ease)}
+  .nav.open ul a{min-height:52px;font-size:15px;width:100%}
+  .nav.open li+li{border-top:1px solid rgba(232,242,237,.14)}
+}
+@keyframes mIn{from{opacity:0;transform:translateY(-6px)}}
+/* заставка только при первом заходе */
+html.seen .loader{display:none}
 </style>
 <link rel="stylesheet" href="css/consent.css">
 </head>
@@ -736,12 +754,13 @@ body{background:linear-gradient(180deg,#c9d2d5 0%,#d3dbdc 40%,#d6e2de 100%)}
   <a href="#top" class="brand" aria-label="ORIEN"><img src="img/orien-ink.png" alt="orien"></a>
   <span class="n-txt">Цифровая студия<br>на Сахалине</span>
   <span class="n-txt">Сайты, приложения<br>и реклама для бизнеса</span>
-  <ul>
+  <ul id="navList">
     <li><a href="#works">Работы</a></li>
     <li><a href="#price">Цены</a></li>
     <li><a href="#approach">Подход</a></li>
     <li><a href="#contact">Связь</a></li>
   </ul>
+  <button class="m-menu mono" id="mMenu" type="button" aria-expanded="false" aria-controls="navList">Меню</button>
   <div class="right"><a class="btn mono tg" href="#">Написать <span class="arr">→</span></a></div>
 </header>
 
@@ -753,7 +772,7 @@ body{background:linear-gradient(180deg,#c9d2d5 0%,#d3dbdc 40%,#d6e2de 100%)}
     <img class="photo photo-cut" src="img/gen/hero-cut.webp" alt="" decoding="async">
     <p class="h-side mono h-in">Платите, только если понравится. Неделя правок бесплатно</p>
     <h1 class="h-title"><span class="mask"><span>Сайты</span></span><span class="mask"><span>за 2 дня</span></span></h1>
-    <p class="h-bl mono h-in">ORIEN - цифровая студия. Первую версию сайта показываем за 2 дня. Работаем по всей России</p>
+    <p class="h-bl mono h-in">ORIEN - студия одного человека. Первую версию сайта показываю за 2 дня. Работаю по всей России</p>
     <a class="h-br h-in" href="#works"><span class="mono">Смотреть работы</span><i class="plus" aria-hidden="true"></i></a>
   </section>
 
@@ -761,12 +780,12 @@ body{background:linear-gradient(180deg,#c9d2d5 0%,#d3dbdc 40%,#d6e2de 100%)}
   <section class="wrap approach" id="approach">
     <div>
       <span class="label mono">Подход · (02)</span>
-      <p class="big-txt" data-words style="margin-top:clamp(24px,3vw,40px)">Разбираемся, как устроено ваше дело, и делаем только то, что нужно вашему делу. Всё лишнее убираем</p>
+      <p class="big-txt" data-words style="margin-top:clamp(24px,3vw,40px)">Разбираюсь, как устроено ваше дело, и делаю только то, что ему нужно. Всё лишнее убираю</p>
       <div class="facts mono">
         <div class="rv"><span class="muted">Первая версия</span><b>2 дня</b></div>
         <div class="rv"><span class="muted">Сайтов</span><b>20+</b></div>
         <div class="rv"><span class="muted">База</span><b>Сахалин</b></div>
-        <div class="rv"><span class="muted">Работаем</span><b>По всей РФ</b></div>
+        <div class="rv"><span class="muted">Работаю</span><b>По всей РФ</b></div>
       </div>
     </div>
     <figure class="chat rv" id="chat" aria-label="Пример переписки с клиентом">
@@ -783,8 +802,8 @@ body{background:linear-gradient(180deg,#c9d2d5 0%,#d3dbdc 40%,#d6e2de 100%)}
     </figure>
   </section>
 
-  <section class="doing wrap" aria-label="Что мы делаем">
-    <div class="doing-top mono"><span class="label">Мы делаем</span><span class="dim"><span id="dNum">01</span> / 04</span></div>
+  <section class="doing wrap" aria-label="Что я делаю">
+    <div class="doing-top mono"><span class="label">Делаю</span><span class="dim"><span id="dNum">01</span> / 04</span></div>
     <ol class="svc" id="svc">
       <li class="svc-row"><span class="svc-n mono">01</span><span class="svc-w">Сайты</span><span class="svc-d mono">Первая версия за 2 дня, адрес .ru - 1 500 ₽ в год</span></li>
       <li class="svc-row"><span class="svc-n mono">02</span><span class="svc-w">Приложения</span><span class="svc-d mono">В Telegram: запись, заявки, каталог</span></li>
@@ -798,7 +817,7 @@ body{background:linear-gradient(180deg,#c9d2d5 0%,#d3dbdc 40%,#d6e2de 100%)}
     <div class="works-head">
       <div>
         <span class="label mono">Работы · (03)</span>
-        <h2 class="h2 rv" style="margin-top:22px"><span class="mask"><span>Что мы</span></span><span class="mask"><span>уже сделали</span></span></h2>
+        <h2 class="h2 rv" style="margin-top:22px"><span class="mask"><span>Что я</span></span><span class="mask"><span>уже сделал</span></span></h2>
       </div>
       <p class="mono muted rv">Настоящие экраны настоящих проектов. <span class="only-d">Наведите, и появится цвет</span><span class="only-m">Три экрана из каждого проекта</span></p>
     </div>
@@ -836,7 +855,7 @@ body{background:linear-gradient(180deg,#c9d2d5 0%,#d3dbdc 40%,#d6e2de 100%)}
         <span class="case-n">03</span>
         <div><h3>FITMENT</h3><span class="mono muted">Свой продукт · нейросети</span></div>
         <p>Загружаете фото машины, и через минуту видно, как она будет выглядеть с новыми дисками, обвесом и занижением. 91 модель дисков</p>
-        <div class="case-meta mono"><span class="ok">● Запущен</span><a class="tlink" href="https://car-tuning.brows-booking.workers.dev" target="_blank" rel="noopener">Открыть <span class="arr">↗</span></a></div>
+        <div class="case-meta mono"><span class="ok">● Запущен</span><a class="tlink" href="https://car-tuning.brows-booking.workers.dev" target="_blank" rel="noopener">Открыть, нужен VPN <span class="arr">↗</span></a></div>
       </header>
       <div class="screens">
         <figure class="phone"><span class="scr"><img class="gs" src="img/works/fit-1.jpg?v=2" alt="FITMENT - главный экран" loading="lazy" decoding="async"></span></figure>
@@ -851,7 +870,7 @@ body{background:linear-gradient(180deg,#c9d2d5 0%,#d3dbdc 40%,#d6e2de 100%)}
     <span class="label mono">Услуги и цены · (04)</span>
     <div class="price-head">
       <h2 class="h2 rv"><span class="mask"><span>Сколько</span></span><span class="mask"><span>стоит</span></span></h2>
-      <p class="mono muted rv">Точную цену называем после разговора, до начала работы. Потом она не меняется, если вы сами не добавите задач</p>
+      <p class="mono muted rv">Точную цену называю после разговора, до начала работы. Потом она не меняется, если вы сами не добавите задач</p>
     </div>
     <div class="pp rv">
       <div class="seg" id="seg" role="group" aria-label="Услуга"><i class="pill"></i></div>
@@ -878,7 +897,7 @@ body{background:linear-gradient(180deg,#c9d2d5 0%,#d3dbdc 40%,#d6e2de 100%)}
   <!-- 05 · кто делает -->
   <section class="founder wrap corners">
     <span class="label mono">Кто делает · (05)</span>
-    <h2 class="f-head rv"><span>Делаем сами.</span><span class="f-l2">От и до <i class="f-rule" aria-hidden="true"></i></span></h2>
+    <h2 class="f-head rv"><span>Делаю сам.</span><span class="f-l2">От и до <i class="f-rule" aria-hidden="true"></i></span></h2>
     <div class="f-body">
       <div class="f-badge rv" aria-hidden="true">
         <svg viewBox="0 0 200 200"><defs><path id="fCircle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
@@ -907,8 +926,8 @@ body{background:linear-gradient(180deg,#c9d2d5 0%,#d3dbdc 40%,#d6e2de 100%)}
     <div class="cards steps">
       <div class="card step rv"><span class="mono muted num">01</span><h4>Разговор</h4><p>Вы рассказываете о деле. Пятнадцати минут переписки хватает, чтобы понять задачу</p></div>
       <div class="card step rv"><span class="mono muted num">02</span><h4>Первая версия</h4><p>Через 2 дня у вас рабочая первая версия: можно открыть и попробовать. До оплаты</p></div>
-      <div class="card step rv"><span class="mono muted num">03</span><h4>Правки</h4><p>Меняем тексты, фото и детали. Неделя правок после запуска бесплатно</p></div>
-      <div class="card step rv"><span class="mono muted num">04</span><h4>Запуск</h4><p>Свой адрес .ru и хостинг - 1 500 ₽ в год, открывается в России без VPN. Дальше мы на связи</p></div>
+      <div class="card step rv"><span class="mono muted num">03</span><h4>Правки</h4><p>Меняю тексты, фото и детали. Неделя правок после запуска бесплатно</p></div>
+      <div class="card step rv"><span class="mono muted num">04</span><h4>Запуск</h4><p>Свой адрес .ru и хостинг - 1 500 ₽ в год, открывается в России без VPN. Дальше я на связи</p></div>
     </div>
   </section>
 
@@ -916,10 +935,10 @@ body{background:linear-gradient(180deg,#c9d2d5 0%,#d3dbdc 40%,#d6e2de 100%)}
   <section class="sec wrap" style="padding-top:0">
     <span class="label mono">Частые вопросы · (07)</span>
     <div class="faq rv" id="faq">
-      <details><summary><span class="mono muted">01</span>А если не понравится?<i class="q-x"></i></summary><div class="a"><div><p>Первую версию вы видите до оплаты. Не понравилась - переделаем или разойдёмся, и вы ничего не платите</p></div></div></details>
+      <details><summary><span class="mono muted">01</span>А если не понравится?<i class="q-x"></i></summary><div class="a"><div><p>Первую версию вы видите до оплаты. Не понравилась - переделаю или разойдёмся, и вы ничего не платите</p></div></div></details>
       <details><summary><span class="mono muted">02</span>Нужно платить заранее?<i class="q-x"></i></summary><div class="a"><div><p>Нет. Оплата, когда сайт готов и вас всё устраивает</p></div></div></details>
-      <details><summary><span class="mono muted">03</span>Что нужно от меня?<i class="q-x"></i></summary><div class="a"><div><p>Ссылка на вашу карточку в 2ГИС или Яндекс Картах и несколько фото работ. Тексты, цены и оформление соберём сами, вам останется только поправить</p></div></div></details>
-      <details><summary><span class="mono muted">04</span>Кто будет вносить правки потом?<i class="q-x"></i></summary><div class="a"><div><p>Мы. Неделя правок после запуска бесплатно. Дальше просто пишите: поменять фото, цены или тексты - дело одного вечера</p></div></div></details>
+      <details><summary><span class="mono muted">03</span>Что нужно от меня?<i class="q-x"></i></summary><div class="a"><div><p>Ссылка на вашу карточку в 2ГИС или Яндекс Картах и несколько фото работ. Тексты, цены и оформление соберу сам, вам останется только поправить</p></div></div></details>
+      <details><summary><span class="mono muted">04</span>Кто будет вносить правки потом?<i class="q-x"></i></summary><div class="a"><div><p>Я. Неделя правок после запуска бесплатно. Дальше просто пишите: поменять фото, цены или тексты - дело одного вечера</p></div></div></details>
       <details><summary><span class="mono muted">05</span>Сайт откроется у всех?<i class="q-x"></i></summary><div class="a"><div><p>Да. Со своим адресом .ru (1 500 ₽ в год вместе с хостингом) сайт открывается в России без VPN, с телефона и компьютера</p></div></div></details>
     </div>
   </section>
@@ -929,7 +948,7 @@ body{background:linear-gradient(180deg,#c9d2d5 0%,#d3dbdc 40%,#d6e2de 100%)}
     <figure class="shot"><img src="img/gen/duo-c2-web.jpg" alt="" loading="lazy" decoding="async"></figure>
     <div class="inner">
       <span class="label mono">Связь · (08)</span>
-      <h2 class="big rv" style="margin-top:26px"><span class="mask"><span>Напишите</span></span><span class="mask"><span>нам</span></span></h2>
+      <h2 class="big rv" style="margin-top:26px"><span class="mask"><span>Напишите</span></span><span class="mask"><span>мне</span></span></h2>
       <form class="lead" id="lead" autocomplete="off">
         <span class="mono muted">Первая версия за 2 дня. Платите, только если понравится</span>
         <input class="ym-disable-keys ym-hide-content" name="n" maxlength="120" placeholder="Название вашего дела" aria-label="Название вашего дела" required>
@@ -938,7 +957,7 @@ body{background:linear-gradient(180deg,#c9d2d5 0%,#d3dbdc 40%,#d6e2de 100%)}
         <button class="btn solid" type="submit">Хочу первую версию <span class="arr">→</span></button>
         <span class="agree-note">Сайт заявку не хранит. Откроется Telegram с готовым текстом, отправляете вы сами</span>
       </form>
-      <p class="lead-or mono muted rv">Или просто <a class="tg" href="#">напишите в Telegram</a> · @ceoorien · отвечаем в тот же вечер</p>
+      <p class="lead-or mono muted rv">Или просто <a class="tg" href="#">напишите в Telegram</a> · @ceoorien · отвечаю в тот же вечер</p>
     </div>
   </section>
 </main>
