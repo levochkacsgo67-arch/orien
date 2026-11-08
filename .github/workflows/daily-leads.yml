@@ -1,0 +1,23 @@
+name: daily-leads
+on:
+  schedule:
+    - cron: "40 22 * * *"   # 09:40 по Сахалину
+  workflow_dispatch:
+    inputs:
+      test:
+        type: boolean
+        default: false
+permissions:
+  contents: read
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - run: cd .github/scripts && python3 daily_leads.py
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT: ${{ vars.TG_CHAT }}
+          OPS_DATA: ${{ secrets.OPS_DATA }}
+          TEST: ${{ inputs.test }}
