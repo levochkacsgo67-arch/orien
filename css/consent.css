@@ -1,0 +1,14 @@
+.ck{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));z-index:150;width:min(720px,calc(100vw - 32px));transform:translateX(-50%);
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px 24px;align-items:center;padding:18px 20px;border-radius:24px;
+  background:#111517;color:#e8f2ed;font:400 14px/1.45 "Inter Tight",system-ui,sans-serif;box-shadow:inset 0 0 0 1px rgba(232,242,237,.16),0 24px 60px -24px rgba(0,0,0,.65);
+  animation:ckIn .7s cubic-bezier(.22,.8,.2,1)}
+@keyframes ckIn{from{opacity:0;transform:translate(-50%,14px)}}
+.ck[hidden]{display:none}
+.ck p{margin:0}
+.ck a{text-decoration:underline;text-underline-offset:3px}
+.ck-btns{display:flex;gap:8px}
+.ck button{appearance:none;cursor:pointer;min-width:112px;height:44px;padding:0 18px;border:0;border-radius:999px;background:#e8f2ed;color:#111517;font:500 15px "Inter Tight",system-ui,sans-serif;transition:background .4s}
+.ck button:hover{background:#c6ead9}
+.ck :focus-visible{outline:2px solid #c6ead9;outline-offset:2px}
+@media (max-width:640px){.ck{grid-template-columns:1fr}.ck-btns button{flex:1}}
+@media (prefers-reduced-motion:reduce){.ck{animation:none}}

@@ -533,7 +533,7 @@ body{background:linear-gradient(180deg,#c9d2d5 0%,#d3dbdc 40%,#d6e2de 100%)}
 /* тёмные блоки: мятный на почти чёрном */
 .doing,.pp,footer,.dark{--fg:#e8f2ed;--muted:rgba(232,242,237,.7);--dim:rgba(232,242,237,.48);--line:rgba(232,242,237,.14);--red:var(--mint);--on:#111517;background:var(--dark);color:var(--fg)}
 .doing{border:0}
-.svc-w{background:linear-gradient(90deg,var(--mint) 0 50%,rgba(232,242,237,.13) 50% 100%);background-size:200.5% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text}
+.svc-w{background:linear-gradient(90deg,var(--mint) 0 50%,rgba(232,242,237,.4) 50% 100%);background-size:200.5% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text}
 .pp .pp-big{color:var(--mint)}
 .pp-btn:hover{background:var(--mint);color:#111517}
 .btn.solid{background:var(--fg);color:var(--on);border-color:var(--fg)}
@@ -664,15 +664,40 @@ body{background:linear-gradient(180deg,#c9d2d5 0%,#d3dbdc 40%,#d6e2de 100%)}
   background:linear-gradient(115deg,rgba(255,255,255,.28),rgba(255,255,255,0) 32%,rgba(255,255,255,0) 70%,rgba(255,255,255,.12))}
 .chat>*,.calc>*{position:relative;z-index:1}
 .chip{flex-wrap:wrap;row-gap:3px}.chip small{white-space:nowrap}
+
+/* доступность и правовой блок */
+.skip{position:fixed;left:16px;top:-80px;z-index:300;padding:12px 18px;border-radius:999px;background:#111517;color:#e8f2ed;font:500 15px var(--sans)}
+.skip:focus{top:12px}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+[tabindex="-1"]:focus{outline:0}
+.lead input:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+.nav .right{transition:opacity .4s var(--ease),visibility .4s}
+.nav.at-contact .right{visibility:hidden}
+.tlink:hover,.faq summary:hover{color:var(--fg)}
+.hero::after{background:linear-gradient(0deg,rgba(20,28,31,.62),transparent 26%),linear-gradient(90deg,transparent 30%,rgba(20,28,31,.34) 62%,rgba(20,28,31,.46))}
+.contact::after{background:linear-gradient(90deg,rgba(20,28,31,.66),rgba(20,28,31,.42) 60%,rgba(20,28,31,.12))}
+.lead input::placeholder{color:rgba(238,243,241,.85)}
+@media (max-width:900px){.hero::after{background:linear-gradient(180deg,transparent 28%,rgba(20,28,31,.35) 55%,rgba(20,28,31,.72))}.contact::after{background:rgba(20,28,31,.58)}}
+.approach .wd{opacity:.5}
+.svc-d{opacity:.9}
+.calc-note{margin-top:12px}
+.lead input[type=checkbox]{appearance:none;-webkit-appearance:none;flex:none;width:24px;height:24px;padding:0;border-radius:8px;cursor:pointer;background:rgba(238,243,241,.14) center/15px no-repeat}
+.lead input[type=checkbox]:checked{background-color:var(--mint);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23111517' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5 6.5 12 13 4.5'/%3E%3C/svg%3E")}
+.agree{display:flex;gap:12px;align-items:flex-start;font:400 14px/1.4 var(--sans);cursor:pointer;margin-top:4px}
+.agree a{text-decoration:underline;text-underline-offset:3px}
+.agree-note{font:400 13px/1.4 var(--sans);color:var(--muted)}
+.legal-bar{--fg:#e8f2ed;--muted:rgba(232,242,237,.72);background:var(--dark);color:var(--muted);display:grid;gap:12px;padding:30px var(--pad) 26px;font:400 14px/1.5 var(--sans)}
+.legal-bar a{color:var(--fg)}
+.legal-bar p a{text-decoration:underline;text-underline-offset:3px}
+.legal-bar nav{display:flex;flex-wrap:wrap;gap:6px 22px}
+.legal-bar nav a,.legal-bar nav button{all:unset;cursor:pointer;color:var(--fg);min-height:28px;display:inline-flex;align-items:center;border-bottom:1px solid transparent;transition:border-color .4s}
+.legal-bar nav a:hover,.legal-bar nav button:hover{border-color:var(--fg)}
+.legal-bar nav a:focus-visible,.legal-bar nav button:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
 </style>
-<!-- Яндекс Метрика 114110564 -->
-<script>
-(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
-ym(114110564, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/114110564" style="position:absolute;left:-9999px" alt=""></div></noscript>
+<link rel="stylesheet" href="css/consent.css">
 </head>
 <body>
+<a class="skip" href="#top">Перейти к содержанию</a>
 <div class="grain" aria-hidden="true"></div>
 <div class="loader" id="loader" aria-hidden="true">
   <i class="ld-drop" id="ldDrop"></i><i class="ld-ring"></i><i class="ld-ring"></i>
@@ -711,14 +736,14 @@ document.documentElement.classList.add("ld")</script>
   <div class="right"><a class="btn mono tg" href="#">Написать <span class="arr">→</span></a></div>
 </header>
 
-<main id="top">
+<main id="top" tabindex="-1">
   <!-- 01 -->
   <section class="hero">
-    <img class="photo" src="img/gen/hero-wide-web.jpg" alt="ORIEN - цифровая студия">
+    <img class="photo" src="img/gen/hero-wide-web.jpg" alt="Портрет молодого человека с тёмными волосами, в чёрной футболке, на сером фоне">
     <span class="h-logo h-in" id="heroLogo"><img src="img/orien-mint.png" alt="orien"></span>
     <p class="h-side mono h-in">Платите, только если понравится. Неделя правок бесплатно</p>
     <h1 class="h-title"><span class="mask"><span>Сайты</span></span><span class="mask"><span>за 2 дня</span></span></h1>
-    <p class="h-bl mono h-in">ORIEN - цифровая студия. Делаем сами, от идеи до запуска, по всей России</p>
+    <p class="h-bl mono h-in">ORIEN - цифровая студия. Первую версию сайта показываем за 2 дня. Работаем по всей России</p>
     <a class="h-br h-in" href="#works"><span class="mono">Смотреть работы</span><i class="plus" aria-hidden="true"></i></a>
   </section>
 
@@ -726,16 +751,16 @@ document.documentElement.classList.add("ld")</script>
   <section class="wrap approach" id="approach">
     <div>
       <span class="label mono">Подход · (02)</span>
-      <p class="big-txt" data-words style="margin-top:clamp(24px,3vw,40px)">Разбираемся, как устроено ваше дело, и делаем только то, что приводит клиентов. Всё лишнее убираем</p>
+      <p class="big-txt" data-words style="margin-top:clamp(24px,3vw,40px)">Разбираемся, как устроено ваше дело, и делаем только то, что нужно вашему делу. Всё лишнее убираем</p>
       <div class="facts mono">
         <div class="rv"><span class="muted">Первая версия</span><b>2 дня</b></div>
-        <div class="rv"><span class="muted">Проектов</span><b>20+</b></div>
+        <div class="rv"><span class="muted">Сделано сайтов</span><b>20+</b></div>
         <div class="rv"><span class="muted">База</span><b>Сахалин</b></div>
         <div class="rv"><span class="muted">Работаем</span><b>По всей РФ</b></div>
       </div>
     </div>
     <figure class="chat rv" id="chat" aria-label="Пример переписки с клиентом">
-      <header class="chat-top"><span class="chat-av">O</span><div><b>C.E.O. ORIEN</b><span class="mono dim">обычно отвечает за минуты</span></div><span class="mono dim chat-tag">Как это выглядит</span></header>
+      <header class="chat-top"><span class="chat-av">O</span><div><b>C.E.O. ORIEN</b><span class="mono dim">отвечает в тот же вечер</span></div><span class="mono dim chat-tag">Пример диалога</span></header>
       <div class="chat-body">
         <p class="msg in"><span>Здравствуйте. Нужен сайт для автосервиса, сколько ждать?</span><i class="mono">19:02</i></p>
         <p class="msg out"><span>Пришлите ссылку на вашу карточку в 2ГИС. Первая версия будет через 2 дня</span><i class="mono">19:04</i></p>
@@ -751,7 +776,7 @@ document.documentElement.classList.add("ld")</script>
   <section class="doing wrap" aria-label="Что мы делаем">
     <div class="doing-top mono"><span class="label">Мы делаем</span><span class="dim"><span id="dNum">01</span> / 04</span></div>
     <ol class="svc" id="svc">
-      <li class="svc-row"><span class="svc-n mono">01</span><span class="svc-w">Сайты</span><span class="svc-d mono">Первая версия за 2 дня, свой адрес .ru</span></li>
+      <li class="svc-row"><span class="svc-n mono">01</span><span class="svc-w">Сайты</span><span class="svc-d mono">Первая версия за 2 дня, адрес .ru - 1 500 ₽ в год</span></li>
       <li class="svc-row"><span class="svc-n mono">02</span><span class="svc-w">Приложения</span><span class="svc-d mono">В Telegram: запись, заявки, каталог</span></li>
       <li class="svc-row"><span class="svc-n mono">03</span><span class="svc-w">Рекламу</span><span class="svc-d mono">ВКонтакте и Яндекс, под ключ</span></li>
       <li class="svc-row"><span class="svc-n mono">04</span><span class="svc-w">Дизайн</span><span class="svc-d mono">Логотипы, обложки, фирменный стиль</span></li>
@@ -787,7 +812,7 @@ document.documentElement.classList.add("ld")</script>
         <span class="case-n">02</span>
         <div><h3>Запись к мастеру</h3><span class="mono muted">Приложение в Telegram</span></div>
         <p>Приложение для мастера бровей и ресниц: онлайн-запись, база клиентов, напоминания и статистика доходов. Всё внутри Telegram</p>
-        <div class="case-meta mono"><span class="ok">● Работает</span></div>
+        <div class="case-meta mono"><span class="ok">● Готово, ждёт запуска</span></div>
       </header>
       <div class="screens">
         <figure class="phone"><span class="scr"><img class="gs" src="img/works/nastya-1.jpg?v=2" alt="Статистика доходов" loading="lazy" decoding="async"></span></figure>
@@ -816,10 +841,10 @@ document.documentElement.classList.add("ld")</script>
     <span class="label mono">Услуги и цены · (04)</span>
     <div class="price-head">
       <h2 class="h2 rv"><span class="mask"><span>Сколько</span></span><span class="mask"><span>стоит</span></span></h2>
-      <p class="mono muted rv">Точную цену называем после разговора, до начала работы. Никаких доплат по ходу</p>
+      <p class="mono muted rv">Точную цену называем после разговора, до начала работы. Потом она не меняется, если вы сами не добавите задач</p>
     </div>
     <div class="pp rv">
-      <div class="seg" id="seg" role="tablist" aria-label="Услуга"><i class="pill"></i></div>
+      <div class="seg" id="seg" role="group" aria-label="Услуга"><i class="pill"></i></div>
       <div class="pp-body">
         <div class="pp-swap" id="ppA"></div>
         <div class="pp-swap" id="ppB"></div>
@@ -832,9 +857,10 @@ document.documentElement.classList.add("ld")</script>
         <div class="chips" id="chips"></div>
       </div>
       <div>
-        <div class="calc-sum"><span id="cSum">0</span><span class="cur"> ₽</span></div>
+        <div class="calc-sum"><span class="cur">от </span><span id="cSum">0</span><span class="cur"> ₽</span></div>
         <div class="calc-mo mono muted" id="cMo"></div>
         <a class="pp-btn off" id="cBtn" href="https://t.me/ceoorien" target="_blank" rel="noopener">Отправить расчёт в Telegram <span>→</span></a>
+        <p class="mono muted calc-note">Я самозанятый, налог сверху не добавляю. Рекламный бюджет оплачиваете отдельно</p>
       </div>
     </div>
   </section>
@@ -854,7 +880,7 @@ document.documentElement.classList.add("ld")</script>
         <div class="f-tick mono"><span>Один человек · от идеи до запуска · Один человек · от идеи до запуска · </span><span>Один человек · от идеи до запуска · Один человек · от идеи до запуска · </span></div>
       </div>
       <div class="f-txt rv">
-        <p>Никаких подрядчиков и цепочек из пяти менеджеров. Тот, кто с вами переписывается, сам придумывает, собирает и запускает ваш проект. Поэтому любой вопрос решается за минуты</p>
+        <p>Никаких подрядчиков и цепочек из пяти менеджеров. Тот, кто с вами переписывается, сам придумывает, собирает и запускает ваш проект. Поэтому вопросы не теряются между людьми</p>
         <div class="f-facts mono">
           <div><b>1</b><span class="muted">человек на связи</span></div>
           <div><b>0</b><span class="muted">подрядчиков</span></div>
@@ -871,8 +897,8 @@ document.documentElement.classList.add("ld")</script>
     <div class="cards steps">
       <div class="card step rv"><span class="mono muted num">01</span><h4>Разговор</h4><p>Вы рассказываете о деле. Пятнадцати минут переписки хватает, чтобы понять задачу</p></div>
       <div class="card step rv"><span class="mono muted num">02</span><h4>Первая версия</h4><p>Через 2 дня у вас рабочая первая версия: можно открыть и попробовать. До оплаты</p></div>
-      <div class="card step rv"><span class="mono muted num">03</span><h4>Правки</h4><p>Меняем тексты, фото и детали, пока не станет «то самое»</p></div>
-      <div class="card step rv"><span class="mono muted num">04</span><h4>Запуск</h4><p>Свой адрес, открывается в России без VPN. Дальше мы на связи</p></div>
+      <div class="card step rv"><span class="mono muted num">03</span><h4>Правки</h4><p>Меняем тексты, фото и детали. Неделя правок после запуска бесплатно</p></div>
+      <div class="card step rv"><span class="mono muted num">04</span><h4>Запуск</h4><p>Свой адрес .ru и хостинг - 1 500 ₽ в год, открывается в России без VPN. Дальше мы на связи</p></div>
     </div>
   </section>
 
@@ -884,7 +910,7 @@ document.documentElement.classList.add("ld")</script>
       <details><summary><span class="mono muted">02</span>Нужно платить заранее?<i class="q-x"></i></summary><div class="a"><div><p>Нет. Оплата, когда сайт готов и вас всё устраивает</p></div></div></details>
       <details><summary><span class="mono muted">03</span>Что нужно от меня?<i class="q-x"></i></summary><div class="a"><div><p>Ссылка на вашу карточку в 2ГИС или Яндекс Картах и несколько фото работ. Тексты, цены и оформление соберём сами, вам останется только поправить</p></div></div></details>
       <details><summary><span class="mono muted">04</span>Кто будет вносить правки потом?<i class="q-x"></i></summary><div class="a"><div><p>Мы. Неделя правок после запуска бесплатно. Дальше просто пишите: поменять фото, цены или тексты - дело одного вечера</p></div></div></details>
-      <details><summary><span class="mono muted">05</span>Сайт откроется у всех?<i class="q-x"></i></summary><div class="a"><div><p>Да. Свой адрес .ru, сайт открывается в России без VPN, с телефона и компьютера</p></div></div></details>
+      <details><summary><span class="mono muted">05</span>Сайт откроется у всех?<i class="q-x"></i></summary><div class="a"><div><p>Да. Со своим адресом .ru (1 500 ₽ в год вместе с хостингом) сайт открывается в России без VPN, с телефона и компьютера</p></div></div></details>
     </div>
   </section>
 
@@ -896,9 +922,11 @@ document.documentElement.classList.add("ld")</script>
       <h2 class="big rv" style="margin-top:26px"><span class="mask"><span>Напишите</span></span><span class="mask"><span>нам</span></span></h2>
       <form class="lead" id="lead" autocomplete="off">
         <span class="mono muted">Первая версия за 2 дня. Платите, только если понравится</span>
-        <input name="n" placeholder="Название вашего дела" aria-label="Название вашего дела" required>
-        <input name="l" placeholder="Ссылка на 2ГИС или Яндекс Карты" aria-label="Ссылка на 2ГИС или Яндекс Карты" inputmode="url">
-        <button class="btn solid" type="submit">Хочу сайт за 2 дня <span class="arr">→</span></button>
+        <input class="ym-disable-keys ym-hide-content" name="n" placeholder="Название вашего дела" aria-label="Название вашего дела" required>
+        <input class="ym-disable-keys ym-hide-content" name="l" placeholder="Ссылка на 2ГИС или Яндекс Карты" aria-label="Ссылка на 2ГИС или Яндекс Карты" inputmode="url">
+        <label class="agree"><input type="checkbox" name="ok" required><span>Мне есть 18 лет, и я даю <a href="legal/consent.html" target="_blank" rel="noopener">согласие на обработку данных</a>, чтобы получить ответ на заявку</span></label>
+        <button class="btn solid" type="submit">Хочу первую версию <span class="arr">→</span></button>
+        <span class="agree-note">Сайт заявку не хранит. Откроется Telegram с готовым текстом, отправляете вы сами</span>
       </form>
       <p class="lead-or mono muted rv">Или просто <a class="tg" href="#">напишите в Telegram</a> · @ceoorien · отвечаем в тот же вечер</p>
     </div>
@@ -906,12 +934,19 @@ document.documentElement.classList.add("ld")</script>
 </main>
 
 
+<div class="legal-bar">
+  <p>Исполнитель и оператор данных: самозанятый Плотницкий Лев Сергеевич, ИНН 650117528746, г. Южно-Сахалинск. Связь: <a class="tg" href="#">@ceoorien</a></p>
+  <nav aria-label="Документы">
+    <a href="legal/privacy.html">Конфиденциальность</a><a href="legal/consent.html">Согласие на данные</a><a href="legal/terms.html">Условия</a><a href="legal/refund.html">Возврат</a><a href="legal/cookies.html">Cookie</a><a href="legal/licenses.html">Лицензии</a><button type="button" data-cookie-settings>Настройки cookie</button>
+  </nav>
+</div>
 <footer class="mono muted">
   <span>© 2026 ORIEN · цифровая студия</span>
   <span>46°57′ N · 142°44′ E</span>
   <a href="#top">Наверх ↑</a>
 </footer>
 
+<script src="js/consent.js"></script>
 <script src="js/lenis.min.js"></script>
 <script>
 const TG = "https://t.me/ceoorien";
@@ -979,6 +1014,7 @@ if (window.Lenis && !reduce) {
   document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
     const id = a.getAttribute("href"); if (id.length < 2 || id[0] !== "#") return;
     e.preventDefault(); lenis.scrollTo(id === "#top" ? 0 : id, { offset: 0 });
+    const t = document.querySelector(id); if (t) { if (!t.hasAttribute("tabindex")) t.tabIndex = -1; t.focus({ preventScroll: true }); }
   }));
 }
 
@@ -1058,7 +1094,7 @@ const PRICES = [
 ];
 const seg = document.getElementById("seg"), pill = seg.querySelector(".pill"), ppA = document.getElementById("ppA"), ppB = document.getElementById("ppB");
 const fmtR = n => n.toLocaleString("ru-RU").replace(/\u00a0|\u202f/g, " ");
-PRICES.forEach((p, i) => { const b = document.createElement("button"); b.type = "button"; b.setAttribute("role", "tab"); b.textContent = p.name; b.onclick = () => ppShow(i); seg.append(b); });
+PRICES.forEach((p, i) => { const b = document.createElement("button"); b.type = "button"; b.textContent = p.name; b.onclick = () => ppShow(i); seg.append(b); });
 const segBtns = [...seg.querySelectorAll("button")];
 let ppI = -1;
 function ppPaint(i) {
@@ -1070,7 +1106,7 @@ function ppPill() { const b = segBtns[ppI]; pill.style.width = b.offsetWidth + "
 async function ppShow(i) {
   if (i === ppI) return;
   const first = ppI < 0; ppI = i;
-  segBtns.forEach((b, k) => { b.classList.toggle("on", k === i); b.setAttribute("aria-selected", k === i); });
+  segBtns.forEach((b, k) => { b.classList.toggle("on", k === i); b.setAttribute("aria-pressed", k === i); });
   ppPill();
   if (first || reduce) return ppPaint(i);
   ppA.classList.add("hide"); ppB.classList.add("hide");
@@ -1085,7 +1121,7 @@ document.fonts && document.fonts.ready.then(ppPill);
 // калькулятор: отмеченные услуги складываются, сумма плавно докручивается
 const CALC = [
   { n: "Сайт", p: 4500, on: true }, { n: "Свой адрес .ru и хостинг", p: 1500, s: "в год" },
-  { n: "Приложение в Telegram", p: 12000 }, { n: "Запуск рекламы", p: 7000 },
+  { n: "Приложение в Telegram", p: 12000 }, { n: "Запуск рекламы", p: 7000, t: "без бюджета" },
   { n: "Карточки 2ГИС и Яндекс Карт", p: 2000 }, { n: "Ведение рекламы", p: 5000, m: 1, t: "без бюджета" }, { n: "Поддержка сайта", p: 700, m: 1, t: "до 3 правок" }
 ];
 const chips = document.getElementById("chips"), cSum = document.getElementById("cSum"), cMo = document.getElementById("cMo"), cBtn = document.getElementById("cBtn");
@@ -1101,6 +1137,7 @@ function calcPaint() {
   const sel = CALC.filter(c => c.on), once = sel.filter(c => !c.m).reduce((a, c) => a + c.p, 0), mo = sel.filter(c => c.m).reduce((a, c) => a + c.p, 0);
   cMo.textContent = mo ? `+ ${fmtR(mo)} ₽ в месяц` : "";
   cBtn.classList.toggle("off", !sel.length);
+  if (sel.length) { cBtn.removeAttribute("tabindex"); cBtn.removeAttribute("aria-disabled"); } else { cBtn.tabIndex = -1; cBtn.setAttribute("aria-disabled", "true"); }
   const msg = `Здравствуйте! Посчитал на сайте ORIEN:\n${sel.map(c => "- " + c.n).join("\n")}\nИтого от ${fmtR(once)} ₽${mo ? ` + ${fmtR(mo)} ₽/мес` : ""}`;
   cBtn.href = TG + "?text=" + encodeURIComponent(msg);
   cancelAnimationFrame(cRaf);
@@ -1114,7 +1151,7 @@ calcPaint();
 document.getElementById("lead").addEventListener("submit", e => {
   e.preventDefault();
   const f = e.target, n = f.n.value.trim(), l = f.l.value.trim();
-  const msg = `Здравствуйте! Хочу сайт за 2 дня.\nНазвание: ${n}${l ? "\nКарточка: " + l : ""}`;
+  const msg = `Здравствуйте! Хочу сайт.\nНазвание: ${n}${l ? "\nКарточка: " + l : ""}`;
   window.open(TG + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
 });
 
