@@ -116,7 +116,7 @@ afterLoad.then(() => setTimeout(() => document.querySelector(".h-title").classLi
     for (let i = 0; i < n; i++) {
       const k = i / (n - 1), base = H * (.12 + k * .78);
       x.beginPath();
-      for (let px = 0; px <= W + 8; px += 8) {
+      for (let px = 0; px <= W + 12; px += 12) {
         const u = px / W, y = base + Math.sin(u * 5.2 + s * .22 + k * 2.4) * H * .05 + Math.sin(u * 11 - s * .16 + k * 5) * H * .016 * (1 + Math.sin(s * .12 + k * 6));
         px === 0 ? x.moveTo(px, y) : x.lineTo(px, y);
       }
@@ -124,7 +124,8 @@ afterLoad.then(() => setTimeout(() => document.querySelector(".h-title").classLi
       x.lineWidth = 1; x.stroke();
     }
   };
-  const loop = t => { draw(t); raf = requestAnimationFrame(loop); };
+  let lastT = 0;
+  const loop = t => { if (t - lastT > 32) { lastT = t; draw(t); } raf = requestAnimationFrame(loop); };
   size(); addEventListener("resize", () => { size(); if (reduce) draw(4000); });
   if (reduce) return draw(4000);
   new IntersectionObserver(es => { vis = es[0].isIntersecting; cancelAnimationFrame(raf); if (vis) raf = requestAnimationFrame(loop); }).observe(hero);
@@ -155,7 +156,9 @@ const PRICES = [
   { name: "Приложение", price: 12000, note: "Внутри Telegram, ничего не нужно скачивать",
     inc: ["Запись, заявки или каталог", "Клиенту ничего не нужно скачивать", "Уведомления о каждой заявке", "Кабинет со статистикой"] },
   { name: "Реклама", price: 7000, note: "ВКонтакте и Яндекс",
-    inc: ["Картинки и тексты объявлений", "Настройка и запуск", "Отчёт: сколько стоила заявка", "Дальше ведение - 5 000 ₽ в месяц, бюджет на рекламу отдельно"] }
+    inc: ["Картинки и тексты объявлений", "Настройка и запуск", "Отчёт: сколько стоила заявка", "Дальше ведение - 5 000 ₽ в месяц, бюджет на рекламу отдельно"] },
+  { name: "Логотип", price: 10000, note: "Знак и название, три варианта на выбор",
+    inc: ["Три разных идеи, из них доводим одну", "Файлы для сайта, печати и соцсетей", "Светлая и тёмная версии, аватарка", "Два круга правок бесплатно"] }
 ];
 const seg = document.getElementById("seg"), pill = seg.querySelector(".pill"), ppA = document.getElementById("ppA"), ppB = document.getElementById("ppB");
 const fmtR = n => n.toLocaleString("ru-RU").replace(/\u00a0|\u202f/g, " ");
@@ -187,7 +190,7 @@ document.fonts && document.fonts.ready.then(ppPill);
 const CALC = [
   { n: "Сайт", p: 6500, on: true },
   { n: "Приложение в Telegram", p: 12000 }, { n: "Запуск рекламы", p: 7000, t: "без бюджета" },
-  { n: "Карточки 2ГИС и Яндекс Карт", p: 2000 }, { n: "Ведение рекламы", p: 5000, m: 1, t: "без бюджета" }, { n: "Поддержка сайта", p: 700, m: 1, t: "до 3 правок" }
+  { n: "Логотип", p: 10000 }, { n: "Карточки 2ГИС и Яндекс Карт", p: 2000 }, { n: "Ведение рекламы", p: 5000, m: 1, t: "без бюджета" }, { n: "Поддержка сайта", p: 700, m: 1, t: "до 3 правок" }
 ];
 const chips = document.getElementById("chips"), cSum = document.getElementById("cSum"), cMo = document.getElementById("cMo"), cBtn = document.getElementById("cBtn");
 let cShown = 0, cRaf = 0;
@@ -250,29 +253,28 @@ const par = [...document.querySelectorAll(".parallax img")];
 const phones = [...document.querySelectorAll("[data-py]")];
 function onScroll() {
   const vh = innerHeight, y = scrollY;
+  // сначала читаем размеры, потом пишем, чтобы страница не пересчитывалась по нескольку раз за кадр
+  const cTop = contact.getBoundingClientRect().top;
+  const wr = words.length ? words[0].parentElement.getBoundingClientRect() : null;
+  const pr = reduce ? [] : par.map(img => img.parentElement.getBoundingClientRect());
   if (svc.length) svcScroll(vh);
   nav.classList.toggle("solid", y > vh * 0.6);
-  nav.classList.toggle("at-contact", contact.getBoundingClientRect().top < vh * 0.7);
-  if (words.length) {
-    const r = words[0].parentElement.getBoundingClientRect();
-    const k = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.35)));
+  nav.classList.toggle("at-contact", cTop < vh * 0.7);
+  if (wr) {
+    const k = Math.min(1, Math.max(0, (vh * 0.85 - wr.top) / (wr.height + vh * 0.35)));
     const n = Math.round(k * words.length);
-    words.forEach((w, i) => w.classList.toggle("on", i < n));
+    words.forEach((w, i) => { const on = i < n; if (w._on !== on) { w._on = on; w.classList.toggle("on", on); } });
   }
   if (reduce) return;
-  par.forEach(img => {
-    const r = img.parentElement.getBoundingClientRect();
+  par.forEach((img, i) => {
+    const r = pr[i];
     if (r.bottom < 0 || r.top > vh) return;
     img.style.setProperty("--py", (((r.top + r.height / 2 - vh / 2) / vh) * -5).toFixed(2) + "%");
   });
-  phones.forEach(p => {
-    const r = p.parentElement.getBoundingClientRect();
-    if (r.bottom < 0 || r.top > vh) return;
-    p.style.translate = `0 ${(((r.top + r.height / 2 - vh / 2) / vh) * -p.dataset.py).toFixed(1)}px`;
-  });
 }
-addEventListener("scroll", onScroll, { passive: true });
-if (lenis) lenis.on("scroll", onScroll);
+let sTick = 0;
+const sched = () => { if (!sTick) sTick = requestAnimationFrame(() => { sTick = 0; onScroll(); }); };
+if (lenis) lenis.on("scroll", sched); else addEventListener("scroll", sched, { passive: true });
 onScroll();
 
 // меню на телефоне
