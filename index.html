@@ -733,7 +733,7 @@ html.seen .loader{display:none}
 .nav .btn{background:var(--sil);background-size:250% 100%;animation:shimmer 7s linear infinite;color:#0a1017}
 .btn.solid::before{background:var(--sil);background-size:250% 100%;animation:shimmer 5s linear infinite}
 .pp-btn:hover{background:var(--sil);background-size:250% 100%;animation:shimmer 5s linear infinite;color:#0a1017}
-.doing,.pp,footer{background-image:radial-gradient(rgba(214,226,242,.17) 1px,transparent 1.5px),radial-gradient(900px 420px at 85% 0,rgba(120,150,200,.16),transparent 70%);background-size:9px 9px,auto;background-color:var(--dark)}
+.footer-dots-old{background-image:radial-gradient(rgba(214,226,242,.17) 1px,transparent 1.5px),radial-gradient(900px 420px at 85% 0,rgba(120,150,200,.16),transparent 70%);background-size:9px 9px,auto;background-color:var(--dark)}
 @media (prefers-reduced-motion:reduce){.nav .btn,.btn.solid::before,.pp-btn:hover{animation:none}}
 
 /* ===== скорость: без тяжёлых размытий и лишних слоёв ===== */
@@ -748,6 +748,19 @@ html.seen .loader{display:none}
 .nav.solid{background:rgba(205,213,218,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .v3-pill{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:rgba(10,16,23,.9)!important}
 @media (max-width:560px){.seg{display:flex;width:100%}.seg button{flex:1 1 auto;text-align:center;padding:11px 6px;font-size:13px}}
+
+footer{background-image:radial-gradient(rgba(214,226,242,.17) 1px,transparent 1.5px),radial-gradient(900px 420px at 85% 0,rgba(120,150,200,.16),transparent 70%);background-size:9px 9px,auto;background-color:var(--dark)}
+.doing,.pp{position:relative;isolation:isolate}
+.dots-cv{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;border-radius:inherit}
+/* «Что я делаю» теперь светлая, в цвет сайта, с чёрными переливающимися точками */
+.doing{--fg:#0f1315;--muted:rgba(15,19,21,.72);--dim:rgba(15,19,21,.5);--line:rgba(15,19,21,.18);--red:#0f1315;--on:#eef3f1;background:transparent;color:var(--fg)}
+.doing .svc-w{background:linear-gradient(90deg,#0f1315 0 50%,rgba(15,19,21,.3) 50% 100%);background-size:200.5% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text}
+.doing .svc-row.on .svc-w{background-position:0 0}
+/* шапка: надпись orien почти вровень со знаком */
+.nav .brand img{height:50px}
+.nav .brand .mk{width:64px;height:64px}
+@media (max-width:900px){.nav .brand img{height:38px}.nav .brand .mk{width:50px;height:50px}}
+@media (max-width:420px){.nav .brand img{height:32px}.nav .brand .mk{width:42px;height:42px}}
 </style>
 <link rel="stylesheet" href="css/consent.css">
 </head>
@@ -1002,5 +1015,6 @@ html.seen .loader{display:none}
 <script src="js/lenis.min.js"></script>
 <script src="js/main.js"></script>
 <script src="js/fx.js"></script>
+<script src="js/dots.js"></script>
 </body>
 </html>
