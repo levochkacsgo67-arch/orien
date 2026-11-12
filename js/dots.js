@@ -26,11 +26,11 @@
         const b = Math.sin((x + y) * .0026 + t * .38);
         let v = (a * .6 + b * .4 + 1) / 2; v = Math.pow(v, 2.1);
         if (mode === "light") {            // светлый фон: точки от еле заметных до чёрных
-          const g = Math.round(192 - v * 112);
+          const g = Math.round(200 - v * 78);
           ctx.fillStyle = `rgb(${g},${g + 3},${g + 6})`;
         } else {                           // тёмный фон: от тёмно-серых до серебра
-          const g = Math.round(40 + v * 140);
-          ctx.fillStyle = `rgb(${g},${g},${Math.min(255, g + 8)})`;
+          const g = Math.round(34 + v * 110);
+          ctx.fillStyle = `rgb(${g},${g},${g})`;
         }
         ctx.beginPath(); ctx.arc(x, y, r0 * (.8 + v * .55), 0, 6.283); ctx.fill();
       }

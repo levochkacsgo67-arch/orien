@@ -761,6 +761,25 @@ footer{background-image:radial-gradient(rgba(214,226,242,.17) 1px,transparent 1.
 .nav .brand .mk{width:64px;height:64px}
 @media (max-width:900px){.nav .brand img{height:38px}.nav .brand .mk{width:50px;height:50px}}
 @media (max-width:420px){.nav .brand img{height:32px}.nav .brand .mk{width:42px;height:42px}}
+/* правки 12.11: читаемый текст в «Что я делаю», шапка тоньше, чёрно-белая плашка цен */
+.doing .svc-d{opacity:1;color:#0f1315;font-weight:500}
+.doing .svc-row:not(.on) .svc-d{color:rgba(15,19,21,.78)}
+.doing .svc-w{background-image:linear-gradient(90deg,#0f1315 0 50%,rgba(15,19,21,.42) 50% 100%)}
+.nav{padding-block:9px}
+.nav .brand .mk{width:50px;height:50px}
+.nav .brand img{height:38px}
+.nav .btn{height:36px}
+.nav .btn:hover{color:#fff}
+.nav .btn::before{background:#0a0a0a}
+@media (max-width:900px){.nav .brand .mk{width:42px;height:42px}.nav .brand img{height:30px}}
+@media (max-width:420px){.nav .brand .mk{width:36px;height:36px}.nav .brand img{height:26px}}
+.pp{--mint:#f4f4f4;--dark:#050505;--fg:#f4f4f4;--on:#050505;--muted:rgba(244,244,244,.72);--dim:rgba(244,244,244,.6);--line:rgba(244,244,244,.16);--red:#f4f4f4;background:#050505}
+.pp .pp-big{color:#fff}
+.pp-btn:hover{background:linear-gradient(110deg,#cfcfcf 0%,#fff 25%,#bdbdbd 50%,#f6f6f6 75%,#cfcfcf 100%);background-size:250% 100%;color:#050505}
+.pp .seg{background:rgba(255,255,255,.08)}
+.pp li,.pp-meta,.pp-big small{color:#f4f4f4;text-shadow:0 0 3px #050505,0 0 8px #050505,0 0 14px #050505}
+.pp li{background:linear-gradient(90deg,rgba(5,5,5,.78),rgba(5,5,5,.78))}
+.doing .svc-d,.doing .svc-n{text-shadow:0 0 3px #cdd5d9,0 0 8px #cdd5d9,0 0 14px #cdd5d9}
 </style>
 <link rel="stylesheet" href="css/consent.css">
 </head>
