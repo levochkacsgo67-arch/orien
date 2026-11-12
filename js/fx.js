@@ -10,11 +10,11 @@
 
   const st = document.createElement("style");
   st.textContent = `
-  .v3-pill{position:fixed;left:clamp(14px,2vw,28px);bottom:clamp(14px,2vw,26px);z-index:60;display:flex;align-items:center;gap:12px;padding:8px 18px 8px 8px;border-radius:99px;background:rgba(15,19,21,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#eef3f1;font:500 11px/1 var(--mono,monospace);letter-spacing:.1em;text-transform:uppercase;opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.22,.8,.2,1),transform .7s cubic-bezier(.22,.8,.2,1);cursor:pointer;border:0}
+  .v3-pill{position:fixed;left:clamp(14px,2vw,28px);bottom:clamp(14px,2vw,26px);z-index:60;display:flex;align-items:center;gap:12px;padding:8px 18px 8px 8px;border-radius:99px;background:rgba(15,19,21,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#f2f2f2;font:500 11px/1 var(--mono,monospace);letter-spacing:.1em;text-transform:uppercase;opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.22,.8,.2,1),transform .7s cubic-bezier(.22,.8,.2,1);cursor:pointer;border:0}
   .v3-pill.on{opacity:1;transform:none}
   .v3-pill svg{width:34px;height:34px;flex:none;transform:rotate(-90deg)}
   .v3-pill circle{fill:none;stroke-width:2.2}
-  .v3-pill .bg{stroke:rgba(238,243,241,.2)}.v3-pill .fg{stroke:${mint};stroke-linecap:round}
+  .v3-pill .bg{stroke:rgba(242,242,242,.2)}.v3-pill .fg{stroke:${mint};stroke-linecap:round}
   .v3-pill .t{position:relative;display:block;height:1.2em;overflow:hidden;min-width:130px;text-align:left}
   .v3-pill .t span{position:absolute;left:0;top:0;white-space:nowrap;transition:transform .7s cubic-bezier(.22,.8,.2,1),opacity .5s}
   .v3-pill .t span.old{transform:translateY(-110%);opacity:0}
