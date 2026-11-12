@@ -10,5 +10,5 @@
 .ck button{appearance:none;cursor:pointer;min-width:112px;height:44px;padding:0 18px;border:0;border-radius:999px;background:#f2f2f2;color:#111517;font:500 15px "Inter Tight",system-ui,sans-serif;transition:background .4s}
 .ck button:hover{background:#c6ead9}
 .ck :focus-visible{outline:2px solid #c6ead9;outline-offset:2px}
-@media (max-width:640px){.ck{grid-template-columns:1fr}.ck-btns button{flex:1}}
+@media (max-width:640px){.ck{grid-template-columns:1fr;gap:8px;padding:11px 14px;border-radius:18px;bottom:calc(10px + env(safe-area-inset-bottom));width:calc(100vw - 20px);font-size:12.5px;line-height:1.35}.ck-btns button{flex:1;height:36px;min-width:0;font-size:14px}}
 @media (prefers-reduced-motion:reduce){.ck{animation:none}}

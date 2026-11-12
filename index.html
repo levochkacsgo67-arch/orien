@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://orien-studio.ru/img/og.jpg">
 <meta property="og:url" content="https://orien-studio.ru/">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"ORIEN","url":"https://orien-studio.ru/","image":"https://orien-studio.ru/img/og.jpg","description":"Сайты, приложения в Telegram и реклама для бизнеса","priceRange":"от 6500 ₽","address":{"@type":"PostalAddress","addressLocality":"Южно-Сахалинск","addressCountry":"RU"},"areaServed":"RU","sameAs":["https://t.me/ceoorien"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","telephone":"+79147510929","name":"ORIEN","url":"https://orien-studio.ru/","image":"https://orien-studio.ru/img/og.jpg","description":"Сайты, приложения в Telegram и реклама для бизнеса","priceRange":"от 6500 ₽","address":{"@type":"PostalAddress","addressLocality":"Южно-Сахалинск","addressCountry":"RU"},"areaServed":"RU","sameAs":["https://t.me/ceoorien"]}</script>
 <noscript><style>.rv,.msg,.chat-day{opacity:1!important;transform:none!important}.mask>span{transform:none!important}.h-flow,.photo-cut{display:none}</style></noscript>
 <link rel="preload" href="fonts/InterTight-cyrillic-0.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Unbounded-800.woff2" as="font" type="font/woff2" crossorigin>
@@ -780,6 +780,15 @@ footer{background-image:radial-gradient(rgba(230,230,230,.17) 1px,transparent 1.
 .pp li,.pp-meta,.pp-big small{color:#f4f4f4;text-shadow:0 0 3px #050505,0 0 8px #050505,0 0 14px #050505}
 .pp li{background:linear-gradient(90deg,rgba(5,5,5,.78),rgba(5,5,5,.78))}
 .doing .svc-d,.doing .svc-n{text-shadow:0 0 3px #cdd5d9,0 0 8px #cdd5d9,0 0 14px #cdd5d9}
+/* суд 12.11: читаемость, телефон */
+:root{--muted:rgba(15,19,21,.84);--dim:rgba(15,19,21,.72)}
+.doing{--muted:rgba(15,19,21,.86);--dim:rgba(15,19,21,.78)}
+.mono{font-size:12px}
+.n-tel{font:600 14px var(--sans);letter-spacing:.01em;margin-right:18px;white-space:nowrap;text-decoration:none}
+.n-tel:hover{text-decoration:underline;text-underline-offset:3px}
+.nav .right{display:flex;align-items:center}
+.tg-tel{text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+@media (max-width:900px){.n-tel{display:none}}
 </style>
 <link rel="stylesheet" href="css/consent.css">
 </head>
@@ -816,7 +825,7 @@ footer{background-image:radial-gradient(rgba(230,230,230,.17) 1px,transparent 1.
     <li><a href="#contact">Связь</a></li>
   </ul>
   <button class="m-menu mono" id="mMenu" type="button" aria-expanded="false" aria-controls="navList">Меню</button>
-  <div class="right"><a class="btn mono tg" href="#">Написать <span class="arr">→</span></a></div>
+  <div class="right"><a class="n-tel" href="tel:+79147510929">8 914 751 09 29</a><a class="btn mono tg" href="#">Написать <span class="arr">→</span></a></div>
 </header>
 
 <main id="top" tabindex="-1">
@@ -1012,14 +1021,14 @@ footer{background-image:radial-gradient(rgba(230,230,230,.17) 1px,transparent 1.
         <button class="btn solid" type="submit">Хочу первую версию <span class="arr">→</span></button>
         <span class="agree-note">Сайт заявку не хранит. Откроется Telegram с готовым текстом, отправляете вы сами</span>
       </form>
-      <p class="lead-or mono muted rv">Или просто <a class="tg" href="#">напишите в Telegram</a> · @ceoorien · отвечаю в тот же вечер</p>
+      <p class="lead-or mono muted rv">Или просто <a class="tg" href="#">напишите в Telegram</a> · @ceoorien · или позвоните <a class="tg-tel" href="tel:+79147510929">8 914 751 09 29</a> · отвечаю в тот же вечер</p>
     </div>
   </section>
 </main>
 
 
 <div class="legal-bar">
-  <p>Исполнитель и оператор данных: самозанятый Плотницкий Лев Сергеевич, ИНН 650117528746, г. Южно-Сахалинск. Связь: <a class="tg" href="#">@ceoorien</a></p>
+  <p>Исполнитель и оператор данных: самозанятый Плотницкий Лев Сергеевич, ИНН 650117528746, г. Южно-Сахалинск. Связь: <a class="tg" href="#">@ceoorien</a>, <a href="tel:+79147510929">8 914 751 09 29</a></p>
   <nav aria-label="Документы">
     <a href="legal/privacy.html">Конфиденциальность</a><a href="legal/consent.html">Согласие на данные</a><a href="legal/terms.html">Условия</a><a href="legal/refund.html">Возврат</a><a href="legal/cookies.html">Cookie</a><a href="legal/licenses.html">Лицензии</a><button type="button" data-cookie-settings>Настройки cookie</button>
   </nav>
