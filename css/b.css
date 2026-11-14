@@ -205,3 +205,24 @@ p,h4,summary,figcaption{text-wrap:pretty}h1,h2,h3{text-wrap:balance}
 @media (max-width:900px){.pgrid{grid-template-columns:1fr}.exw{height:clamp(280px,70vw,380px)}}
 @media (prefers-reduced-motion:reduce){.track{animation:none}.exw{overflow-x:auto;-webkit-mask-image:none;mask-image:none}}
 .hrow{margin-top:clamp(28px,3vw,44px)}
+
+/* красные детали */
+:root{--ac:#e5342b;--ac2:#8f1410}
+.hero h1{max-width:none}
+.h1a{display:block;font:500 clamp(26px,3.8vw,60px)/1.1 'IT';letter-spacing:-.035em;text-transform:none;margin-bottom:clamp(6px,1vw,14px)}
+.h1b{display:block;font:800 clamp(64px,13vw,230px)/.88 'UB';letter-spacing:-.06em;text-transform:uppercase;background:linear-gradient(100deg,#fff 0%,#fff 40%,#ff5a4d 66%,var(--ac) 100%);background-size:160% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:shine 9s ease-in-out infinite alternate;padding-bottom:.06em}
+@keyframes shine{to{background-position:100% 0}}
+.b2{background:radial-gradient(closest-side,#7d120d,#2a0504 70%,transparent)}
+.b3{background:radial-gradient(closest-side,#e5342b,#5a0d0a 60%,transparent);opacity:.75}
+.light h2,.contact h2{display:inline-block;background:linear-gradient(95deg,#0c0c0c 0%,#0c0c0c 38%,var(--ac) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;padding-bottom:.06em}
+.seg button.on{background:var(--ac);color:#fff}
+.pt{color:var(--ac2)}
+#pbig .n span{color:var(--ac)}
+#plist li::before{background:var(--ac)}
+.pill.dark:hover{background:var(--ac)}
+.chip.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.contact{background:radial-gradient(60% 70% at 85% 100%,rgba(229,52,43,.55),transparent 70%),linear-gradient(#d7dade,#a9aeb4)}
+.lead{background:linear-gradient(160deg,#1a1a1a,#0c0c0c);box-shadow:0 0 0 1px rgba(229,52,43,.35),0 30px 60px -30px rgba(229,52,43,.45)}
+.lead>b{font:800 clamp(22px,2vw,30px)/1.1 'UB';letter-spacing:-.03em;text-transform:uppercase;margin-bottom:8px}
+.lead .pill{background:var(--ac);color:#fff}.lead .pill:hover{background:#ff5148}
+.legal a:hover{color:var(--ac)}
