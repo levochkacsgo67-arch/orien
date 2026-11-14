@@ -18,21 +18,21 @@ const fmt=n=>n.toLocaleString("ru-RU").replace(/ | /g," ");
 const W=n=>`img/works/${n}`;
 const PRICES=[
 {acc:"сайт",name:"Сайт",price:6500,note:"Первая версия за 2 дня, до оплаты",
- inc:["Работы, цены, отзывы, кнопки связи","Удобно с телефона и компьютера","Неделя правок бесплатно","Адрес .ru на первый год, дальше 1 500 ₽ в год"],
- get:["Первую версию через 2 дня, до оплаты","Сайт на своём адресе, открывается без VPN"],
+ inc:["Разработка адаптивного сайта: услуги, портфолио, отзывы, кнопки связи","Корректное отображение на телефоне и компьютере","Доработки до утверждения результата","Домен .ru на первый год, далее 1&nbsp;500&nbsp;₽ в год"],
+ get:["Готовый сайт на собственном домене, доступный из России"],
  ex:{label:"Кузовной 25",kind:"ph",img:["kuzov-1.jpg","kuzov-2.jpg","kuzov-3.jpg"]}},
-{acc:"приложение",name:"Приложение",price:12000,note:"Внутри Telegram",
- inc:["Запись, заявки или каталог","Уведомления о каждой заявке","Кабинет со статистикой"],
- get:["Приложение, которое открывается из Telegram","Все заявки и записи в одном месте"],
+{acc:"приложение",name:"Приложение",price:12000,note:"Мини-приложение в Telegram",
+ inc:["Онлайн-запись, приём заявок или каталог товаров","Мгновенные уведомления о каждой заявке","Личный кабинет со статистикой"],
+ get:["Приложение, которое открывается по ссылке, без установки","Единая база заявок и записей"],
  ex:{label:"Запись к мастеру, FITMENT",kind:"ph",img:["nastya-1.jpg","nastya-2.jpg","nastya-3.jpg","fit-1.jpg","fit-2.jpg","fit-3.jpg"]}},
-{acc:"рекламу",name:"Реклама",price:7000,note:"ВКонтакте и Яндекс",
- inc:["Картинки и тексты объявлений","Настройка и запуск","Ведение - 5 000 ₽ в месяц, бюджет отдельно"],
- get:["Запущенную рекламу во ВКонтакте и Яндексе","Отчёт: сколько стоила заявка"],
- ex:{label:"Объявления для Кузовного 25",kind:"ad",img:["ad-1.jpg","ad-2.jpg","ad-3.jpg","ad-4.jpg"]}},
-{acc:"логотип",name:"Логотип",price:10000,note:"Три варианта на выбор",
- inc:["Три разных идеи, из них доводим одну","Два круга правок бесплатно","Аватарка для соцсетей"],
- get:["Готовый знак с названием","Файлы для сайта, печати и соцсетей"],
- ex:{label:"Знак ORIEN",kind:"ph",img:["logo-1.jpg","logo-2.jpg","logo-3.jpg"]}}];
+{acc:"рекламу",name:"Реклама",price:7000,note:"ВКонтакте и Яндекс Директ",
+ inc:["Разработка рекламных креативов и текстов объявлений","Настройка таргетинга и запуск кампаний","Ведение кампании - 5&nbsp;000&nbsp;₽ в месяц, рекламный бюджет оплачивается отдельно"],
+ get:["Запущенные кампании во ВКонтакте и Яндекс Директе","Отчёт о стоимости привлечения заявки"],
+ ex:{label:"Рекламные креативы для Кузовного 25",kind:"ad",img:["ad-1.jpg","ad-2.jpg","ad-3.jpg","ad-4.jpg"]}},
+{acc:"логотип",name:"Логотип",price:10000,note:"Три концепции на выбор",
+ inc:["Разработка трёх концепций логотипа и доработка выбранной","Правки до утверждения результата"],
+ get:["Логотип в светлой и тёмной версиях","Фирменные цвета и шрифты","Файлы для веба, печати и соцсетей, аватар профиля"],
+ ex:{label:"Логотип ORIEN",kind:"ph",img:["logo-1.jpg","logo-2.jpg","logo-3.jpg"]}}];
 (()=>{const seg=document.getElementById("seg");if(!seg)return;const big=document.getElementById("pbig"),list=document.getElementById("plist"),ex=document.getElementById("pex");
 [big,list,ex].forEach(e=>e.classList.add("swap"));let cur=-1;
 const btns=PRICES.map((p,i)=>{const b=document.createElement("button");b.type="button";b.textContent=p.name;b.onclick=()=>show(i);seg.append(b);return b});
@@ -45,21 +45,21 @@ async function show(i){if(i===cur)return;const first=cur<0;cur=i;btns.forEach((b
 if(first||reduce)return paint(i);[big,list,ex].forEach(e=>e.classList.add("hide"));await new Promise(r=>setTimeout(r,180));paint(i);[big,list,ex].forEach(e=>e.classList.remove("hide"))}
 show(0)})();
 // калькулятор
-(()=>{if(!document.getElementById("chips"))return;const C=[{n:"Сайт",p:6500,on:1},{n:"Приложение в Telegram",p:12000},{n:"Запуск рекламы",p:7000,t:"без бюджета"},{n:"Логотип",p:10000},{n:"Карточки 2ГИС и Яндекс Карт",p:2000},{n:"Ведение рекламы",p:5000,m:1,t:"без бюджета"},{n:"Поддержка сайта",p:700,m:1,t:"до 3 правок"}];
+(()=>{if(!document.getElementById("chips"))return;const C=[{n:"Сайт",p:6500,on:1},{n:"Приложение в Telegram",p:12000},{n:"Запуск рекламных кампаний",p:7000,t:"без бюджета"},{n:"Логотип",p:10000},{n:"Оформление карточек в 2ГИС и Яндекс Картах",p:2000},{n:"Ведение рекламных кампаний",p:5000,m:1,t:"без бюджета"},{n:"Техническая поддержка сайта",p:700,m:1,t:"до 3 правок"}];
 const chips=document.getElementById("chips"),sum=document.getElementById("cSum"),mo=document.getElementById("cMo"),btn=document.getElementById("cBtn");let shown=0,raf=0;
 C.forEach(c=>{const b=document.createElement("button");b.type="button";b.className="chip"+(c.on?" on":"");b.setAttribute("aria-pressed",!!c.on);
 b.innerHTML=`${c.n}<small>${fmt(c.p)} ₽${c.m?" / мес":""}${c.t?" · "+c.t:""}</small>`;b.onclick=()=>{c.on=!c.on;b.classList.toggle("on",c.on);b.setAttribute("aria-pressed",c.on);paint()};chips.append(b)});
 function paint(){const sel=C.filter(c=>c.on),once=sel.filter(c=>!c.m).reduce((a,c)=>a+c.p,0),m=sel.filter(c=>c.m).reduce((a,c)=>a+c.p,0);
 const nosel=!sel.length,onlyM=sel.length&&!once;document.querySelector(".cn").hidden=nosel;document.querySelector(".cn span:first-child").style.display=onlyM?"none":"";document.querySelector(".cn span:last-child").textContent=onlyM?" ₽ в месяц":" ₽";mo.textContent=nosel?"Отметьте хотя бы одну услугу":(onlyM?"":(m?`+ ${fmt(m)} ₽ в месяц`:""));
 btn.setAttribute("aria-disabled",!sel.length);if(!sel.length)btn.tabIndex=-1;else btn.removeAttribute("tabindex");
-btn.href=!sel.length?"#price":TG+"?text="+encodeURIComponent(`Здравствуйте! Посчитал на сайте ORIEN:\n${sel.map(c=>"- "+c.n).join("\n")}\nИтого от ${fmt(once)} ₽${m?` + ${fmt(m)} ₽/мес`:""}`);
+btn.href=!sel.length?"#price":TG+"?text="+encodeURIComponent(`Здравствуйте! Рассчитал стоимость на сайте ORIEN:\n${sel.map(c=>"- "+c.n).join("\n")}\nИтого от ${fmt(once)} ₽${m?` + ${fmt(m)} ₽/мес`:""}`);
 cancelAnimationFrame(raf);const from=shown,t0=performance.now(),d=reduce?1:700;
 const tgt=once||m;const tick=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);shown=Math.round(from+(tgt-from)*e);sum.textContent=fmt(shown);if(k<1)raf=requestAnimationFrame(tick)};raf=requestAnimationFrame(tick)}
 paint()})();
 // заявка: ничего не уходит на сервер, открывается Telegram с готовым текстом
 document.getElementById("lead")&&document.getElementById("lead").addEventListener("submit",e=>{e.preventDefault();const f=e.target,n=f.n.value.trim(),l=f.l.value.trim();
 if(!n){f.n.value="";f.n.focus();return}
-window.open(TG+"?text="+encodeURIComponent(`Здравствуйте! Хочу сайт.\nНазвание: ${n}${l?"\nКарточка: "+l:""}`),"_blank","noopener")});
+window.open(TG+"?text="+encodeURIComponent(`Здравствуйте! Хочу заказать сайт.\nКомпания: ${n}${l?"\nКарточка: "+l:""}`),"_blank","noopener")});
 // цели Метрики (работают, только если посетитель принял cookie)
 const goal=n=>{try{window.ym&&window.ym(114110564,"reachGoal",n)}catch(e){}};
 document.addEventListener("click",e=>{const a=e.target.closest("a,button");if(!a)return;
