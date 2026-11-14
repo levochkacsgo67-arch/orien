@@ -100,14 +100,13 @@ document.querySelectorAll(".rv").forEach(el => {
 })();
 
 // заголовок первого экрана выезжает после заставки
-afterLoad.then(() => setTimeout(() => document.querySelector(".h-title").classList.add("in"), 250));
+afterLoad.then(() => document.querySelector(".top2").classList.add("in"));
 
 // первый экран: тонкие линии медленно текут за человеком
 (() => {
   const cv = document.getElementById("heroFlow");
   const x = cv.getContext("2d"), hero = cv.parentElement;
-  const cut = document.querySelector(".photo-cut");
-  afterLoad.then(() => cut.decode()).then(() => setTimeout(() => cv.classList.add("on"), reduce ? 0 : 2300)).catch(() => {});
+  afterLoad.then(() => setTimeout(() => cv.classList.add("on"), reduce ? 0 : 600));
   let W = 0, H = 0, vis = true, raf = 0;
   const size = () => { const r = Math.min(devicePixelRatio || 1, 2); W = hero.clientWidth; H = hero.clientHeight; cv.width = W * r; cv.height = H * r; x.setTransform(r, 0, 0, r, 0, 0); };
   const draw = t => {
@@ -120,7 +119,7 @@ afterLoad.then(() => setTimeout(() => document.querySelector(".h-title").classLi
         const u = px / W, y = base + Math.sin(u * 5.2 + s * .22 + k * 2.4) * H * .05 + Math.sin(u * 11 - s * .16 + k * 5) * H * .016 * (1 + Math.sin(s * .12 + k * 6));
         px === 0 ? x.moveTo(px, y) : x.lineTo(px, y);
       }
-      x.strokeStyle = `rgba(198,234,217,${(.16 + .2 * Math.sin(k * Math.PI)).toFixed(3)})`;
+      x.strokeStyle = `rgba(215,220,230,${(.07 + .12 * Math.sin(k * Math.PI)).toFixed(3)})`;
       x.lineWidth = 1; x.stroke();
     }
   };
@@ -131,30 +130,12 @@ afterLoad.then(() => setTimeout(() => document.querySelector(".h-title").classLi
   new IntersectionObserver(es => { vis = es[0].isIntersecting; cancelAnimationFrame(raf); if (vis) raf = requestAnimationFrame(loop); }).observe(hero);
 })();
 
-// «Что мы делаем»: заливается строка, ближайшая к середине экрана; на компьютере - и под курсором
-const svc = [...document.querySelectorAll(".svc-row")], dNum = document.getElementById("dNum");
-let sI = -1;
-function svcSet(i) {
-  if (i === sI) return; sI = i;
-  svc.forEach((r, k) => r.classList.toggle("on", k === i));
-  dNum.textContent = String(i + 1).padStart(2, "0");
-}
-function svcScroll(vh) {
-  const box = svc[0].parentElement.getBoundingClientRect();
-  if (box.bottom < 0 || box.top > vh) return;
-  let best = 0, d = Infinity;
-  svc.forEach((r, k) => { const b = r.getBoundingClientRect(), m = Math.abs(b.top + b.height / 2 - vh * 0.52); if (m < d) { d = m; best = k; } });
-  svcSet(best);
-}
-svcSet(0);
-if (matchMedia("(hover: hover)").matches) svc.forEach((r, i) => r.addEventListener("pointerenter", () => svcSet(i)));
-
 // цены: переключатель услуг, панель меняется плавно
 const PRICES = [
   { name: "Сайт", price: 6500, note: "Первая версия за 2 дня, до оплаты",
     inc: ["Работы, цены, отзывы, кнопки связи", "Удобно с телефона и компьютера", "Неделя правок бесплатно", "Свой адрес .ru на первый год, дальше 1 500 ₽ в год"] },
   { name: "Приложение", price: 12000, note: "Внутри Telegram, ничего не нужно скачивать",
-    inc: ["Запись, заявки или каталог", "Клиенту ничего не нужно скачивать", "Уведомления о каждой заявке", "Кабинет со статистикой"] },
+    inc: ["Запись, заявки или каталог", "Открывается по ссылке из Telegram", "Уведомления о каждой заявке", "Кабинет со статистикой"] },
   { name: "Реклама", price: 7000, note: "ВКонтакте и Яндекс",
     inc: ["Картинки и тексты объявлений", "Настройка и запуск", "Отчёт: сколько стоила заявка", "Дальше ведение - 5 000 ₽ в месяц, бюджет на рекламу отдельно"] },
   { name: "Логотип", price: 10000, note: "Знак и название, три варианта на выбор",
@@ -205,6 +186,7 @@ function calcPaint() {
   const sel = CALC.filter(c => c.on), once = sel.filter(c => !c.m).reduce((a, c) => a + c.p, 0), mo = sel.filter(c => c.m).reduce((a, c) => a + c.p, 0);
   cMo.textContent = mo ? `+ ${fmtR(mo)} ₽ в месяц` : "";
   cBtn.classList.toggle("off", !sel.length);
+  cMo.textContent = sel.length ? cMo.textContent : "Отметьте хотя бы одну услугу";
   if (sel.length) { cBtn.removeAttribute("tabindex"); cBtn.removeAttribute("aria-disabled"); } else { cBtn.tabIndex = -1; cBtn.setAttribute("aria-disabled", "true"); }
   const msg = `Здравствуйте! Посчитал на сайте ORIEN:\n${sel.map(c => "- " + c.n).join("\n")}\nИтого от ${fmtR(once)} ₽${mo ? ` + ${fmtR(mo)} ₽/мес` : ""}`;
   cBtn.href = TG + "?text=" + encodeURIComponent(msg);
@@ -219,6 +201,7 @@ calcPaint();
 document.getElementById("lead").addEventListener("submit", e => {
   e.preventDefault();
   const f = e.target, n = f.n.value.trim(), l = f.l.value.trim();
+  if (!n) { f.n.value = ""; f.n.focus(); return; }
   const msg = `Здравствуйте! Хочу сайт.\nНазвание: ${n}${l ? "\nКарточка: " + l : ""}`;
   window.open(TG + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
 });
@@ -257,7 +240,6 @@ function onScroll() {
   const cTop = contact.getBoundingClientRect().top;
   const wr = words.length ? words[0].parentElement.getBoundingClientRect() : null;
   const pr = reduce ? [] : par.map(img => img.parentElement.getBoundingClientRect());
-  if (svc.length) svcScroll(vh);
   nav.classList.toggle("solid", y > vh * 0.6);
   nav.classList.toggle("at-contact", cTop < vh * 0.7);
   if (wr) {
@@ -290,7 +272,19 @@ onScroll();
 // если картинка не догрузилась - пробуем ещё раз
 document.querySelectorAll("img").forEach(im => im.addEventListener("error", () => { if (im.dataset.retry) return; im.dataset.retry = 1; setTimeout(() => { im.src = im.src.split("?")[0] + "?r=" + Date.now(); }, 800); }));
 
-// время на Сахалине
-const clock = document.getElementById("clock");
-const tick = () => clock.textContent = new Intl.DateTimeFormat("ru-RU", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Sakhalin" }).format(new Date());
-tick(); setInterval(tick, 15000);
+// карусель работ: стрелки, полоска прогресса
+(() => {
+  const car = document.getElementById("car"); if (!car) return;
+  const prev = document.getElementById("carPrev"), next = document.getElementById("carNext"), bar = document.getElementById("carBar");
+  const step = () => Math.max(240, car.clientWidth * .6);
+  const upd = () => {
+    const m = car.scrollWidth - car.clientWidth, k = m > 0 ? car.scrollLeft / m : 0;
+    bar.style.width = (100 * car.clientWidth / car.scrollWidth) + "%"; bar.style.transform = `translateX(${k * (car.scrollWidth / car.clientWidth - 1) * 100}%)`;
+    prev.disabled = car.scrollLeft < 4; next.disabled = car.scrollLeft > m - 4;
+  };
+  prev.onclick = () => car.scrollBy({ left: -step(), behavior: "smooth" });
+  next.onclick = () => car.scrollBy({ left: step(), behavior: "smooth" });
+  car.addEventListener("scroll", () => requestAnimationFrame(upd), { passive: true });
+  addEventListener("resize", upd); upd();
+  car.addEventListener("keydown", e => { if (e.key === "ArrowRight") next.click(); if (e.key === "ArrowLeft") prev.click(); });
+})();
