@@ -13,21 +13,36 @@ const set=o=>{n.classList.toggle("open",o);b.setAttribute("aria-expanded",o);b.t
 b.onclick=()=>set(!n.classList.contains("open"));
 n.querySelector(".m").addEventListener("click",e=>{if(e.target.closest("a"))set(false)});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")set(false)})})();
-// подсветка строки работ под курсором
-document.querySelectorAll(".wr").forEach(r=>r.addEventListener("pointermove",e=>{const b=r.getBoundingClientRect();r.style.setProperty("--mx",(e.clientX-b.left)+"px")}));
 // цены
 const fmt=n=>n.toLocaleString("ru-RU").replace(/ | /g," ");
+const W=n=>`img/works/${n}`;
 const PRICES=[
-{acc:"сайт",name:"Сайт",price:6500,note:"Первая версия за 2 дня, до оплаты",inc:["Работы, цены, отзывы, кнопки связи","Удобно с телефона и компьютера","Неделя правок бесплатно","Свой адрес .ru на первый год, дальше 1 500 ₽ в год"]},
-{acc:"приложение",name:"Приложение",price:12000,note:"Внутри Telegram",inc:["Запись, заявки или каталог","Открывается по ссылке из Telegram","Уведомления о каждой заявке","Кабинет со статистикой"]},
-{acc:"рекламу",name:"Реклама",price:7000,note:"ВКонтакте и Яндекс",inc:["Картинки и тексты объявлений","Настройка и запуск","Отчёт: сколько стоила заявка","Дальше ведение - 5 000 ₽ в месяц, бюджет на рекламу отдельно"]},
-{acc:"логотип",name:"Логотип",price:10000,note:"Знак и название, три варианта на выбор",inc:["Три разных идеи, из них доводим одну","Файлы для сайта, печати и соцсетей","Светлая и тёмная версии, аватарка","Два круга правок бесплатно"]}];
-(()=>{if(!document.getElementById("seg"))return;const seg=document.getElementById("seg"),big=document.getElementById("pbig"),list=document.getElementById("plist");big.className=list.className="swap";let cur=-1;
+{acc:"сайт",name:"Сайт",price:6500,note:"Первая версия за 2 дня, до оплаты",
+ inc:["Работы, цены, отзывы, кнопки связи","Удобно с телефона и компьютера","Неделя правок бесплатно","Адрес .ru на первый год, дальше 1 500 ₽ в год"],
+ get:["Первую версию через 2 дня, до оплаты","Сайт на своём адресе, открывается без VPN"],
+ ex:{label:"Кузовной 25",kind:"ph",img:["kuzov-1.jpg","kuzov-2.jpg","kuzov-3.jpg"]}},
+{acc:"приложение",name:"Приложение",price:12000,note:"Внутри Telegram",
+ inc:["Запись, заявки или каталог","Уведомления о каждой заявке","Кабинет со статистикой"],
+ get:["Приложение, которое открывается из Telegram","Все заявки и записи в одном месте"],
+ ex:{label:"Запись к мастеру, FITMENT",kind:"ph",img:["nastya-1.jpg","nastya-2.jpg","nastya-3.jpg","fit-1.jpg","fit-2.jpg","fit-3.jpg"]}},
+{acc:"рекламу",name:"Реклама",price:7000,note:"ВКонтакте и Яндекс",
+ inc:["Картинки и тексты объявлений","Настройка и запуск","Ведение - 5 000 ₽ в месяц, бюджет отдельно"],
+ get:["Запущенную рекламу во ВКонтакте и Яндексе","Отчёт: сколько стоила заявка"],
+ ex:{label:"Объявления для Кузовного 25",kind:"ad",img:["ad-1.jpg","ad-2.jpg","ad-3.jpg","ad-4.jpg"]}},
+{acc:"логотип",name:"Логотип",price:10000,note:"Три варианта на выбор",
+ inc:["Три разных идеи, из них доводим одну","Два круга правок бесплатно","Аватарка для соцсетей"],
+ get:["Готовый знак с названием","Файлы для сайта, печати и соцсетей"],
+ ex:{label:"Знак ORIEN",kind:"ph",img:["logo-1.jpg","logo-2.jpg","logo-3.jpg"]}}];
+(()=>{const seg=document.getElementById("seg");if(!seg)return;const big=document.getElementById("pbig"),list=document.getElementById("plist"),ex=document.getElementById("pex");
+[big,list,ex].forEach(e=>e.classList.add("swap"));let cur=-1;
 const btns=PRICES.map((p,i)=>{const b=document.createElement("button");b.type="button";b.textContent=p.name;b.onclick=()=>show(i);seg.append(b);return b});
-const paint=i=>{const p=PRICES[i];big.innerHTML=`<div class="n"><small>от</small>${fmt(p.price)}<span> ₽</span></div><p>${p.note}</p>`;
-list.innerHTML=`<ul>${p.inc.map(x=>`<li>${x}</li>`).join("")}</ul><a class="pill dark" href="${TG}" target="_blank" rel="noopener">Обсудить ${p.acc} <span>→</span></a>`};
+const paint=i=>{const p=PRICES[i];
+big.innerHTML=`<em class="pt">Стоимость</em><div class="n"><small>от</small>${fmt(p.price)}<span> ₽</span></div><p>${p.note}</p><a class="pill dark" href="${TG}" target="_blank" rel="noopener">Обсудить ${p.acc} <span>→</span></a>`;
+list.innerHTML=`<em class="pt">Входит</em><ul>${p.inc.map(x=>`<li>${x}</li>`).join("")}</ul><em class="pt">Вы получаете</em><ul>${p.get.map(x=>`<li>${x}</li>`).join("")}</ul>`;
+const it=p.ex.img.map(n=>`<img class="${p.ex.kind}" src="${W(n)}?v=3" alt="" loading="lazy" decoding="async" draggable="false">`).join("");
+ex.innerHTML=`<em class="pt">Примеры работ</em><div class="exw"><div class="track" style="--dur:${p.ex.img.length*7}s">${it}${it}</div></div><span class="exl">${p.ex.label}</span>`};
 async function show(i){if(i===cur)return;const first=cur<0;cur=i;btns.forEach((b,k)=>{b.classList.toggle("on",k===i);b.setAttribute("aria-pressed",k===i)});
-if(first||reduce)return paint(i);big.classList.add("hide");list.classList.add("hide");await new Promise(r=>setTimeout(r,160));paint(i);big.classList.remove("hide");list.classList.remove("hide")}
+if(first||reduce)return paint(i);[big,list,ex].forEach(e=>e.classList.add("hide"));await new Promise(r=>setTimeout(r,180));paint(i);[big,list,ex].forEach(e=>e.classList.remove("hide"))}
 show(0)})();
 // калькулятор
 (()=>{if(!document.getElementById("chips"))return;const C=[{n:"Сайт",p:6500,on:1},{n:"Приложение в Telegram",p:12000},{n:"Запуск рекламы",p:7000,t:"без бюджета"},{n:"Логотип",p:10000},{n:"Карточки 2ГИС и Яндекс Карт",p:2000},{n:"Ведение рекламы",p:5000,m:1,t:"без бюджета"},{n:"Поддержка сайта",p:700,m:1,t:"до 3 правок"}];
