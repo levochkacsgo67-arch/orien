@@ -351,3 +351,39 @@ body{font-family:'GL',system-ui,sans-serif}
 .contact{padding-bottom:clamp(120px,13vw,200px)}
 .hero .grain{-webkit-mask-image:linear-gradient(180deg,#000 60%,transparent 98%);mask-image:linear-gradient(180deg,#000 60%,transparent 98%)}
 @media (max-width:900px){.nav{padding:8px 8px 8px 18px;gap:8px;grid-template-columns:1fr auto auto}.nav .pill.sm{height:40px;padding:0 16px;font-size:14px}.burger{height:40px;padding:0 14px;font-size:14px}.c1{display:none}}
+
+/* === правки 16.11 (ночь): орбита вместо прицела, отступы, межбуквенные, меню, скругление букв === */
+.cross,.tick,.coord,.corner{display:none!important}
+.topo{opacity:.4;-webkit-mask-image:radial-gradient(55% 60% at 82% 26%,#000 0,transparent 72%);mask-image:radial-gradient(55% 60% at 82% 26%,#000 0,transparent 72%)}
+.orbit{position:absolute;z-index:1;pointer-events:none;right:8vw;top:15%;width:clamp(150px,22vw,330px);aspect-ratio:1;border-radius:50%;border:1px solid rgba(255,255,255,.38);animation:orb 60s linear infinite}
+.orbit::before{content:"";position:absolute;inset:16%;border-radius:50%;border:1px dashed rgba(255,255,255,.28)}
+.orbit::after{content:"";position:absolute;left:50%;top:-4px;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:#fff;box-shadow:0 0 14px 3px rgba(255,255,255,.6)}
+@keyframes orb{to{transform:rotate(360deg)}}
+@media (max-width:900px){.orbit{right:6vw;top:19%;width:46vw}}
+@media (prefers-reduced-motion:reduce){.orbit{animation:none}}
+/* межбуквенные: Benzin и так плотный */
+.hero h1,h1,h2,.hp,.wn b,.wp-top h1,.wp-next b,.lead>b{letter-spacing:.012em!important}
+#pbig .n,.cn,.xc u{letter-spacing:-.01em!important}
+.nav .l,.mq span{letter-spacing:.01em!important}
+.tab b,.st h4,.ctel,.wt strong,.meta b,.calc .ct,.xc b{letter-spacing:0!important}
+.hero h1{line-height:1.08}h2{line-height:1.1}
+/* скругление острых краёв крупных букв */
+@media (min-width:901px){.hero h1,.light h2,.contact h2{filter:url(#rnd)}}
+/* отступы между блоками */
+.hero .hin{padding-bottom:clamp(64px,9vh,110px)}
+.hero::after{background:linear-gradient(180deg,rgba(12,12,12,.35),transparent 22%),linear-gradient(180deg,transparent 80%,rgba(207,210,214,.6) 93%,var(--warm) 100%)}
+.sec.light{padding-top:clamp(56px,6vw,90px);padding-bottom:clamp(56px,6vw,90px)}
+.contact{min-height:0;padding-top:clamp(70px,8vw,110px);padding-bottom:clamp(60px,6vw,90px)}
+.contact .fadetop{height:clamp(110px,13vw,190px)}
+.contact .fadebot{height:clamp(100px,11vw,160px)}
+@media (max-width:900px){.hero::after{background:linear-gradient(180deg,rgba(12,12,12,.35),transparent 22%),linear-gradient(180deg,transparent 84%,rgba(207,210,214,.6) 94%,var(--warm) 100%)}}
+/* меню на телефоне: закрывается так же аккуратно, как открывается */
+@media (max-width:900px){
+.nav .m,.nav.open .m{will-change:clip-path,opacity}
+.nav .m{transform:translateY(-8px);transition:clip-path .38s cubic-bezier(.4,0,.6,1),opacity .28s ease,transform .38s cubic-bezier(.4,0,.6,1)}
+.nav.open .m{transform:none;transition:clip-path .7s cubic-bezier(.2,.9,.25,1),opacity .35s ease,transform .7s cubic-bezier(.2,.9,.25,1)}
+.nav .m a{transition:opacity .15s,transform .15s;transition-delay:0s}
+.nav.open .m a{transition:opacity .4s,transform .5s cubic-bezier(.2,.9,.25,1)}
+}
+#pbig .n{font-size:clamp(36px,4.3vw,68px)}#pbig .n small{font-size:15px}
+@media (max-width:900px){#pbig .n{font-size:clamp(44px,13vw,72px)}}
