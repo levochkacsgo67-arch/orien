@@ -1,5 +1,13 @@
 const TG="https://t.me/ceoorien",reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 document.querySelectorAll(".tg").forEach(a=>{a.href=TG;a.target="_blank";a.rel="noopener"});
+// кнопки Telegram открывают приложение сразу (tg://), без промежуточной страницы t.me в браузере
+const MOB=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+function openTG(url){let t="";try{t=new URL(url,location.href).searchParams.get("text")||""}catch(_){}
+const app="tg://resolve?domain=ceoorien"+(t?"&text="+encodeURIComponent(t):"");let left=false;const mark=()=>{left=true};
+addEventListener("blur",mark,{once:true});addEventListener("pagehide",mark,{once:true});document.addEventListener("visibilitychange",mark,{once:true});
+location.href=app;
+if(!MOB)setTimeout(()=>{if(!left&&!document.hidden)window.open(url,"_blank","noopener")},1800)}
+document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest('a[href^="https://t.me/ceoorien"]');if(!a||e.defaultPrevented||a.getAttribute("aria-disabled")==="true")return;e.preventDefault();openTG(a.href)},true);
 // появление при прокрутке
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{rootMargin:"0px 0px -8% 0px"});
 document.querySelectorAll(".rv").forEach(el=>io.observe(el));
@@ -43,14 +51,14 @@ const btns=PRICES.map((p,i)=>{const b=document.createElement("button");b.type="b
 const xt=document.getElementById("pxtra");if(xt)xt.classList.add("swap");
 const paint=i=>{const p=PRICES[i];
 if(xt)xt.innerHTML=`<em class="pt">Дополнительно к услуге «${p.name}»</em><div class="xg">${p.xt.map(x=>`<a class="xc" href="${TG}?text=${encodeURIComponent("Здравствуйте! Интересует «"+p.name+"» и дополнительно: "+x.t)}" target="_blank" rel="noopener"><b>${x.t}</b><span>${x.d}</span><i><u>${x.p}</u>${x.m?`<s>${x.m}</s>`:""}<em>+</em></i></a>`).join("")}</div>`;
-big.innerHTML=`<em class="pt">Стоимость</em><div class="n"><small>от</small>${fmt(p.price)}<span> ₽</span></div><p>${p.note}</p><a class="pill dark" href="${TG}" target="_blank" rel="noopener">Обсудить ${p.acc} <span>→</span></a>`;
+big.innerHTML=`<em class="pt">Стоимость</em><div class="n"><small>от</small>${fmt(p.price)}<span> ₽</span></div><p>${p.note}</p><a class="pill dark" href="${TG}?text=${encodeURIComponent("Здравствуйте! Хочу обсудить "+({"сайт":"создание сайта","приложение в Telegram":"приложение в Telegram","рекламу":"рекламу","логотип":"разработку логотипа"}[p.acc]||p.acc)+".")}" target="_blank" rel="noopener">Обсудить ${p.acc} <span>→</span></a>`;
 list.innerHTML=`<em class="pt">Входит</em><ul>${p.inc.map(x=>`<li>${x}</li>`).join("")}</ul>${p.get.length?`<em class="pt">Вы получаете</em><ul>${p.get.map(x=>`<li>${x}</li>`).join("")}</ul>`:""}`;
 const base=p.ex.img,rep=Math.ceil(10/base.length),half=Array.from({length:rep},()=>base).flat();
-const it=half.map(n=>`<img class="${p.ex.kind}" src="${W(n)}?v=4" alt="" decoding="async" draggable="false">`).join("");
+const it=half.map(n=>`<img class="${p.ex.kind}" src="${W(n)}?v=5" alt="" decoding="async" draggable="false">`).join("");
 ex.innerHTML=`<em class="pt">Примеры работ</em><div class="exw"><div class="track" >${it}${it}</div></div>${p.ex.label?`<span class="exl"><i></i>${p.ex.label}</span>`:""}`;const tr=ex.querySelector(".track");if(tr)tr.style.setProperty("--dur",(tr.scrollWidth/2/SPEED)+"s")};
 async function show(i){if(i===cur)return;const first=cur<0;cur=i;btns.forEach((b,k)=>{b.classList.toggle("on",k===i);b.setAttribute("aria-pressed",k===i)});
 if(first||reduce)return paint(i);[big,list,ex,xt].forEach(e=>e&&e.classList.add("hide"));await new Promise(r=>setTimeout(r,180));paint(i);[big,list,ex,xt].forEach(e=>e&&e.classList.remove("hide"))}
-show(0);const pre=()=>PRICES.forEach(p=>p.ex.img.forEach(n=>{const i=new Image();i.src=W(n)+"?v=4"}));"requestIdleCallback"in window?requestIdleCallback(pre):setTimeout(pre,300)})();
+show(0);const pre=()=>PRICES.forEach(p=>p.ex.img.forEach(n=>{const i=new Image();i.src=W(n)+"?v=5"}));"requestIdleCallback"in window?requestIdleCallback(pre):setTimeout(pre,300)})();
 // калькулятор
 (()=>{if(!document.getElementById("chips"))return;const C=[{n:"Сайт",p:6500,on:1},{n:"Приложение в Telegram",p:12000},{n:"Запуск рекламных кампаний",p:7000,t:"без бюджета"},{n:"Логотип",p:10000},{n:"Оформление карточек в 2ГИС и Яндекс Картах",p:2000},{n:"Ведение рекламных кампаний",p:5000,m:1,t:"без бюджета"},{n:"Техническая поддержка сайта",p:700,m:1,t:"до 3 правок"}];
 const chips=document.getElementById("chips"),sum=document.getElementById("cSum"),mo=document.getElementById("cMo"),btn=document.getElementById("cBtn");let shown=0,raf=0;
@@ -65,8 +73,15 @@ const tgt=once||m;const tick=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3
 paint()})();
 // заявка: ничего не уходит на сервер, открывается Telegram с готовым текстом
 document.getElementById("lead")&&document.getElementById("lead").addEventListener("submit",e=>{e.preventDefault();const f=e.target,n=f.n.value.trim(),l=f.l.value.trim();
-if(!n){f.n.value="";f.n.focus();return}
-window.open(TG+"?text="+encodeURIComponent(`Здравствуйте! Хочу заказать сайт.\nКомпания: ${n}${l?"\nКарточка: "+l:""}`),"_blank","noopener")});
+if(!n){const sb=document.querySelector("#svc .selb");sb.classList.add("err");sb.click();return}
+openTG(TG+"?text="+encodeURIComponent(`Здравствуйте! Интересует: ${n}.${l?"\nКомментарий: "+l:""}`))});
+// выбор услуги в форме
+(()=>{const w=document.getElementById("svc");if(!w)return;const b=w.querySelector(".selb"),m=w.querySelector(".selm"),v=w.querySelector(".selv"),h=w.querySelector("input[name=n]");
+const set=o=>{m.hidden=!o;b.setAttribute("aria-expanded",o);w.classList.toggle("open",o)};
+b.onclick=()=>set(m.hidden);
+m.addEventListener("click",e=>{const o=e.target.closest("button[data-v]");if(!o)return;h.value=o.dataset.v;v.textContent=o.dataset.v;w.classList.add("has");b.classList.remove("err");m.querySelectorAll("button").forEach(x=>x.setAttribute("aria-selected",x===o));set(false)});
+document.addEventListener("pointerdown",e=>{if(!w.contains(e.target))set(false)},{passive:true});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")set(false)})})();
 // цели Метрики (работают, только если посетитель принял cookie)
 const goal=n=>{try{window.ym&&window.ym(114110564,"reachGoal",n)}catch(e){}};
 document.addEventListener("click",e=>{const a=e.target.closest("a,button");if(!a)return;
