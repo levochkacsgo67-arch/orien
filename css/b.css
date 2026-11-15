@@ -399,3 +399,7 @@ h2,.hp,.wn b,.wp-next b,.lead>b{letter-spacing:.025em!important}
 .contact .fadetop{height:clamp(70px,8vw,120px)}
 .contact .fadebot{height:clamp(70px,8vw,120px)}
 .xtr{margin-top:clamp(28px,3.5vw,48px)}
+/* 16.11 зазор между допами и «Как связаться» */
+.sec.light{padding-bottom:clamp(24px,2.5vw,36px)}
+.contact{padding-top:clamp(28px,3vw,44px)}
+.contact .fadetop{height:clamp(50px,5vw,80px)}
