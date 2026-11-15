@@ -387,3 +387,15 @@ body{font-family:'GL',system-ui,sans-serif}
 }
 #pbig .n{font-size:clamp(36px,4.3vw,68px)}#pbig .n small{font-size:15px}
 @media (max-width:900px){#pbig .n{font-size:clamp(44px,13vw,72px)}}
+/* 16.11 поздно: без склейки букв, меньше расстояния */
+@media (min-width:901px){.hero h1,.light h2,.contact h2{filter:none}}
+.hero h1,.wp-top h1{letter-spacing:.035em!important}
+h2,.hp,.wn b,.wp-next b,.lead>b{letter-spacing:.025em!important}
+.hero h1{font-size:clamp(28px,5vw,92px);line-height:1.1}
+.hero .hin{padding-bottom:clamp(40px,6vh,64px)}
+.sec.light{padding-top:clamp(36px,4vw,56px);padding-bottom:clamp(36px,3.5vw,52px)}
+.light h2{margin-top:0}
+.contact{padding-top:clamp(40px,4.5vw,64px);padding-bottom:clamp(40px,4vw,56px)}
+.contact .fadetop{height:clamp(70px,8vw,120px)}
+.contact .fadebot{height:clamp(70px,8vw,120px)}
+.xtr{margin-top:clamp(28px,3.5vw,48px)}
