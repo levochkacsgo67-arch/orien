@@ -29,19 +29,19 @@ const fmt=n=>n.toLocaleString("ru-RU").replace(/ | /g," ");
 const W=n=>`img/works/${n}`;
 const SPEED=55;
 const PRICES=[
-{acc:"сайт",xt:[{t:"Поддержка сайта",d:"Мелкие правки на сайте, до 3 обращений в месяц",p:"700&nbsp;₽",m:"в месяц"},{t:"Оформление карточек в 2ГИС и Яндекс Картах",d:"Фото, описание, часы работы: вас проще найти и выбрать",p:"2&nbsp;000&nbsp;₽"},{t:"Присмотр за рекламой после запуска",d:"Каждый месяц: проверка, какая реклама приносит заявки, а какая зря тратит деньги, и исправления. Деньги на показ рекламы оплачиваются отдельно",p:"5&nbsp;000&nbsp;₽",m:"в месяц"}],name:"Сайт",price:6500,note:"Первая версия через 2 дня, оплата после согласования",
+{acc:"сайт",xt:[{t:"Поддержка сайта",d:"Мелкие правки на сайте, до 3 обращений в месяц",p:"700&nbsp;₽",m:"в месяц"},{t:"Оформление карточек в 2ГИС и Яндекс Картах",d:"Фото, описание, часы работы: вас проще найти и выбрать",p:"2&nbsp;000&nbsp;₽"}],name:"Сайт",price:6500,note:"Первая версия через 2 дня, оплата после согласования",
  inc:["Сайт с вашими услугами, примерами работ, отзывами и кнопками связи","Удобно открывается и на телефоне, и на компьютере","Правки до тех пор, пока вы не утвердите результат","Адрес сайта в интернете (.ru): первый год включён, далее 1&nbsp;500&nbsp;₽ в год"],
  get:[],
  ex:{label:"Кузовной 25",kind:"ph",img:["kuzov-1.jpg","kuzov-2.jpg","kuzov-3.jpg"]}},
-{acc:"приложение в Telegram",xt:[{t:"Присмотр за рекламой после запуска",d:"Каждый месяц: проверка, какая реклама приносит заявки, а какая зря тратит деньги, и исправления. Деньги на показ рекламы оплачиваются отдельно",p:"5&nbsp;000&nbsp;₽",m:"в месяц"},{t:"Оформление карточек в 2ГИС и Яндекс Картах",d:"Фото, описание, часы работы: вас проще найти и выбрать",p:"2&nbsp;000&nbsp;₽"}],name:"Приложение в Telegram",price:12000,note:"Приложение внутри Telegram",
- inc:["Онлайн-запись, приём заявок и каталог товаров","Уведомления в Telegram: клиенту о записи, вам о каждой новой заявке","Личный кабинет: сколько заявок и записей пришло"],
- get:["Приложение открывается по ссылке, установка не нужна","Все заявки и записи в одном месте"],
+{acc:"приложение в Telegram",xt:[{t:"Оформление карточек в 2ГИС и Яндекс Картах",d:"Фото, описание, часы работы: вас проще найти и выбрать",p:"2&nbsp;000&nbsp;₽"}],name:"Приложение в Telegram",price:12000,note:"Открывается прямо в Telegram, установка не нужна",
+ inc:["Онлайн-запись, приём заявок и каталог товаров","Уведомления в Telegram: клиенту о записи, вам о каждой новой заявке"],
+ get:["Личный кабинет: сколько заявок и записей пришло"],
  ex:{label:"Запись к мастеру · FITMENT",kind:"ph",img:["nastya-1.jpg","nastya-2.jpg","nastya-3.jpg","fit-1.jpg","fit-2.jpg","fit-3.jpg"]}},
-{acc:"рекламу",xt:[{t:"Оформление карточек в 2ГИС и Яндекс Картах",d:"Фото, описание, часы работы: вас проще найти и выбрать",p:"2&nbsp;000&nbsp;₽"}],name:"Реклама",price:7000,note:"Реклама во ВКонтакте и в Яндексе",
+{acc:"рекламу",xt:[{t:"Присмотр за рекламой после запуска",d:"Каждый месяц проверка: какая реклама приносит заявки, а какая тратит деньги впустую. Слабую правим",p:"5&nbsp;000&nbsp;₽",m:"в месяц"},{t:"Оформление карточек в 2ГИС и Яндекс Картах",d:"Фото, описание, часы работы: вас проще найти и выбрать",p:"2&nbsp;000&nbsp;₽"}],name:"Реклама",price:7000,note:"Деньги на показ рекламы оплачиваются отдельно",
  inc:["Картинки и короткие тексты для рекламы","Выбор, кому показывать рекламу: город, возраст, интересы","Запуск рекламы во ВКонтакте и в Яндексе"],
- get:["В рекламе можно сразу написать вам или позвонить","Понятный расчёт: сколько стоит одна заявка","Деньги на показ рекламы вы платите ВКонтакте и Яндексу напрямую, отдельно от стоимости услуги"],
+ get:["В рекламе можно сразу написать вам или позвонить","Понятный расчёт: сколько стоит одна заявка"],
  ex:{label:"Реклама для Кузовного 25",kind:"ad",img:["ad-1.jpg","ad-2.jpg","ad-3.jpg","ad-4.jpg"]}},
-{acc:"логотип",xt:[{t:"Оформление карточек в 2ГИС и Яндекс Картах",d:"Фото, описание, часы работы: вас проще найти и выбрать",p:"2&nbsp;000&nbsp;₽"}],name:"Логотип",price:10000,note:"Знак и фирменный стиль",
+{acc:"логотип",xt:[],name:"Логотип",price:10000,note:"Знак и фирменный стиль",
  inc:["Три варианта логотипа на выбор и доработка выбранного","Правки до утверждения результата"],
  get:["Логотип в светлой и тёмной версиях","Памятка по стилю: фирменные цвета, шрифты и правила, как использовать логотип"],
  ex:{label:"Smart PDR и ORIEN",kind:"ph",img:["spdr-1.jpg","spdr-2.jpg","spdr-3.jpg","orien-1.jpg","orien-2.jpg","orien-3.jpg"]}}];
@@ -50,8 +50,9 @@ const PRICES=[
 const btns=PRICES.map((p,i)=>{const b=document.createElement("button");b.type="button";b.textContent=p.name;b.onclick=()=>show(i);seg.append(b);return b});
 const xt=document.getElementById("pxtra");if(xt)xt.classList.add("swap");
 const paint=i=>{const p=PRICES[i];
+if(xt)xt.hidden=!p.xt.length;
 if(xt)xt.innerHTML=`<em class="pt">Дополнительно к услуге «${p.name}»</em><div class="xg">${p.xt.map(x=>`<a class="xc" href="${TG}?text=${encodeURIComponent("Здравствуйте! Интересует «"+p.name+"» и дополнительно: "+x.t)}" target="_blank" rel="noopener"><b>${x.t}</b><span>${x.d}</span><i><u>${x.p}</u>${x.m?`<s>${x.m}</s>`:""}<em>+</em></i></a>`).join("")}</div>`;
-big.innerHTML=`<em class="pt">Стоимость</em><div class="n"><small>от</small>${fmt(p.price)}<span> ₽</span></div><p>${p.note}</p><a class="pill dark" href="${TG}?text=${encodeURIComponent("Здравствуйте! Хочу обсудить "+({"сайт":"создание сайта","приложение в Telegram":"приложение в Telegram","рекламу":"рекламу","логотип":"разработку логотипа"}[p.acc]||p.acc)+".")}" target="_blank" rel="noopener">Обсудить ${p.acc} <span>→</span></a>`;
+big.innerHTML=`<em class="pt">Стоимость</em><div class="n"><small>от</small>${fmt(p.price)}<span> ₽</span></div><p>${p.note}</p><a class="pill dark" href="${TG}?text=${encodeURIComponent("Здравствуйте! Хочу обсудить "+({"сайт":"создание сайта","приложение в Telegram":"приложение в Telegram","рекламу":"рекламу","логотип":"разработку логотипа"}[p.acc]||p.acc)+".")}" target="_blank" rel="noopener">${({"сайт":"Обсудить сайт","приложение в Telegram":"Обсудить приложение","рекламу":"Обсудить рекламу","логотип":"Обсудить логотип"}[p.acc]||"Обсудить "+p.acc)} <span>→</span></a>`;
 list.innerHTML=`<em class="pt">Входит</em><ul>${p.inc.map(x=>`<li>${x}</li>`).join("")}</ul>${p.get.length?`<em class="pt">Вы получаете</em><ul>${p.get.map(x=>`<li>${x}</li>`).join("")}</ul>`:""}`;
 const base=p.ex.img,rep=Math.ceil(10/base.length),half=Array.from({length:rep},()=>base).flat();
 const it=half.map(n=>`<img class="${p.ex.kind}" src="${W(n)}?v=5" alt="" decoding="async" draggable="false">`).join("");
@@ -77,7 +78,7 @@ if(!n){const sb=document.querySelector("#svc .selb");sb.classList.add("err");sb.
 openTG(TG+"?text="+encodeURIComponent(`Здравствуйте! Интересует: ${n}.${l?"\nКомментарий: "+l:""}`))});
 // выбор услуги в форме
 (()=>{const w=document.getElementById("svc");if(!w)return;const b=w.querySelector(".selb"),m=w.querySelector(".selm"),v=w.querySelector(".selv"),h=w.querySelector("input[name=n]");
-const set=o=>{m.hidden=!o;b.setAttribute("aria-expanded",o);w.classList.toggle("open",o)};
+const set=o=>{m.hidden=!o;b.setAttribute("aria-expanded",o);w.classList.toggle("open",o);if(o){w.classList.remove("up");const c=document.getElementById("contact").getBoundingClientRect(),r=b.getBoundingClientRect();if(c.bottom-r.bottom<m.offsetHeight+16)w.classList.add("up")}};
 b.onclick=()=>set(m.hidden);
 m.addEventListener("click",e=>{const o=e.target.closest("button[data-v]");if(!o)return;h.value=o.dataset.v;v.textContent=o.dataset.v;w.classList.add("has");b.classList.remove("err");m.querySelectorAll("button").forEach(x=>x.setAttribute("aria-selected",x===o));set(false)});
 document.addEventListener("pointerdown",e=>{if(!w.contains(e.target))set(false)},{passive:true});
