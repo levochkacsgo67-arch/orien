@@ -558,3 +558,8 @@ background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.75) 50%,tran
 .contact{padding-bottom:clamp(84px,8vw,110px)}
 /* компьютер: ссылки в шапке нажимаются (раньше мобильный блок оставлял pointer-events:none) */
 @media (min-width:901px){.nav .m,.nav .m a{pointer-events:auto!important}}
+
+/* звезду показываем только после подгонки размера (js), без прыжка при загрузке */
+@media (max-width:900px){.chr{opacity:0;transition:opacity .5s ease}.chr.on{opacity:1}}
+/* 16.11 одна линия вместо двух: у последнего списка нет нижней линии, дальше идёт разделитель блока */
+#plist ul:last-of-type li:last-child{border-bottom:0!important}

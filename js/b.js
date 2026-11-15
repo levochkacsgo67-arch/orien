@@ -94,3 +94,10 @@ document.addEventListener("pointerdown",e=>{const t=e.target.closest(".pill,.seg
 const r=t.getBoundingClientRect(),s=Math.max(r.width,r.height)*2.2,i=document.createElement("i");i.className="rip";
 i.style.cssText=`width:${s}px;height:${s}px;left:${e.clientX-r.left-s/2}px;top:${e.clientY-r.top-s/2}px`;t.append(i);setTimeout(()=>i.remove(),700);
 try{navigator.vibrate&&navigator.vibrate(8)}catch(_){}},{passive:true});
+
+// хромированная звезда на телефоне и планшете: размер и место подбираются под свободную зону между шапкой и заголовком (чтобы не заходила на текст на низких экранах)
+(()=>{const chr=document.querySelector(".chr"),h1=document.querySelector(".hero h1"),nav=document.getElementById("nav"),hero=document.querySelector(".hero");if(!chr||!h1||!hero)return;
+const fit=()=>{if(innerWidth>900){chr.removeAttribute("style");chr.classList.add("on");return}
+const hr=hero.getBoundingClientRect(),pt=parseFloat(getComputedStyle(h1).paddingTop)||0,gap=14,topFree=(nav?nav.offsetHeight:58)+12+gap,botFree=h1.getBoundingClientRect().top-hr.top+pt-gap,free=botFree-topFree,size=Math.max(96,Math.min(innerWidth*.66,free));
+chr.style.width=size+"px";chr.style.marginLeft=(-size/2)+"px";chr.style.top=(topFree+Math.max(0,(free-size)/2))+"px";chr.classList.add("on")};
+fit();addEventListener("resize",fit);addEventListener("orientationchange",()=>setTimeout(fit,200));addEventListener("load",fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit)})();
