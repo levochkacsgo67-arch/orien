@@ -32,21 +32,23 @@ const PRICES=[
 {acc:"сайт",xt:[{t:"Поддержка сайта",d:"Мелкие правки на сайте, до 3 обращений в месяц",p:"700&nbsp;₽",m:"в месяц"},{t:"Оформление карточек в 2ГИС и Яндекс Картах",d:"Фото, описание, часы работы: вас проще найти и выбрать",p:"2&nbsp;000&nbsp;₽"}],name:"Сайт",price:6500,note:"Первая версия через 2 дня, оплата после согласования",
  inc:["Сайт с вашими услугами, примерами работ, отзывами и кнопками связи","Удобно открывается и на телефоне, и на компьютере","Правки до тех пор, пока вы не утвердите результат","Адрес сайта в интернете (.ru): первый год включён, далее 1&nbsp;500&nbsp;₽ в год"],
  get:[],
- ex:{label:"Кузовной 25",kind:"ph",img:["kuzov-1.jpg","kuzov-2.jpg","kuzov-3.jpg"]}},
+ ex:{label:"Кузовной 25",kind:"ph",img:["kuzov-1.webp","kuzov-2.webp","kuzov-3.webp"]}},
 {acc:"приложение в Telegram",xt:[{t:"Оформление карточек в 2ГИС и Яндекс Картах",d:"Фото, описание, часы работы: вас проще найти и выбрать",p:"2&nbsp;000&nbsp;₽"}],name:"Приложение в Telegram",price:12000,note:"Открывается прямо в Telegram, установка не нужна",
  inc:["Онлайн-запись, приём заявок и каталог товаров","Уведомления в Telegram: клиенту о записи, вам о каждой новой заявке"],
  get:["Личный кабинет: сколько заявок и записей пришло"],
- ex:{label:"Запись к мастеру · FITMENT",kind:"ph",img:["nastya-1.jpg","nastya-2.jpg","nastya-3.jpg","fit-1.jpg","fit-2.jpg","fit-3.jpg"]}},
+ ex:{label:"Запись к мастеру · FITMENT",kind:"ph",img:["nastya-1.webp","nastya-2.webp","nastya-3.webp","fit-1.webp","fit-2.webp","fit-3.webp"]}},
 {acc:"рекламу",xt:[{t:"Присмотр за рекламой после запуска",d:"Каждый месяц проверка: какая реклама приносит заявки, а какая тратит деньги впустую. Слабую правим",p:"5&nbsp;000&nbsp;₽",m:"в месяц"},{t:"Оформление карточек в 2ГИС и Яндекс Картах",d:"Фото, описание, часы работы: вас проще найти и выбрать",p:"2&nbsp;000&nbsp;₽"}],name:"Реклама",price:7000,note:"Деньги на показ рекламы оплачиваются отдельно",
  inc:["Картинки и короткие тексты для рекламы","Выбор, кому показывать рекламу: город, возраст, интересы","Запуск рекламы во ВКонтакте и в Яндексе"],
  get:["В рекламе можно сразу написать вам или позвонить","Понятный расчёт: сколько стоит одна заявка"],
- ex:{label:"Реклама для Кузовного 25",kind:"ad",img:["ad-1.jpg","ad-2.jpg","ad-3.jpg","ad-4.jpg"]}},
+ ex:{label:"Реклама для Кузовного 25",kind:"ad",img:["ad-1.webp","ad-2.webp","ad-3.webp","ad-4.webp"]}},
 {acc:"логотип",xt:[],name:"Логотип",price:10000,note:"Знак и фирменный стиль",
  inc:["Три варианта логотипа на выбор и доработка выбранного","Правки до утверждения результата"],
  get:["Логотип в светлой и тёмной версиях","Памятка по стилю: фирменные цвета, шрифты и правила, как использовать логотип"],
- ex:{label:"Smart PDR и ORIEN",kind:"ph",img:["spdr-1.jpg","spdr-2.jpg","spdr-3.jpg","orien-1.jpg","orien-2.jpg","orien-3.jpg"]}}];
+ ex:{label:"Smart PDR и ORIEN",kind:"ph",img:["spdr-1.webp","spdr-2.webp","spdr-3.webp","orien-1.webp","orien-2.webp","orien-3.webp"]}}];
 (()=>{const seg=document.getElementById("seg");if(!seg)return;const big=document.getElementById("pbig"),list=document.getElementById("plist"),ex=document.getElementById("pex");
 [big,list,ex].forEach(e=>e.classList.add("swap"));let cur=-1;
+let exNear=false;const loadEx=()=>ex.querySelectorAll("img[data-s]").forEach(i=>{i.src=i.dataset.s;i.removeAttribute("data-s")});
+if("IntersectionObserver"in window){new IntersectionObserver((es,o)=>{if(es.some(e=>e.isIntersecting)){exNear=true;loadEx();o.disconnect()}},{rootMargin:"1200px 0px"}).observe(ex)}else{exNear=true}
 const btns=PRICES.map((p,i)=>{const b=document.createElement("button");b.type="button";b.textContent=p.name;b.onclick=()=>show(i);seg.append(b);return b});
 const xt=document.getElementById("pxtra");if(xt)xt.classList.add("swap");
 const paint=i=>{const p=PRICES[i];
@@ -55,11 +57,11 @@ if(xt)xt.innerHTML=`<em class="pt">Дополнительно к услуге «
 big.innerHTML=`<em class="pt">Стоимость</em><div class="n"><small>от</small>${fmt(p.price)}<span> ₽</span></div><p>${p.note}</p><a class="pill dark" href="${TG}?text=${encodeURIComponent("Здравствуйте! Хочу обсудить "+({"сайт":"создание сайта","приложение в Telegram":"приложение в Telegram","рекламу":"рекламу","логотип":"разработку логотипа"}[p.acc]||p.acc)+".")}" target="_blank" rel="noopener">${({"сайт":"Обсудить сайт","приложение в Telegram":"Обсудить приложение","рекламу":"Обсудить рекламу","логотип":"Обсудить логотип"}[p.acc]||"Обсудить "+p.acc)} <span>→</span></a>`;
 list.innerHTML=`<em class="pt">Входит</em><ul>${p.inc.map(x=>`<li>${x}</li>`).join("")}</ul>${p.get.length?`<em class="pt">Вы получаете</em><ul>${p.get.map(x=>`<li>${x}</li>`).join("")}</ul>`:""}`;
 const base=p.ex.img,rep=Math.ceil(10/base.length),half=Array.from({length:rep},()=>base).flat();
-const it=half.map(n=>`<img class="${p.ex.kind}" src="${W(n)}?v=5" alt="" decoding="async" draggable="false">`).join("");
-ex.innerHTML=`<em class="pt">Примеры работ</em><div class="exw"><div class="track" >${it}${it}</div></div>${p.ex.label?`<span class="exl"><i></i>${p.ex.label}</span>`:""}`;const tr=ex.querySelector(".track");if(tr)tr.style.setProperty("--dur",(tr.scrollWidth/2/SPEED)+"s")};
+const it=half.map(n=>`<img class="${p.ex.kind}" data-s="${W(n)}?v=6" alt="" decoding="async" draggable="false">`).join("");
+ex.innerHTML=`<em class="pt">Примеры работ</em><div class="exw"><div class="track" >${it}${it}</div></div>${p.ex.label?`<span class="exl"><i></i>${p.ex.label}</span>`:""}`;const tr=ex.querySelector(".track");if(tr)tr.style.setProperty("--dur",(tr.scrollWidth/2/SPEED)+"s");if(exNear)loadEx()};
 async function show(i){if(i===cur)return;const first=cur<0;cur=i;btns.forEach((b,k)=>{b.classList.toggle("on",k===i);b.setAttribute("aria-pressed",k===i)});
 if(first||reduce)return paint(i);[big,list,ex,xt].forEach(e=>e&&e.classList.add("hide"));await new Promise(r=>setTimeout(r,180));paint(i);[big,list,ex,xt].forEach(e=>e&&e.classList.remove("hide"))}
-show(0);const pre=()=>PRICES.forEach(p=>p.ex.img.forEach(n=>{const i=new Image();i.src=W(n)+"?v=5"}));"requestIdleCallback"in window?requestIdleCallback(pre):setTimeout(pre,300)})();
+show(0);btns.forEach((b,k)=>{const f=()=>PRICES[k].ex.img.forEach(n=>{const i=new Image();i.src=W(n)+"?v=6"});b.addEventListener("pointerenter",f,{once:true,passive:true});b.addEventListener("touchstart",f,{once:true,passive:true})})})();
 // калькулятор
 (()=>{if(!document.getElementById("chips"))return;const C=[{n:"Сайт",p:6500,on:1},{n:"Приложение в Telegram",p:12000},{n:"Запуск рекламных кампаний",p:7000,t:"без бюджета"},{n:"Логотип",p:10000},{n:"Оформление карточек в 2ГИС и Яндекс Картах",p:2000},{n:"Ведение рекламных кампаний",p:5000,m:1,t:"без бюджета"},{n:"Техническая поддержка сайта",p:700,m:1,t:"до 3 правок"}];
 const chips=document.getElementById("chips"),sum=document.getElementById("cSum"),mo=document.getElementById("cMo"),btn=document.getElementById("cBtn");let shown=0,raf=0;
@@ -101,3 +103,9 @@ const fit=()=>{if(innerWidth>900){chr.removeAttribute("style");chr.classList.add
 const hr=hero.getBoundingClientRect(),pt=parseFloat(getComputedStyle(h1).paddingTop)||0,gap=14,topFree=(nav?nav.offsetHeight:58)+12+gap,botFree=h1.getBoundingClientRect().top-hr.top+pt-gap,free=botFree-topFree,size=Math.max(96,Math.min(innerWidth*.66,free));
 chr.style.width=size+"px";chr.style.marginLeft=(-size/2)+"px";chr.style.top=(topFree+Math.max(0,(free-size)/2))+"px";chr.classList.add("on")};
 fit();addEventListener("resize",fit);addEventListener("orientationchange",()=>setTimeout(fit,200));addEventListener("load",fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit)})();
+
+// скорость: анимации стоят, пока блок не на экране; на слабых устройствах включается лёгкий режим (класс lite)
+(()=>{const root=document.documentElement;
+if("IntersectionObserver"in window){const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle("off",!e.isIntersecting)),{rootMargin:"60px"});
+document.querySelectorAll(".hero,.contact,#pex").forEach(e=>io.observe(e))}
+if(!root.classList.contains("lite")&&!/[?&]nolite/.test(location.search)){setTimeout(()=>{let n=0,t0=0,last=0,bad=0;const f=t=>{if(!t0)t0=t;else{n++;if(t-last>40)bad++}last=t;if(t-t0<1500)requestAnimationFrame(f);else if(n>10&&((t-t0)/n>30||bad/n>.3))root.classList.add("lite")};requestAnimationFrame(f)},2500)}})();

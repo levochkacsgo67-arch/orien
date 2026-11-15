@@ -523,7 +523,7 @@ body{max-width:100vw}
 /* 16.11 гендир: хромированный логотип вместо круга (жидкий металл, блик проходит раз в 8 секунд, лёгкое всплытие) */
 .chr{position:absolute;z-index:2;pointer-events:none;right:6vw;top:9%;width:clamp(240px,29vw,500px);aspect-ratio:1200/1197;animation:chrf 9s ease-in-out infinite alternate}
 .chr img{display:block;width:100%;height:100%}
-.chr i{position:absolute;inset:0;-webkit-mask:url(../img/chrome-star.png) center/100% 100% no-repeat;mask:url(../img/chrome-star.png) center/100% 100% no-repeat;
+.chr i{position:absolute;inset:0;-webkit-mask:url(../img/chrome-star.webp) center/100% 100% no-repeat;mask:url(../img/chrome-star.webp) center/100% 100% no-repeat;
 background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.75) 50%,transparent 58%) 0 0/300% 100% no-repeat;background-position:0% 0;animation:chrs 8s ease-in-out infinite}
 @keyframes chrf{to{transform:translateY(-10px)}}
 @keyframes chrs{0%,30%{background-position:0% 0}75%,100%{background-position:100% 0}}
@@ -604,3 +604,22 @@ transition:clip-path .36s cubic-bezier(.5,0,.2,1),visibility 0s linear .36s}
 html{background:#0c0c0c}
 body{transition:opacity .3s ease}
 html.fl body{opacity:0}
+
+/* 16.11 скорость. 1) без смешивания слоёв (blend) и с лёгким размытием шапки: это самое дорогое при прокрутке на слабых устройствах */
+.grain,.topo{mix-blend-mode:normal!important}
+.nav{-webkit-backdrop-filter:blur(12px)!important;backdrop-filter:blur(12px)!important}
+.pill.glass{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:rgba(12,12,12,.5)!important}
+/* 2) анимации стоят, пока блок не на экране (класс off ставит js) */
+.hero.off .blob,.hero.off .chr,.hero.off .chr i,.contact.off::before,.contact.off::after,.contact.off .b4,#pex.off .track{animation-play-state:paused!important}
+/* 3) лёгкий режим: нет вечных анимаций, нет размытия и шума, фон из мягких градиентов вместо размытых пятен */
+html.lite .blob,html.lite .contact .b4{animation:none!important;filter:none!important;background:radial-gradient(closest-side,rgba(11,11,11,.85),rgba(11,11,11,0))!important}
+html.lite .chr,html.lite .chr i,html.lite .contact::before,html.lite .contact::after{animation:none!important}
+html.lite .grain,html.lite .topo{display:none!important}
+html.lite .nav{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:rgba(24,26,30,.94)!important}
+html.lite .chr i{display:none}
+/* 16.11 скорость: пятна фона без размытия (filter: blur очень дорогой для слабых устройств). Вместо него готовые мягкие градиенты с таким же видом */
+.hero .blob{filter:none!important;background:radial-gradient(closest-side,rgba(11,11,11,1) 0,rgba(11,11,11,1) 55%,rgba(11,11,11,.55) 80%,rgba(11,11,11,0) 100%)!important;scale:1.25}
+.contact .b4,.contact::before,.contact::after{filter:none!important}
+.contact::before,.contact::after{scale:1.15}
+.contact .b4{opacity:.5!important}
+.contact::before{opacity:.85}

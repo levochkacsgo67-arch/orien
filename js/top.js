@@ -19,3 +19,8 @@ setTimeout(go,3000);
 addEventListener("DOMContentLoaded",function(){
 if(!document.fonts||!document.fonts.load){go();return}
 Promise.all([document.fonts.load("800 40px UB","Сайт Aa"),document.fonts.load("400 18px GL","Аа Aa"),document.fonts.load("600 18px GL","Аа Aa")]).then(go,go)})})();
+
+/* лёгкий режим для слабых устройств (мало ядер или памяти, экономия трафика, «уменьшить движение», ?lite): без размытий, смешивания слоёв и вечных анимаций */
+(function(){var d=document.documentElement,n=navigator,c=n.connection||{};
+var low=(n.deviceMemory&&n.deviceMemory<=4)||(n.hardwareConcurrency&&n.hardwareConcurrency<=4)||c.saveData||(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)||/[?&]lite/.test(location.search);
+if(low&&!/[?&]nolite/.test(location.search))d.classList.add("lite")})();
