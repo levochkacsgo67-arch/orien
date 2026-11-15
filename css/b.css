@@ -428,3 +428,9 @@ transition:opacity .28s ease,transform .5s cubic-bezier(.2,.9,.25,1),visibility 
 .nav.open .m a:nth-child(1){animation-delay:.06s}.nav.open .m a:nth-child(2){animation-delay:.12s}
 @keyframes mnu{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.nav .m,.nav.open .m{transition-duration:.01s!important}.nav.open .m a{animation:none}}
+/* 16.11 меню 2: без размытия внутри размытия (на iPhone оно «схлопывалось» с центра), только прозрачность и сдвиг */
+.nav .m,.nav.open .m{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:rgba(30,32,36,.94)!important;will-change:auto!important;transform-origin:50% 0}
+.nav .m{transform:translateY(-10px)!important}
+.nav.open .m{transform:none!important}
+/* ширина панели одинаковая в открытом и закрывающемся состоянии (иначе сжималась к центру) */
+@media (max-width:900px){.nav .m,.nav.open .m{left:0!important;right:0!important;width:auto!important;justify-self:stretch!important;box-sizing:border-box}}
