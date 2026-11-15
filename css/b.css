@@ -487,3 +487,12 @@ transition:opacity .3s ease,transform .7s cubic-bezier(.16,1.1,.3,1),visibility 
 .nav.open .m a:nth-child(1){animation-delay:.1s!important}.nav.open .m a:nth-child(2){animation-delay:.18s!important}
 @keyframes mnu6{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 }
+/* 16.11 меню 7: текст и размеры НЕ анимируются никогда (ни масштаб, ни сдвиг, ни прозрачность пунктов). Только раскрытие шторкой из угла кнопки */
+@media (max-width:900px){
+.nav .m,.nav.open .m{transform:none!important;opacity:1!important;will-change:auto!important}
+.nav .m a,.nav.open .m a{animation:none!important;opacity:1!important;transform:none!important;transition:none!important}
+.nav .m{clip-path:inset(0 0 100% 100% round 30px)!important;visibility:hidden;
+transition:clip-path .36s cubic-bezier(.5,0,.2,1),visibility 0s linear .36s!important}
+.nav.open .m{clip-path:inset(0 0 0 0 round 30px)!important;visibility:visible;
+transition:clip-path .75s cubic-bezier(.19,1,.22,1),visibility 0s!important}
+}
