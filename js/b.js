@@ -12,7 +12,10 @@ h.addEventListener("pointermove",e=>{cancelAnimationFrame(raf);raf=requestAnimat
 const set=o=>{n.classList.toggle("open",o);b.setAttribute("aria-expanded",o);b.textContent=o?"Закрыть":"Меню"};
 b.onclick=()=>set(!n.classList.contains("open"));
 n.querySelector(".m").addEventListener("click",e=>{if(e.target.closest("a"))set(false)});
-document.addEventListener("keydown",e=>{if(e.key==="Escape")set(false)})})();
+document.addEventListener("keydown",e=>{if(e.key==="Escape")set(false)});
+let y0=0;new MutationObserver(()=>{if(n.classList.contains("open"))y0=window.scrollY}).observe(n,{attributes:true,attributeFilter:["class"]});
+window.addEventListener("scroll",()=>{if(n.classList.contains("open")&&Math.abs(window.scrollY-y0)>6)set(false)},{passive:true});
+document.addEventListener("pointerdown",e=>{if(n.classList.contains("open")&&!n.contains(e.target))set(false)},{passive:true})})();
 // цены
 const fmt=n=>n.toLocaleString("ru-RU").replace(/ | /g," ");
 const W=n=>`img/works/${n}`;
@@ -33,7 +36,7 @@ const PRICES=[
 {acc:"логотип",xt:[{t:"Оформление карточек в 2ГИС и Яндекс Картах",d:"Фото, описание, часы работы: вас проще найти и выбрать",p:"2&nbsp;000&nbsp;₽"}],name:"Логотип",price:10000,note:"Знак и фирменный стиль",
  inc:["Разработка трёх концепций логотипа и доработка выбранной","Правки до утверждения результата"],
  get:["Логотип в светлой и тёмной версиях","Брендбук: фирменные цвета, шрифты и правила, как использовать логотип"],
- ex:{label:"Smart PDR",kind:"ph",img:["spdr-1.jpg","spdr-2.jpg","spdr-3.jpg"]}}];
+ ex:{label:"Smart PDR и ORIEN",kind:"ph",img:["spdr-1.jpg","spdr-2.jpg","spdr-3.jpg","orien-1.jpg","orien-2.jpg","orien-3.jpg"]}}];
 (()=>{const seg=document.getElementById("seg");if(!seg)return;const big=document.getElementById("pbig"),list=document.getElementById("plist"),ex=document.getElementById("pex");
 [big,list,ex].forEach(e=>e.classList.add("swap"));let cur=-1;
 const btns=PRICES.map((p,i)=>{const b=document.createElement("button");b.type="button";b.textContent=p.name;b.onclick=()=>show(i);seg.append(b);return b});

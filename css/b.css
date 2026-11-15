@@ -464,3 +464,5 @@ transition:clip-path .6s cubic-bezier(.2,.8,.2,1),transform .6s cubic-bezier(.2,
 /* 16.11 Й: Safari режет шапочку над буквой по границе блока заголовка. Блок расширен вверх, текст стоит на месте */
 h1,h2,.light h2,.contact h2,.hero h1{padding-top:.32em!important;margin-top:-.32em!important}
 .hero h1{margin-top:-.32em!important}
+/* 16.11 вкладки прайса на телефоне: длинный текст переносится, а не обрезается */
+@media (max-width:900px){.seg button{height:auto;min-height:48px;padding:8px 12px;white-space:normal;line-height:1.2;display:flex;align-items:center;justify-content:center;text-align:center}}
