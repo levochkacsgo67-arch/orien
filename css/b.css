@@ -573,3 +573,10 @@ background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.75) 50%,tran
 .nav::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(#16181b,#0c0c0c);opacity:0;transition:opacity .4s ease;pointer-events:none;z-index:-1}
 .nav.open::before{opacity:.96}
 .nav.open{background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.03) 45%,rgba(255,255,255,.08)),rgba(24,26,30,.76)!important}
+
+/* 16.11 список услуг: та же шторка, что у меню в шапке (время и кривая те же), раскрывается из точки, куда нажали (--ox ставит js) */
+.selm,.selm[hidden]{clip-path:inset(0 calc(100% - var(--ox,50%)) 100% var(--ox,50%) round 26px);will-change:clip-path;
+transition:clip-path .36s cubic-bezier(.5,0,.2,1),visibility 0s linear .36s}
+.sel.open .selm{clip-path:inset(0 0 0 0 round 26px);transition:clip-path .75s cubic-bezier(.19,1,.22,1),visibility 0s}
+/* пока список открыт, фоновые переливы блока стоят: на телефоне они тормозят отрисовку */
+.contact:has(.sel.open) :is(.blob,.grain,.fadetop,.fadebot),.contact:has(.sel.open)::before,.contact:has(.sel.open)::after{animation-play-state:paused!important}
