@@ -496,3 +496,15 @@ transition:clip-path .36s cubic-bezier(.5,0,.2,1),visibility 0s linear .36s!impo
 .nav.open .m{clip-path:inset(0 0 0 0 round 30px)!important;visibility:visible;
 transition:clip-path .75s cubic-bezier(.19,1,.22,1),visibility 0s!important}
 }
+/* 16.11 меню 8: плотная чёрная панель (сквозь неё ничего не просвечивает), красная стрелка у пунктов, шапка при открытом меню тоже плотнее. Размеры и текст по-прежнему не анимируются */
+@media (max-width:900px){
+.nav .m,.nav.open .m{background:#0c0c0c!important;border:1px solid rgba(255,255,255,.14)!important;
+box-shadow:0 0 0 1px rgba(0,0,0,.4),0 28px 60px -12px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.08)!important}
+.nav .m a{display:flex!important;align-items:center;justify-content:space-between;color:#fff!important;text-shadow:none!important;border-bottom:1px solid rgba(255,255,255,.12)!important}
+.nav .m a:last-child{border-bottom:0!important}
+.nav .m a::after{content:"→";color:var(--ac);font-size:20px}
+.nav{transition:background .3s ease,border-color .3s ease}
+.nav.open{background:linear-gradient(#16181b,#0c0c0c)!important;border-color:rgba(255,255,255,.16)!important}
+}
+/* 16.11 порядок: цена и состав -> Дополнительно -> Примеры работ */
+#pex{grid-column:auto;margin-top:clamp(36px,4vw,56px);padding-top:clamp(28px,3vw,40px);border-top:1px solid rgba(12,12,12,.25)}
