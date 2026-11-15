@@ -434,3 +434,14 @@ transition:opacity .28s ease,transform .5s cubic-bezier(.2,.9,.25,1),visibility 
 .nav.open .m{transform:none!important}
 /* ширина панели одинаковая в открытом и закрывающемся состоянии (иначе сжималась к центру) */
 @media (max-width:900px){.nav .m,.nav.open .m{left:0!important;right:0!important;width:auto!important;justify-self:stretch!important;box-sizing:border-box}}
+/* 16.11 меню 3: кнопка не дёргается, меню вытекает из-под кнопки */
+.burger{min-width:92px;justify-content:center;text-align:center;transition:background .3s,color .3s,transform .18s ease!important}
+.burger:active{transform:scale(.97)!important}
+.burger .rip{display:none}
+@media (max-width:900px){
+.nav .m{clip-path:inset(0 0 100% 0 round 30px)!important;transform:translateY(-8px)!important;opacity:1!important;visibility:hidden;
+transition:clip-path .34s cubic-bezier(.4,0,.2,1),transform .34s cubic-bezier(.4,0,.2,1),visibility 0s linear .34s!important}
+.nav.open .m{clip-path:inset(0 0 0 0 round 30px)!important;transform:none!important;visibility:visible;
+transition:clip-path .6s cubic-bezier(.2,.8,.2,1),transform .6s cubic-bezier(.2,.8,.2,1),visibility 0s!important}
+.nav .m{transform-origin:100% 0}
+}
