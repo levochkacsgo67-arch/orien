@@ -11,3 +11,11 @@ function top(){try{scrollTo({top:0,left:0,behavior:"instant"})}catch(e){scrollTo
 top();addEventListener("DOMContentLoaded",top);
 addEventListener("load",function(){top();setTimeout(top,60);setTimeout(top,300)});
 addEventListener("pageshow",function(e){if(e.persisted)top()})})();
+
+/* шрифты: пока свои шрифты не загрузились, страницу не показываем (иначе на секунду мелькает тонкий запасной шрифт). Страховка 1.8с, чтобы страница не осталась пустой */
+(function(){var d=document.documentElement,done=false;d.classList.add("fl");
+function go(){if(done)return;done=true;d.classList.remove("fl")}
+setTimeout(go,1800);
+addEventListener("DOMContentLoaded",function(){
+if(!document.fonts||!document.fonts.load){go();return}
+Promise.all([document.fonts.load("800 40px UB","Сайт Aa"),document.fonts.load("400 18px GL","Аа Aa"),document.fonts.load("600 18px GL","Аа Aa")]).then(go,go)})})();

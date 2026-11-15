@@ -1,8 +1,8 @@
-@font-face{font-family:'GL';font-weight:300 800;src:url(../fonts/Geologica-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:'GL';font-weight:300 800;src:url(../fonts/Geologica-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2190-2193}
+@font-face{font-family:'GL';font-display:block;font-weight:300 800;src:url(../fonts/Geologica-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'GL';font-display:block;font-weight:300 800;src:url(../fonts/Geologica-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2190-2193}
 @font-face{font-family:'IT';font-weight:100 900;src:url(../fonts/InterTight-cyrillic-0.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
 @font-face{font-family:'IT';font-weight:100 900;src:url(../fonts/InterTight-latin-1.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2190-2193}
-@font-face{font-family:'UB';font-weight:800;src:url(../fonts/Benzin-Bold.woff2) format('woff2')}
+@font-face{font-family:'UB';font-display:block;font-weight:800;src:url(../fonts/Benzin-Bold.woff2) format('woff2')}
 :root{--bg:#0c0c0c;--fg:#f4f1ec;--mut:rgba(244,241,236,.76);--line:rgba(244,241,236,.2);--warm:#d4cec6;--ease:cubic-bezier(.22,.8,.2,1);--pad:clamp(20px,3vw,40px)}
 *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;background:var(--bg)}
 body{font-family:'GL',system-ui,sans-serif;font-size:18px;line-height:1.5;background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -578,8 +578,6 @@ background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.75) 50%,tran
 .selm,.selm[hidden]{clip-path:inset(0 calc(100% - var(--ox,50%)) 100% var(--ox,50%) round 26px);will-change:clip-path;
 transition:clip-path .36s cubic-bezier(.5,0,.2,1),visibility 0s linear .36s}
 .sel.open .selm{clip-path:inset(0 0 0 0 round 26px);transition:clip-path .75s cubic-bezier(.19,1,.22,1),visibility 0s}
-/* пока список открыт, фоновые переливы блока стоят: на телефоне они тормозят отрисовку */
-.contact:has(.sel.open) :is(.blob,.grain,.fadetop,.fadebot),.contact:has(.sel.open)::before,.contact:has(.sel.open)::after{animation-play-state:paused!important}
 /* 16.11 шапка: одна система пропорций. Высота шапки 58 = отступ 8 + элементы 42 + отступ 8. Все отступы по краям и между кнопками 8px,
    радиус шапки 30 = радиус кнопки 21 + отступ 9 (8 + рамка 1) (скругления параллельны, кнопка не «плавает»). Слева у логотипа 22-24px (оптический отступ под скругление) */
 .nav{padding:8px 8px 8px 22px!important;border-radius:30px!important;gap:9px!important;align-items:center}
@@ -598,3 +596,11 @@ transition:clip-path .36s cubic-bezier(.5,0,.2,1),visibility 0s linear .36s}
 /* 16.11 список услуг: шторка строго сверху вниз от поля (без привязки к точке нажатия), мягкий старт и мягкое замедление */
 .selm,.selm[hidden]{clip-path:inset(0 0 100% 0 round 26px);will-change:clip-path;transition:clip-path .38s cubic-bezier(.4,0,.6,1),visibility 0s linear .38s}
 .sel.open .selm{clip-path:inset(0 0 0 0 round 26px);transition:clip-path .62s cubic-bezier(.4,0,.15,1),visibility 0s}
+
+/* 16.11 без моргания при нажатии: серая вспышка нажатия iPhone у кнопок списка отключена */
+.sel,.selb,.selm button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-appearance:none;appearance:none}
+.selb:focus,.selb:active,.selm button:focus{outline:none}
+/* 16.11 шрифты: пока не загрузились свои, страница скрыта (class fl ставит top.js), нет мелькания тонкого шрифта */
+html{background:#0c0c0c}
+body{transition:opacity .3s ease}
+html.fl body{opacity:0}
