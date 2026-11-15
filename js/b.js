@@ -69,3 +69,9 @@ const goal=n=>{try{window.ym&&window.ym(114110564,"reachGoal",n)}catch(e){}};
 document.addEventListener("click",e=>{const a=e.target.closest("a,button");if(!a)return;
 if(a.matches(".tg,[href*='t.me/']"))goal("tg_click");else if(a.matches("[href^='tel:']"))goal("tel_click");else if(a.closest(".wr"))goal("work_open");else if(a.id==="cBtn")goal("calc_send")});
 document.getElementById("lead")&&document.getElementById("lead").addEventListener("submit",()=>goal("lead_submit"));
+
+// отклик на нажатие: волна и лёгкая вибрация
+document.addEventListener("pointerdown",e=>{const t=e.target.closest(".pill,.seg button,.xc,.burger,.chip");if(!t)return;
+const r=t.getBoundingClientRect(),s=Math.max(r.width,r.height)*2.2,i=document.createElement("i");i.className="rip";
+i.style.cssText=`width:${s}px;height:${s}px;left:${e.clientX-r.left-s/2}px;top:${e.clientY-r.top-s/2}px`;t.append(i);setTimeout(()=>i.remove(),700);
+try{navigator.vibrate&&navigator.vibrate(8)}catch(_){}},{passive:true});
