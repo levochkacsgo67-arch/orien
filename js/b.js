@@ -16,6 +16,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")set(false)})})();
 // цены
 const fmt=n=>n.toLocaleString("ru-RU").replace(/ | /g," ");
 const W=n=>`img/works/${n}`;
+const SPEED=55;
 const PRICES=[
 {acc:"сайт",xt:[{t:"Техническая поддержка сайта",d:"Правки и мелкие доработки, до 3 обращений в месяц",p:"700&nbsp;₽",m:"в месяц"},{t:"Оформление карточек в 2ГИС и Яндекс Картах",d:"Фото, описание, часы работы: вас проще найти и выбрать",p:"2&nbsp;000&nbsp;₽"},{t:"Присмотр за рекламой после запуска",d:"Каждый месяц смотрю, что приносит заявки, а что просто тратит деньги, и поправляю. Деньги на показ рекламы платите отдельно",p:"5&nbsp;000&nbsp;₽",m:"в месяц"}],name:"Сайт",price:6500,note:"Первая версия за 2 дня, до оплаты",
  inc:["Адаптивный сайт: услуги, портфолио, отзывы, кнопки связи","Удобное отображение на телефоне и компьютере","Доработки до утверждения результата","Домен .ru на первый год, далее 1&nbsp;500&nbsp;₽ в год"],
@@ -42,11 +43,11 @@ if(xt)xt.innerHTML=`<em class="pt">Дополнительно к услуге «
 big.innerHTML=`<em class="pt">Стоимость</em><div class="n"><small>от</small>${fmt(p.price)}<span> ₽</span></div><p>${p.note}</p><a class="pill dark" href="${TG}" target="_blank" rel="noopener">Обсудить ${p.acc} <span>→</span></a>`;
 list.innerHTML=`<em class="pt">Входит</em><ul>${p.inc.map(x=>`<li>${x}</li>`).join("")}</ul>${p.get.length?`<em class="pt">Вы получаете</em><ul>${p.get.map(x=>`<li>${x}</li>`).join("")}</ul>`:""}`;
 const base=p.ex.img,rep=Math.ceil(10/base.length),half=Array.from({length:rep},()=>base).flat();
-const it=half.map(n=>`<img class="${p.ex.kind}" src="${W(n)}?v=3" alt="" decoding="async" draggable="false">`).join("");
-ex.innerHTML=`<em class="pt">Примеры работ</em><div class="exw"><div class="track" style="--dur:${half.length*7}s">${it}${it}</div></div>${p.ex.label?`<span class="exl"><i></i>${p.ex.label}</span>`:""}`};
+const it=half.map(n=>`<img class="${p.ex.kind}" src="${W(n)}?v=4" alt="" decoding="async" draggable="false">`).join("");
+ex.innerHTML=`<em class="pt">Примеры работ</em><div class="exw"><div class="track" >${it}${it}</div></div>${p.ex.label?`<span class="exl"><i></i>${p.ex.label}</span>`:""}`;const tr=ex.querySelector(".track");if(tr)tr.style.setProperty("--dur",(tr.scrollWidth/2/SPEED)+"s")};
 async function show(i){if(i===cur)return;const first=cur<0;cur=i;btns.forEach((b,k)=>{b.classList.toggle("on",k===i);b.setAttribute("aria-pressed",k===i)});
 if(first||reduce)return paint(i);[big,list,ex,xt].forEach(e=>e&&e.classList.add("hide"));await new Promise(r=>setTimeout(r,180));paint(i);[big,list,ex,xt].forEach(e=>e&&e.classList.remove("hide"))}
-show(0)})();
+show(0);const pre=()=>PRICES.forEach(p=>p.ex.img.forEach(n=>{const i=new Image();i.src=W(n)+"?v=4"}));"requestIdleCallback"in window?requestIdleCallback(pre):setTimeout(pre,300)})();
 // калькулятор
 (()=>{if(!document.getElementById("chips"))return;const C=[{n:"Сайт",p:6500,on:1},{n:"Приложение в Telegram",p:12000},{n:"Запуск рекламных кампаний",p:7000,t:"без бюджета"},{n:"Логотип",p:10000},{n:"Оформление карточек в 2ГИС и Яндекс Картах",p:2000},{n:"Ведение рекламных кампаний",p:5000,m:1,t:"без бюджета"},{n:"Техническая поддержка сайта",p:700,m:1,t:"до 3 правок"}];
 const chips=document.getElementById("chips"),sum=document.getElementById("cSum"),mo=document.getElementById("cMo"),btn=document.getElementById("cBtn");let shown=0,raf=0;
