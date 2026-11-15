@@ -24,11 +24,11 @@ const PRICES=[
 {acc:"приложение",xt:[{t:"Ведение рекламных кампаний",d:"Слежу за заявками и ценой клиента. Бюджет оплачивается отдельно",p:"5&nbsp;000&nbsp;₽",m:"в месяц"},{t:"Оформление карточек в 2ГИС и Яндекс Картах",d:"Фото, описание, часы работы: вас проще найти и выбрать",p:"2&nbsp;000&nbsp;₽"}],name:"Приложение",price:12000,note:"Мини-приложение в Telegram",
  inc:["Онлайн-запись, приём заявок или каталог товаров","Мгновенные уведомления о каждой заявке","Личный кабинет со статистикой"],
  get:["Приложение открывается по ссылке, установка не нужна","Единая база заявок и записей"],
- ex:{label:"Запись к мастеру, FITMENT",kind:"ph",img:["nastya-1.jpg","nastya-2.jpg","nastya-3.jpg","fit-1.jpg","fit-2.jpg","fit-3.jpg"]}},
+ ex:{label:"Запись к мастеру · FITMENT",kind:"ph",img:["nastya-1.jpg","nastya-2.jpg","nastya-3.jpg","fit-1.jpg","fit-2.jpg","fit-3.jpg"]}},
 {acc:"рекламу",xt:[{t:"Оформление карточек в 2ГИС и Яндекс Картах",d:"Фото, описание, часы работы: вас проще найти и выбрать",p:"2&nbsp;000&nbsp;₽"}],name:"Реклама",price:7000,note:"ВКонтакте и Яндекс Директ",
  inc:["Разработка рекламных креативов и текстов объявлений","Настройка таргетинга и запуск кампаний","Ведение кампании - 5&nbsp;000&nbsp;₽ в месяц, рекламный бюджет оплачивается отдельно"],
  get:["Запущенные кампании во ВКонтакте и Яндекс Директе","Отчёт о стоимости одной заявки"],
- ex:{label:"Рекламные креативы для Кузовного 25",kind:"ad",img:["ad-1.jpg","ad-2.jpg","ad-3.jpg","ad-4.jpg"]}},
+ ex:{label:"Креативы для Кузовного 25",kind:"ad",img:["ad-1.jpg","ad-2.jpg","ad-3.jpg","ad-4.jpg"]}},
 {acc:"логотип",xt:[{t:"Оформление карточек в 2ГИС и Яндекс Картах",d:"Фото, описание, часы работы: вас проще найти и выбрать",p:"2&nbsp;000&nbsp;₽"}],name:"Логотип",price:10000,note:"Знак и фирменный стиль",
  inc:["Разработка трёх концепций логотипа и доработка выбранной","Правки до утверждения результата"],
  get:["Логотип в светлой и тёмной версиях","Фирменные цвета и шрифты","Файлы для веба, печати и соцсетей, аватар профиля"],
@@ -41,8 +41,9 @@ const paint=i=>{const p=PRICES[i];
 if(xt)xt.innerHTML=`<em class="pt">Дополнительно к услуге «${p.name}»</em><div class="xg">${p.xt.map(x=>`<a class="xc" href="${TG}?text=${encodeURIComponent("Здравствуйте! Интересует «"+p.name+"» и дополнительно: "+x.t)}" target="_blank" rel="noopener"><b>${x.t}</b><span>${x.d}</span><i><u>${x.p}</u>${x.m?`<s>${x.m}</s>`:""}<em>+</em></i></a>`).join("")}</div>`;
 big.innerHTML=`<em class="pt">Стоимость</em><div class="n"><small>от</small>${fmt(p.price)}<span> ₽</span></div><p>${p.note}</p><a class="pill dark" href="${TG}" target="_blank" rel="noopener">Обсудить ${p.acc} <span>→</span></a>`;
 list.innerHTML=`<em class="pt">Входит</em><ul>${p.inc.map(x=>`<li>${x}</li>`).join("")}</ul><em class="pt">Вы получаете</em><ul>${p.get.map(x=>`<li>${x}</li>`).join("")}</ul>`;
-const it=p.ex.img.map(n=>`<img class="${p.ex.kind}" src="${W(n)}?v=3" alt="" loading="lazy" decoding="async" draggable="false">`).join("");
-ex.innerHTML=`<em class="pt">Примеры работ</em><div class="exw"><div class="track" style="--dur:${p.ex.img.length*7}s">${it}${it}</div></div><span class="exl">${p.ex.label}</span>`};
+const base=p.ex.img,rep=Math.ceil(10/base.length),half=Array.from({length:rep},()=>base).flat();
+const it=half.map(n=>`<img class="${p.ex.kind}" src="${W(n)}?v=3" alt="" decoding="async" draggable="false">`).join("");
+ex.innerHTML=`<em class="pt">Примеры работ</em><div class="exw"><div class="track" style="--dur:${half.length*7}s">${it}${it}</div></div>${p.ex.label?`<span class="exl"><i></i>${p.ex.label}</span>`:""}`};
 async function show(i){if(i===cur)return;const first=cur<0;cur=i;btns.forEach((b,k)=>{b.classList.toggle("on",k===i);b.setAttribute("aria-pressed",k===i)});
 if(first||reduce)return paint(i);[big,list,ex,xt].forEach(e=>e&&e.classList.add("hide"));await new Promise(r=>setTimeout(r,180));paint(i);[big,list,ex,xt].forEach(e=>e&&e.classList.remove("hide"))}
 show(0)})();
