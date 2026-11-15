@@ -78,8 +78,7 @@ if(!n){const sb=document.querySelector("#svc .selb");sb.classList.add("err");sb.
 openTG(TG+"?text="+encodeURIComponent(`Здравствуйте! Интересует: ${n}.${l?"\nКомментарий: "+l:""}`))});
 // выбор услуги в форме
 (()=>{const w=document.getElementById("svc");if(!w)return;const b=w.querySelector(".selb"),m=w.querySelector(".selm"),v=w.querySelector(".selv"),h=w.querySelector("input[name=n]");
-let ox=50;b.addEventListener("pointerdown",e=>{const r=b.getBoundingClientRect();ox=Math.max(6,Math.min(94,(e.clientX-r.left)/r.width*100))},{passive:true});
-const set=o=>{if(o)w.style.setProperty("--ox",ox+"%");b.setAttribute("aria-expanded",o);w.classList.toggle("open",o)};
+const set=o=>{b.setAttribute("aria-expanded",o);w.classList.toggle("open",o)};
 b.onclick=()=>set(!w.classList.contains("open"));
 m.addEventListener("click",e=>{const o=e.target.closest("button[data-v]");if(!o)return;h.value=o.dataset.v;v.textContent=o.dataset.v;w.classList.add("has");b.classList.remove("err");m.querySelectorAll("button").forEach(x=>x.setAttribute("aria-selected",x===o));set(false)});
 document.addEventListener("pointerdown",e=>{if(!w.contains(e.target))set(false)},{passive:true});

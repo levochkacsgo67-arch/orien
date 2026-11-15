@@ -594,3 +594,7 @@ transition:clip-path .36s cubic-bezier(.5,0,.2,1),visibility 0s linear .36s}
 .nav .pill.sm{grid-column:3;justify-self:end}
 }
 @media (max-width:900px){.nav{grid-template-columns:1fr auto auto!important}}
+
+/* 16.11 список услуг: шторка строго сверху вниз от поля (без привязки к точке нажатия), мягкий старт и мягкое замедление */
+.selm,.selm[hidden]{clip-path:inset(0 0 100% 0 round 26px);will-change:clip-path;transition:clip-path .38s cubic-bezier(.4,0,.6,1),visibility 0s linear .38s}
+.sel.open .selm{clip-path:inset(0 0 0 0 round 26px);transition:clip-path .62s cubic-bezier(.4,0,.15,1),visibility 0s}
