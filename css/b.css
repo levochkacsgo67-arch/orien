@@ -445,3 +445,13 @@ transition:clip-path .34s cubic-bezier(.4,0,.2,1),transform .34s cubic-bezier(.4
 transition:clip-path .6s cubic-bezier(.2,.8,.2,1),transform .6s cubic-bezier(.2,.8,.2,1),visibility 0s!important}
 .nav .m{transform-origin:100% 0}
 }
+/* 16.11 меню 4: одинаковые размеры в обоих состояниях (раньше 20px/15px и 19px/14px - прыгало), одно движение: раскрытие сверху */
+.nav .m a,.nav.open .m a{font-size:20px!important;padding:15px 0!important;line-height:30px!important}
+@media (max-width:900px){
+.nav .m,.nav.open .m{transform:none!important}
+.nav .m{transition:clip-path .32s cubic-bezier(.4,0,.2,1),visibility 0s linear .32s!important}
+.nav.open .m{transition:clip-path .5s cubic-bezier(.22,.8,.2,1),visibility 0s!important}
+.nav.open .m a{animation:mnu2 .45s ease both}
+.nav.open .m a:nth-child(1){animation-delay:.08s}.nav.open .m a:nth-child(2){animation-delay:.14s}
+@keyframes mnu2{from{opacity:0}to{opacity:1}}
+}
