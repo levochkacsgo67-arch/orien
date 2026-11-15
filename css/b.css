@@ -455,3 +455,9 @@ transition:clip-path .6s cubic-bezier(.2,.8,.2,1),transform .6s cubic-bezier(.2,
 .nav.open .m a:nth-child(1){animation-delay:.08s}.nav.open .m a:nth-child(2){animation-delay:.14s}
 @keyframes mnu2{from{opacity:0}to{opacity:1}}
 }
+/* 16.11 меню 5: пункты не анимируются совсем (моргали), панель только раскрывается сверху */
+.nav .m a,.nav.open .m a{animation:none!important;opacity:1!important;transform:none!important;transition:none!important}
+@media (max-width:900px){
+.nav .m{opacity:1!important;transition:clip-path .38s cubic-bezier(.4,0,.2,1),visibility 0s linear .38s!important}
+.nav.open .m{opacity:1!important;transition:clip-path .55s cubic-bezier(.3,.7,.2,1),visibility 0s!important}
+}
