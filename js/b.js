@@ -78,8 +78,8 @@ if(!n){const sb=document.querySelector("#svc .selb");sb.classList.add("err");sb.
 openTG(TG+"?text="+encodeURIComponent(`Здравствуйте! Интересует: ${n}.${l?"\nКомментарий: "+l:""}`))});
 // выбор услуги в форме
 (()=>{const w=document.getElementById("svc");if(!w)return;const b=w.querySelector(".selb"),m=w.querySelector(".selm"),v=w.querySelector(".selv"),h=w.querySelector("input[name=n]");
-const set=o=>{m.hidden=!o;b.setAttribute("aria-expanded",o);w.classList.toggle("open",o);};
-b.onclick=()=>set(m.hidden);
+const set=o=>{b.setAttribute("aria-expanded",o);w.classList.toggle("open",o)};
+b.onclick=()=>set(!w.classList.contains("open"));
 m.addEventListener("click",e=>{const o=e.target.closest("button[data-v]");if(!o)return;h.value=o.dataset.v;v.textContent=o.dataset.v;w.classList.add("has");b.classList.remove("err");m.querySelectorAll("button").forEach(x=>x.setAttribute("aria-selected",x===o));set(false)});
 document.addEventListener("pointerdown",e=>{if(!w.contains(e.target))set(false)},{passive:true});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")set(false)})})();

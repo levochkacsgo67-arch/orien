@@ -563,3 +563,13 @@ background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.75) 50%,tran
 @media (max-width:900px){.chr{opacity:0;transition:opacity .5s ease}.chr.on{opacity:1}}
 /* 16.11 одна линия вместо двух: у последнего списка нет нижней линии, дальше идёт разделитель блока */
 #plist ul:last-of-type li:last-child{border-bottom:0!important}
+
+/* 16.11 список услуг: плавное раскрытие шторкой сверху вниз (как меню): текст не двигается, раскрывается только панель */
+.selm,.selm[hidden]{display:grid!important;clip-path:inset(0 0 100% 0 round 26px);visibility:hidden;transition:clip-path .3s cubic-bezier(.5,0,.2,1),visibility 0s linear .3s}
+.sel.open .selm{clip-path:inset(0 0 0 0 round 26px);visibility:visible;transition:clip-path .55s cubic-bezier(.19,1,.22,1),visibility 0s}
+.selb i{transition:transform .35s ease}
+/* 16.11 шапка: плавная переливка стекла в чёрный и обратно. Чёрный слой отдельный, у него плавно меняется прозрачность (смена градиентов фона рывком не переливается) */
+.nav{transition:border-color .4s ease}
+.nav::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(#16181b,#0c0c0c);opacity:0;transition:opacity .4s ease;pointer-events:none;z-index:-1}
+.nav.open::before{opacity:.96}
+.nav.open{background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.03) 45%,rgba(255,255,255,.08)),rgba(24,26,30,.76)!important}
