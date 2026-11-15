@@ -611,10 +611,9 @@ html.fl body{opacity:0}
 .pill.glass{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:rgba(12,12,12,.5)!important}
 /* 2) анимации стоят, пока блок не на экране (класс off ставит js) */
 .hero.off .blob,.hero.off .chr,.hero.off .chr i,.contact.off::before,.contact.off::after,.contact.off .b4,#pex.off .track{animation-play-state:paused!important}
-/* 3) лёгкий режим: нет вечных анимаций, нет размытия и шума, фон из мягких градиентов вместо размытых пятен */
-html.lite .blob,html.lite .contact .b4{animation:none!important;filter:none!important;background:radial-gradient(closest-side,rgba(11,11,11,.85),rgba(11,11,11,0))!important}
+/* 3) лёгкий режим: ВИД ТОТ ЖЕ, что на компьютере, только нет вечных анимаций и тяжёлого размытия шапки (Лев: на телефоне фон отличался от компьютерного) */
+html.lite .blob,html.lite .contact .b4{animation:none!important}
 html.lite .chr,html.lite .chr i,html.lite .contact::before,html.lite .contact::after{animation:none!important}
-html.lite .grain,html.lite .topo{display:none!important}
 html.lite .nav{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:rgba(24,26,30,.94)!important}
 html.lite .chr i{display:none}
 /* 16.11 скорость: пятна фона без размытия (filter: blur очень дорогой для слабых устройств). Вместо него готовые мягкие градиенты с таким же видом */
