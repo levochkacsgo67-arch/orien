@@ -409,3 +409,12 @@ h2,.hp,.wn b,.wp-next b,.lead>b{letter-spacing:.025em!important}
 .contact .fadetop{display:none}
 .contact::before,.contact::after{border-radius:50%}
 .contact{padding-top:clamp(44px,4.6vw,68px)}
+/* 16.11 «за 2 дня» красным + прайс как лист поверх главного экрана */
+.hero h1 .h1b,.hero h1 .h1b .rd{color:var(--ac)!important;-webkit-text-fill-color:var(--ac)!important}
+.hero::after{background:linear-gradient(180deg,rgba(12,12,12,.35),transparent 22%),linear-gradient(0deg,rgba(12,12,12,.55),transparent 30%)!important}
+.hero{padding-bottom:clamp(36px,3.5vw,52px)}
+#price{position:relative;z-index:3;margin-top:calc(-1 * clamp(36px,3.5vw,52px));border-radius:clamp(28px,3.4vw,52px) clamp(28px,3.4vw,52px) 0 0;box-shadow:0 -1px 0 rgba(255,255,255,.85),0 -18px 50px rgba(12,12,12,.35),inset 0 1px 0 rgba(255,255,255,.7);padding-top:clamp(44px,4.6vw,68px)}
+.contact{z-index:4}
+/* 16.11 карусель примеров крупнее: на компьютере во всю ширину */
+@media (min-width:901px){.pgrid{grid-template-columns:.8fr 1.1fr}#pex{grid-column:1/-1}.exw{height:clamp(440px,38vw,580px)}}
+@media (max-width:900px){.exw{height:clamp(340px,92vw,480px)}}
