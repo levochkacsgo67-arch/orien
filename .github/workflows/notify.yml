@@ -1,0 +1,21 @@
+name: notify
+on:
+  workflow_dispatch:
+    inputs:
+      text:
+        description: "Текст сообщения"
+        required: true
+permissions:
+  contents: read
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -sS --fail -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TG_CHAT}" --data-urlencode "text=${TEXT}"
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT: ${{ vars.TG_CHAT }}
+          TEXT: ${{ inputs.text }}
