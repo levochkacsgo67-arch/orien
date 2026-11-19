@@ -1,5 +1,5 @@
-# Раз в день: открываются ли сайты, не кончается ли HTTPS, нет ли близких сроков.
-# Пишет только при проблеме и по понедельникам коротко, что всё в порядке. В журнал ничего личного не выводит.
+# Раз в день: открываются ли сайты, работает ли приём заявок, не кончается ли HTTPS, нет ли близких сроков.
+# Пишет ТОЛЬКО при проблеме или близком сроке (без отчётов «всё в порядке»). В журнал ничего личного не выводит.
 import datetime as dt, os, socket, ssl, subprocess, time, urllib.request
 from ops_common import send
 
@@ -44,6 +44,13 @@ for url, marker in SITES:
     err = check(url, marker)
     if err:
         problems.append(f"Не открывается {url}: {err}")
+try:
+    rq = urllib.request.Request("https://orien-leads.brows-booking.workers.dev", method="OPTIONS", headers={"Origin": "https://orien-studio.ru", "Access-Control-Request-Method": "POST", "User-Agent": "ORIEN-watchdog"})
+    with urllib.request.urlopen(rq, timeout=25) as r:
+        if r.status not in (200, 204):
+            problems.append(f"Приём заявок отвечает кодом {r.status}")
+except Exception as e:
+    problems.append(f"Приём заявок не отвечает: {str(e)[:100]}")
 for host in ("orien-studio.ru", "kuzovnoy25.ru"):
     try:
         left = cert_days(host)
@@ -62,6 +69,6 @@ if idle >= 50:
 report = os.environ.get("REPORT") == "true"
 if problems or soon:
     send("\n\n".join((["Проблема с сайтами"] + problems if problems else []) + (["Сроки"] + soon if soon else [])))
-elif report or today.weekday() == 0:
+elif report:
     send("Сторож: сайты открываются, HTTPS в порядке, близких сроков нет.")
 print("ok", len(problems), len(soon))
