@@ -1,0 +1,79 @@
+/* окно заявки на страницах услуг */
+.mo{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:16px;background:rgba(8,8,10,0);visibility:hidden;transition:background-color .45s var(--ease),visibility 0s linear .45s}
+.mo.on{background:rgba(8,8,10,.42);visibility:visible;transition:background-color .45s var(--ease),visibility 0s}
+.md{position:relative;width:100%;max-width:480px;max-height:calc(100svh - 32px);overflow:auto;overscroll-behavior:contain;display:grid;gap:12px;padding:clamp(22px,3vw,32px);border-radius:30px;color:var(--fg);isolation:isolate;background:radial-gradient(70% 55% at 100% 100%,rgba(229,52,43,.22),transparent 70%),linear-gradient(140deg,rgba(255,255,255,.17),rgba(255,255,255,.04) 38%,rgba(255,255,255,.07)),rgba(22,22,24,.46);-webkit-backdrop-filter:blur(30px) saturate(1.7);backdrop-filter:blur(30px) saturate(1.7);box-shadow:inset 0 1px 0 rgba(255,255,255,.38),inset 0 0 0 1px rgba(255,255,255,.13),inset 0 -24px 44px -26px rgba(255,255,255,.1),0 40px 90px -30px rgba(0,0,0,.75);opacity:0;transform:translateY(22px) scale(.975);transition:opacity .4s var(--ease),transform .6s var(--ease)}
+.mo.on .md{opacity:1;transform:none;transition-delay:.05s}
+.md h2{font:800 clamp(22px,2.4vw,28px)/1.1 'UB';letter-spacing:.02em;text-transform:uppercase;padding-right:44px;margin-bottom:4px}
+.mx{position:absolute;top:16px;right:16px;width:40px;height:40px;border:0;border-radius:50%;background:rgba(244,241,236,.12);color:var(--fg);cursor:pointer;transition:background .3s}
+.mx::before,.mx::after{content:"";position:absolute;left:50%;top:50%;width:16px;height:2px;border-radius:2px;background:currentColor;transform:translate(-50%,-50%) rotate(45deg)}
+.mx::after{transform:translate(-50%,-50%) rotate(-45deg)}
+@media (hover:hover){.mx:hover{background:rgba(244,241,236,.22)}}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mw{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.mg button,.mw button{min-height:50px;padding:0 10px;border:0;border-radius:999px;background:rgba(244,241,236,.12);color:rgba(244,241,236,.85);font:400 16px 'GL';cursor:pointer;transition:background .25s,color .25s}
+.mg button[aria-checked=true],.mw button[aria-checked=true]{background:#f4f1ec;color:#0c0c0c}
+@media (hover:hover){.mg button[aria-checked=false]:hover,.mw button[aria-checked=false]:hover{background:rgba(244,241,236,.2)}}
+.mf{display:grid;gap:12px;animation:mfin .3s ease both}.mf[hidden]{display:none}
+@keyframes mfin{from{opacity:0}to{opacity:1}}
+.md input:not([type=checkbox]){width:100%;height:54px;padding:0 22px;border-radius:999px;border:0;background:rgba(244,241,236,.12);color:var(--fg);font:400 17px 'GL'}
+.md input::placeholder{color:rgba(244,241,236,.75)}
+.md input[type=checkbox]{appearance:none;-webkit-appearance:none;flex:none;width:26px;height:26px;border-radius:8px;cursor:pointer;background:rgba(244,241,236,.14) center/15px no-repeat}
+.md input[type=checkbox]:checked{background-color:#f4f1ec;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%230c0c0c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5l3.2 3.2L13 5'/%3E%3C/svg%3E")}
+.ma{display:flex;align-items:center;gap:12px;font-size:15px;line-height:1.35;color:rgba(244,241,236,.85);cursor:pointer}.ma a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.md .pill{width:100%;justify-content:space-between;background:var(--ac);color:#fff;border:0;cursor:pointer;font-family:inherit}
+@media (hover:hover){.md .pill:hover{background:#ff5148}}
+.md .err,.md input.err::placeholder{color:#ff8a83}.mw.err button[aria-checked=false],.mg.err button[aria-checked=false]{color:#ff8a83}
+.md form{transition:opacity .35s ease,transform .35s ease}.md.leave form{opacity:0;transform:translateY(-8px);pointer-events:none}.md.sent form,.md.sent h2{display:none}.md.sent{align-content:center}
+body.mlock{overflow:hidden}
+@media (max-width:400px){.mw button{font-size:15px;padding:0 4px}}
+@media (prefers-reduced-motion:reduce){.mo,.md,.mf{transition:none;animation:none}.md{transform:none}}
+
+.ms{position:relative;z-index:5}
+.msb{width:100%;height:54px;padding:0 22px;border:0;border-radius:999px;display:flex;align-items:center;justify-content:space-between;background:rgba(244,241,236,.12);color:rgba(244,241,236,.75);font:400 17px 'GL';text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ms.has .msb{color:#fff}.ms.err .msb{color:#ff8a83}
+.msb i{flex:none;width:10px;height:10px;margin-right:4px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .35s ease}
+.ms.open .msb i{transform:rotate(-135deg) translateY(-2px)}
+.msm{position:absolute;left:0;right:0;top:calc(100% + 8px);display:grid;gap:2px;padding:8px;border-radius:26px;background:linear-gradient(160deg,#1a1a1a,#0c0c0c);box-shadow:0 0 0 1px rgba(244,241,236,.12),0 24px 50px -10px rgba(0,0,0,.7);clip-path:inset(0 0 100% 0 round 26px);visibility:hidden;transition:clip-path .38s cubic-bezier(.4,0,.6,1),visibility 0s linear .38s}
+.ms.open .msm{clip-path:inset(0 0 0 0 round 26px);visibility:visible;transition:clip-path .62s cubic-bezier(.4,0,.15,1),visibility 0s}
+.msm button{height:44px;padding:0 18px;border:0;border-radius:999px;background:transparent;color:#f4f1ec;font:500 17px 'GL';text-align:left;cursor:pointer}
+.msm button[aria-selected=true]{background:var(--ac);color:#fff}
+@media (hover:hover){.msm button[aria-selected=false]:hover{background:rgba(255,255,255,.1)}}
+@media (prefers-reduced-motion:reduce){.msm,.msb i{transition:none}}
+
+/* жидкое стекло: поля, кнопки и список тоже прозрачные */
+.md::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;background:radial-gradient(55% 38% at 12% 0%,rgba(255,255,255,.22),transparent 70%)}
+.mx,.mw button,.msb,.md input:not([type=checkbox]){background:rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),inset 0 0 0 1px rgba(255,255,255,.08)}
+.md input[type=checkbox]{background-color:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.md input[type=checkbox]:checked{background-color:#f4f1ec}
+.mw button[aria-checked=true]{background:rgba(244,241,236,.92);color:#0c0c0c;box-shadow:inset 0 1px 0 #fff}
+@media (hover:hover){.mw button[aria-checked=false]:hover,.mx:hover{background:rgba(255,255,255,.18)}}
+.md .pill{box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 10px 26px -10px rgba(229,52,43,.7)}
+.msm{background:linear-gradient(140deg,#323034,#232226);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),inset 0 0 0 1px rgba(255,255,255,.12),0 24px 50px -10px rgba(0,0,0,.6)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.md{background:linear-gradient(160deg,#1a1a1a,#0c0c0c)}.msm{background:#232226}}
+
+/* форма внизу страницы услуги: тот же вид, что на главной (тёмная карточка с красным ободком) */
+.md.mi{position:relative;max-width:none;max-height:none;overflow:visible;opacity:1;transform:none;isolation:auto;gap:0;padding:clamp(20px,2.4vw,32px);border-radius:26px;background:linear-gradient(160deg,#1a1a1a,#0c0c0c);-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 34px 90px -22px rgba(229,52,43,.85),0 0 70px -14px rgba(229,52,43,.5)}
+.md.mi::before{display:none}
+.mjs .cta .ctl .pill{display:none}
+.ctg2{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,64px);align-items:center}
+@media (max-width:900px){.ctg2{grid-template-columns:1fr}}
+
+/* окно «спасибо» после отправки заявки */
+.okv{display:grid;justify-items:center;gap:12px;padding:8px 4px;text-align:center;opacity:0;transform:translateY(14px) scale(.97);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.show>.okv{opacity:1;transform:none}
+.okc{width:88px;height:88px;margin-bottom:6px;overflow:visible;filter:drop-shadow(0 0 26px rgba(229,52,43,.6))}
+.okc circle{fill:rgba(229,52,43,.14);stroke:#e5342b;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:221;stroke-dashoffset:221;transform:rotate(-90deg);transform-origin:40px 40px}
+.okc path{fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60}
+.show .okc circle{animation:okd .85s .1s cubic-bezier(.65,0,.35,1) forwards}
+.show .okc path{animation:okd2 .5s .75s cubic-bezier(.65,0,.35,1) forwards}
+@keyframes okd{to{stroke-dashoffset:0}}@keyframes okd2{to{stroke-dashoffset:0}}
+.okv h3{font:800 clamp(20px,2.2vw,28px)/1.1 'UB';letter-spacing:.02em;text-transform:uppercase;color:#f4f1ec}
+.okv p{max-width:20em;font-size:17px;line-height:1.5;color:rgba(244,241,236,.82)}
+@media (prefers-reduced-motion:reduce){.okv{transition:none;transform:none}.okc circle,.okc path{animation:none!important;stroke-dashoffset:0}}
+
+/* кнопки «Оставить заявку»: тихий блик раз в несколько секунд, подъём и свечение при наведении, нажатие */
+.hbtn .pill,.tbtn .pill,.cta .ctl .pill,.md .pill{position:relative;overflow:hidden;isolation:isolate;transition:background .4s cubic-bezier(.22,.8,.2,1),transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s cubic-bezier(.22,1,.36,1)}
+.hbtn .pill::after,.tbtn .pill::after,.cta .ctl .pill::after,.md .pill::after{content:"";position:absolute;top:0;bottom:0;left:0;width:60%;z-index:-1;pointer-events:none;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.34) 50%,transparent 70%);transform:translateX(-130%) skewX(-12deg);animation:btnsheen 6.5s cubic-bezier(.4,0,.2,1) 1.8s infinite}
+@keyframes btnsheen{0%{transform:translateX(-130%) skewX(-12deg)}22%,100%{transform:translateX(260%) skewX(-12deg)}}
+@media (hover:hover){.hbtn .pill:hover,.tbtn .pill:hover,.cta .ctl .pill:hover,.md .pill:hover{transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(229,52,43,.75)}}
+.hbtn .pill:active,.tbtn .pill:active,.cta .ctl .pill:active,.md .pill:active{transform:scale(.97);transition-duration:.15s}
+@media (prefers-reduced-motion:reduce){.hbtn .pill::after,.tbtn .pill::after,.cta .ctl .pill::after,.md .pill::after{animation:none;display:none}.hbtn .pill:hover,.tbtn .pill:hover,.cta .ctl .pill:hover,.md .pill:hover,.hbtn .pill:active,.tbtn .pill:active,.cta .ctl .pill:active,.md .pill:active{transform:none}}

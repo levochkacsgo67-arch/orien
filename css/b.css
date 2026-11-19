@@ -615,3 +615,107 @@ html.lite .chr i{display:none}
 
 /* 16.11 аудит: серая вспышка нажатия iPhone отключена у всех нажимаемых элементов */
 a,button,[role=button],input,select,textarea,label,summary{-webkit-tap-highlight-color:transparent}
+
+/* форма связи: способ + поля под выбор */
+.way{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.way button{height:52px;border:0;border-radius:999px;background:rgba(244,241,236,.12);color:rgba(244,241,236,.85);font:400 16px 'GL';cursor:pointer;transition:background .25s ease,color .25s ease,box-shadow .25s ease}
+.way button[aria-checked=true]{background:#f4f1ec;color:#0c0c0c}
+.way.err{border-radius:999px;box-shadow:0 0 0 2px var(--ac)}
+@media (hover:hover){.way button[aria-checked=false]:hover{background:rgba(244,241,236,.2)}}
+.wf{display:grid;gap:12px;animation:wfin .3s ease both}.wf[hidden]{display:none}
+@keyframes wfin{from{opacity:0}to{opacity:1}}
+.lead input.err{box-shadow:0 0 0 2px var(--ac)}
+.agree{display:flex;align-items:center;gap:12px;font-size:15px;line-height:1.35;color:rgba(244,241,236,.85);cursor:pointer}
+.agree a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.agree.err{color:#fff;text-shadow:0 0 0 var(--ac)}.agree.err input{box-shadow:0 0 0 2px var(--ac)}
+.lead .pill b{font-weight:inherit}
+@media (prefers-reduced-motion:reduce){.wf{animation:none}}
+
+/* ошибка: текст подсвечивается красным, без обводки */
+.way.err,.lead input.err,.selb.err,.agree.err input{box-shadow:none}
+.lead input.err,.lead input.err::placeholder,.selb.err,.agree.err,.way.err button[aria-checked=false]{color:#ff8a83}
+
+/* доп. услуги: просто карточки, не кнопки */
+.xc{cursor:default}
+@media (hover:hover){.xc:hover{transform:none;background:rgba(255,255,255,.55);box-shadow:0 0 0 1px rgba(12,12,12,.12)}}
+.xc:active{transform:none}
+
+/* плавная смена услуги: высота блока меняется плавно, ничего не прыгает */
+.pwrap{overflow:hidden;padding:2px;margin:-2px;transition:height .7s cubic-bezier(.4,0,.2,1)}
+.pwrap .swap,.pwrap .swap.hide{transform:none!important}
+.pwrap .swap{transition:opacity .7s cubic-bezier(.4,0,.2,1)!important}
+.pwrap .swap.hide{transition:opacity .22s ease!important}
+@media (prefers-reduced-motion:reduce){.pwrap{transition:none}}
+
+/* узкие телефоны: шапка с кнопкой «Оставить заявку» помещается в одну строку */
+@media (max-width:480px){.nav .pill.sm,.burger{padding:0 14px!important;font-size:14px!important}.burger{min-width:0!important}.nav{gap:6px}}
+@media (max-width:400px){.nav .pill.sm,.burger{padding:0 12px!important;font-size:13px!important}}
+@media (max-width:370px){.nav .pill.sm,.burger{padding:0 10px!important;font-size:12.5px!important}}
+
+/* прайс на главной: коротко, без повторов (подробности на страницах услуг) */
+#plist .sh{font-size:18px;line-height:1.45;max-width:30em}
+#plist .pill{width:auto;justify-content:flex-start;align-self:flex-start;margin-top:26px}
+.pill.line{background:transparent;color:#0c0c0c;box-shadow:inset 0 0 0 1.5px #0c0c0c}
+@media (hover:hover){.pill.line:hover{background:#0c0c0c;color:#f4f1ec}}
+
+/* «остров» вместо длинной шапки: чёрная капсула с логотипом по центру сверху, ведёт на главную */
+.notch{position:fixed;z-index:50;top:14px;left:50%;transform:translateX(-50%)}
+.notch a{display:flex;align-items:center;justify-content:center;width:clamp(160px,15vw,190px);height:52px;border-radius:999px;background:radial-gradient(70% 90% at 20% 0%,rgba(255,255,255,.26),transparent 70%),linear-gradient(140deg,rgba(255,255,255,.16),rgba(255,255,255,.03) 45%,rgba(255,255,255,.08)),rgba(18,18,20,.66);-webkit-backdrop-filter:blur(22px) saturate(1.7);backdrop-filter:blur(22px) saturate(1.7);box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 0 0 1px rgba(255,255,255,.14),inset 0 -10px 18px -10px rgba(255,255,255,.14),0 12px 28px -10px rgba(0,0,0,.5);transition:transform .8s cubic-bezier(.22,1,.36,1),box-shadow .8s cubic-bezier(.22,1,.36,1);will-change:transform}
+.notch i{display:block;width:98px;height:32px;background:var(--fg);-webkit-mask:url(../img/orien-ink-clean.png) center/contain no-repeat;mask:url(../img/orien-ink-clean.png) center/contain no-repeat;transform:translateY(9%)}
+@media (hover:hover){.notch a:hover{transform:scale(1.09)}}
+.notch a:active{transform:scale(.96);transition-duration:.25s}
+.notch a:focus-visible{outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.notch a{transition:none}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.notch a{background:#111}}
+
+/* прайс услуг: карточки как у пакетов */
+.scs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;align-items:stretch}
+.sc{display:flex;flex-direction:column;padding:clamp(22px,2.4vw,32px);border-radius:28px;background:rgba(255,255,255,.55);box-shadow:0 0 0 1px rgba(12,12,12,.12);color:#0c0c0c}
+.sc h3{font:800 clamp(18px,1.55vw,23px)/1.15 'UB';letter-spacing:.01em;text-transform:uppercase;min-height:2.3em}@media (max-width:760px){.sc h3{min-height:0}}
+.sc .sub{margin-top:8px;font-size:16px;line-height:1.35;color:rgba(12,12,12,.7)}
+.sc .tp{margin-top:16px;font:800 clamp(26px,2.3vw,34px)/1 'UB';letter-spacing:-.01em;white-space:nowrap}
+.sc .tp small{font:500 16px 'GL';letter-spacing:0;margin-right:4px;vertical-align:top}
+.sc .per{display:block;min-height:2.8em;margin-top:10px;font-style:normal;font-size:15px;line-height:1.4;color:rgba(12,12,12,.7)}
+.sc .lst{margin:22px 0 26px;padding:0;list-style:none;border-top:1px solid rgba(12,12,12,.18)}
+.sc .lst li{display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-bottom:1px solid rgba(12,12,12,.18);font-size:16px;font-weight:500;line-height:1.4}
+.sc .lst li::before{content:"";flex:none;width:6px;height:6px;margin-top:.55em;border-radius:50%;background:var(--ac)}
+.sc .pill{margin-top:auto;align-self:stretch;justify-content:space-between;background:#0c0c0c;color:#f4f1ec}
+.sc .pill.red{background:var(--ac);color:#fff}
+.sc.dark{background:linear-gradient(160deg,#1a1a1a,#0c0c0c);color:var(--fg);box-shadow:0 0 0 1px rgba(229,52,43,.35),0 30px 60px -30px rgba(229,52,43,.35)}
+.sc.dark .sub,.sc.dark .per{color:rgba(244,241,236,.8)}
+.sc.dark .lst,.sc.dark .lst li{border-color:rgba(244,241,236,.18)}
+
+/* окно «спасибо» после отправки заявки */
+.okv{display:grid;justify-items:center;gap:12px;padding:8px 4px;text-align:center;opacity:0;transform:translateY(14px) scale(.97);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.show>.okv{opacity:1;transform:none}
+.okc{width:88px;height:88px;margin-bottom:6px;overflow:visible;filter:drop-shadow(0 0 26px rgba(229,52,43,.6))}
+.okc circle{fill:rgba(229,52,43,.14);stroke:#e5342b;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:221;stroke-dashoffset:221;transform:rotate(-90deg);transform-origin:40px 40px}
+.okc path{fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60}
+.show .okc circle{animation:okd .85s .1s cubic-bezier(.65,0,.35,1) forwards}
+.show .okc path{animation:okd2 .5s .75s cubic-bezier(.65,0,.35,1) forwards}
+@keyframes okd{to{stroke-dashoffset:0}}@keyframes okd2{to{stroke-dashoffset:0}}
+.okv h3{font:800 clamp(20px,2.2vw,28px)/1.1 'UB';letter-spacing:.02em;text-transform:uppercase;color:#f4f1ec}
+.okv p{max-width:20em;font-size:17px;line-height:1.5;color:rgba(244,241,236,.82)}
+@media (prefers-reduced-motion:reduce){.okv{transition:none;transform:none}.okc circle,.okc path{animation:none!important;stroke-dashoffset:0}}
+
+.lead.leave>*:not(.okv){opacity:0;transform:translateY(-8px);transition:opacity .35s ease,transform .35s ease;pointer-events:none}
+.lead.sent>*:not(.okv){display:none}.lead.sent{align-content:center}
+
+/* кнопки «Оставить заявку»: тихий блик раз в несколько секунд, подъём и свечение при наведении, нажатие */
+.lead .pill{position:relative;overflow:hidden;isolation:isolate;transition:background .4s cubic-bezier(.22,.8,.2,1),transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s cubic-bezier(.22,1,.36,1)}
+.lead .pill::after{content:"";position:absolute;top:0;bottom:0;left:0;width:60%;z-index:-1;pointer-events:none;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.34) 50%,transparent 70%);transform:translateX(-130%) skewX(-12deg);animation:btnsheen 6.5s cubic-bezier(.4,0,.2,1) 1.8s infinite}
+@keyframes btnsheen{0%{transform:translateX(-130%) skewX(-12deg)}22%,100%{transform:translateX(260%) skewX(-12deg)}}
+@media (hover:hover){.lead .pill:hover{transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(229,52,43,.75)}}
+.lead .pill:active{transform:scale(.97);transition-duration:.15s}
+@media (prefers-reduced-motion:reduce){.lead .pill::after{animation:none;display:none}.lead .pill:hover,.lead .pill:active{transform:none}}
+
+/* примеры работ на главной: три кадра в ряд */
+.wk-h{margin-top:clamp(64px,8vw,120px)}
+.wks{display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,64px);margin-top:clamp(24px,3vw,40px)}
+.wk{display:grid;justify-items:center;align-content:start;gap:20px;width:clamp(200px,19vw,270px);color:#0c0c0c;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.wk b{font-size:19px;font-weight:600;text-align:center}
+.wk img{display:block;width:100%;height:auto;border-radius:clamp(16px,2vw,26px);background:#16181b;box-shadow:0 0 0 1px rgba(12,12,12,.12),0 30px 60px -34px rgba(0,0,0,.6)}
+@media (hover:hover){.wk:hover{transform:translateY(-6px)}}
+@media (max-width:700px){.wks{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;margin-left:calc(var(--pad)*-1);margin-right:calc(var(--pad)*-1);padding:0 var(--pad) 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.wks::-webkit-scrollbar{display:none}.wk{flex:none;width:62vw;max-width:280px;scroll-snap-align:start}}
+@media (prefers-reduced-motion:reduce){.wk{transition:none}}
+.sec .wk-h,h2.wk-h{margin-top:clamp(70px,8vw,120px)!important}
