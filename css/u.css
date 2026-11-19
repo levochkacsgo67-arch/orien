@@ -165,3 +165,16 @@ html.lite .md:not(.mi){-webkit-backdrop-filter:none!important;backdrop-filter:no
 html.lite .hbtn .pill::after,html.lite .tbtn .pill::after,html.lite .cta .ctl .pill::after,html.lite .md .pill::after,html.lite .lead .pill::after{display:none!important}
 html.lite .hdown i{animation:none}
 html.lite .grain{display:none}
+/* телефон: примеры работ рядом в ряд (как на главной), листаются вбок */
+@media (max-width:760px){
+.grps{flex-wrap:nowrap;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(var(--pad)*-1);padding:0 var(--pad) 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.grps::-webkit-scrollbar{display:none}
+.grps .grp,.grps .grp:has(.ph),.grps .grp:has(.lg){flex:none;scroll-snap-align:start;width:min(43vw,200px)}
+.grps .grp:has(.ad){width:min(52vw,220px)}
+.grps .shots,.grps .shots.ph,.grps .shots.lg,.grps .shots.ad{display:block;margin:0;padding:0;overflow:visible;width:100%}
+.grps .shots img,.grps .shots.ph img,.grps .shots.lg img,.grps .shots.ad img{width:100%;max-width:none}
+.grps .gh{min-height:2.8em;align-items:flex-end;margin-bottom:12px}
+.grps .gh b{font-size:15px;line-height:1.25}
+}
+@media (max-width:480px){.hero h1{font-size:clamp(28px,8.4vw,40px)}}
+@media (max-width:760px){.grps{scroll-padding-inline:var(--pad)}}
