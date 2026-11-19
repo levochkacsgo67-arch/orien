@@ -92,7 +92,7 @@ const text=lines.join("\n");
 if(!LEAD_URL)return;
 goal("lead_submit");// пока только визуал: отправка будет позже
 const btn=f.querySelector("button[type=submit]");btn.disabled=true;
-try{const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),8000);const r=await fetch(LEAD_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text}),signal:ac.signal});clearTimeout(tm);if(!r.ok)throw 0;
+try{const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),8000);const r=await fetch(LEAD_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text,hp:f.site.value}),signal:ac.signal});clearTimeout(tm);if(!r.ok)throw 0;
 const sentWay=w;f.reset();badAgree(false);w="";way.querySelectorAll("button").forEach(x=>x.setAttribute("aria-checked","false"));wtg.hidden=wph.hidden=true;
 f.querySelector(".selv").textContent="Выберите услугу";f.querySelector("#svc").classList.remove("has");
 f.style.height=f.getBoundingClientRect().height+"px";f.classList.add("leave");
