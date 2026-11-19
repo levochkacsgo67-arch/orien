@@ -17,7 +17,7 @@
     '<div class="mf mph" hidden style="margin-bottom:12px"><input name="pm" type="tel" inputmode="tel" maxlength="20" placeholder="+7 (___) ___-__-__" aria-label="Номер телефона"><input name="nm" maxlength="60" placeholder="Как к вам обращаться" aria-label="Как к вам обращаться"></div>'+
     '<input name="l" maxlength="500" placeholder="Комментарий (необязательно)" aria-label="Комментарий" style="margin-bottom:12px">'+
     '<label class="ma" style="margin-bottom:12px"><input type="checkbox" name="ok"><span>Согласен на <a href="../legal/consent.html" target="_blank" rel="noopener">обработку персональных данных</a></span></label>'+
-    '<input class="hpf" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">'+
+    '<input class="hpf" name="hpx" tabindex="-1" autocomplete="off" aria-hidden="true">'+
     '<button class="pill" type="submit"><b>Отправить заявку</b> <span>→</span></button></form>';
   }
   // оживляет форму внутри root; у каждой формы своё состояние
@@ -62,7 +62,7 @@
       if(!LEAD_URL)return;
       var btn=f.querySelector("button[type=submit]");btn.disabled=true;
       var ac=new AbortController(),tm=setTimeout(function(){ac.abort()},8000);
-      fetch(LEAD_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:lines.join("\n"),hp:f.site.value}),signal:ac.signal})
+      fetch(LEAD_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:lines.join("\n"),hp:f.hpx.value}),signal:ac.signal})
         .then(function(r){clearTimeout(tm);if(!r.ok)throw 0;thanks()})
         .catch(function(){clearTimeout(tm);btn.disabled=false;location.href="https://t.me/ceoorien?text="+encodeURIComponent("Здравствуйте! Заявка с сайта.\n"+lines.join("\n"))});
     });

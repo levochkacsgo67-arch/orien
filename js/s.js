@@ -1,6 +1,11 @@
 // плавная прокрутка всех страниц и плавный переход между страницами (шторка), без сторонних сервисов
 (function(){
   var d=document.documentElement,reduce=matchMedia("(prefers-reduced-motion: reduce)").matches,KEY="orien-t";
+  // слабое устройство: мало ядер или памяти, экономия трафика или прошлый замер в этой сессии
+  var nv=navigator,cores=nv.hardwareConcurrency||8,mem=nv.deviceMemory||8,save=!!(nv.connection&&nv.connection.saveData),stored=null;
+  try{stored=sessionStorage.getItem("orien-lite")}catch(e){}
+  var weak=cores<=4||mem<=2||save;
+  if(stored==="1"||(stored===null&&(cores<=2||mem<=1||save)))d.classList.add("lite");
   var base=document.currentScript?document.currentScript.src:"",STAR=base?new URL("../img/chrome-star.webp",base).href:"";
   new Image().src=STAR; // звезда прогружается заранее
   var st=document.createElement("style");
@@ -20,6 +25,7 @@
     'html.tload #tc .tcs{animation:tcin 1.2s cubic-bezier(.22,1,.36,1) both}@keyframes tcin{from{opacity:0;transform:translate(-50%,-50%) scale(.88)}}'+
     'html.tload #tc .tcb{opacity:1}#tc .tcb u{display:block;height:100%;background:linear-gradient(90deg,#e5342b,#fff);transform:scaleX(0);transform-origin:left;transition:transform .25s linear}'+
     'html.tload #tc i{opacity:1;animation:tcsl 1.7s cubic-bezier(.45,0,.25,1) .3s infinite}@keyframes tcsl{0%{background-position:100% 0}65%,100%{background-position:0 0}}'+
+    'html.lite #tc i,html.lite #tc .tcs::before{display:none}html.lite #tc,html.lite.tout #tc,html.lite.tlift #tc{transition-duration:.25s}'+
     'html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}.lenis.lenis-stopped{overflow:hidden}.lenis.lenis-scrolling iframe{pointer-events:none}';
   document.head.appendChild(st);
   var tc=document.createElement("div");tc.id="tc";tc.setAttribute("aria-hidden","true");
@@ -28,7 +34,7 @@
   // пришли с другой страницы нашего сайта: шторка уже закрыта, плавно открываем
   var loader=false,isMain=/(^|\/)(index\.html)?$/.test(location.pathname);
   try{if(sessionStorage.getItem(KEY)){sessionStorage.removeItem(KEY);d.classList.add("tin")}
-    else if(isMain&&!reduce&&!sessionStorage.getItem("orien-seen")){sessionStorage.setItem("orien-seen","1");d.classList.add("tin","tload");loader=true}}catch(e){}
+    else if(isMain&&!reduce&&!weak&&stored!=="1"&&!sessionStorage.getItem("orien-seen")){sessionStorage.setItem("orien-seen","1");d.classList.add("tin","tload");loader=true}}catch(e){}
   function lift(){if(!d.classList.contains("tin"))return;d.classList.add("tlift");d.classList.remove("tin","tload");setTimeout(function(){d.classList.remove("tlift")},1200)}
   if(loader){
     // как будто страница загружается: звезда, бегущий свет и полоса прогресса; только при первом заходе за сессию, не короче 1,5 с
@@ -43,16 +49,27 @@
   addEventListener("pageshow",function(e){if(e.persisted){d.classList.add("tlift");d.classList.remove("tout","tin");setTimeout(function(){d.classList.remove("tlift")},1200)}});
   // плавная прокрутка
   var lenis=null;
-  if(window.Lenis&&!reduce){
+  if(window.Lenis&&!reduce&&!d.classList.contains("lite")&&matchMedia("(hover:hover) and (pointer:fine)").matches){
     lenis=new Lenis({duration:1.1,easing:function(t){return 1-Math.pow(1-t,4)}});
     (function raf(t){lenis.raf(t);requestAnimationFrame(raf)})(performance.now());
     window.__lenis=lenis;
   }
+  // замер плавности: если кадры долго рисуются, включаем лёгкий режим (без размытия и бегущих эффектов) и помним это в сессии
+  if(stored===null&&!d.classList.contains("lite")){
+    addEventListener("load",function(){setTimeout(function(){
+      var n=0,t0=0,last=0,bad=0;
+      (function f(t){if(!t0)t0=t;else{n++;if(t-last>40)bad++}last=t;
+        if(t-t0<1500)requestAnimationFrame(f);
+        else{var slow=n>10&&((t-t0)/n>30||bad/n>.3);try{sessionStorage.setItem("orien-lite",slow?"1":"0")}catch(e){}if(slow)d.classList.add("lite")}})(performance.now());
+    },1200)});
+  }
+  var going=false;
   function go(href){
+    if(going)return;going=true;
     if(reduce){location.href=href;return}
     try{sessionStorage.setItem(KEY,"1")}catch(e){}
     d.classList.add("tout");
-    setTimeout(function(){location.href=href},1000);
+    setTimeout(function(){location.href=href},d.classList.contains("lite")?450:1000);
   }
   document.addEventListener("click",function(e){
     var a=e.target.closest&&e.target.closest("a[href]");

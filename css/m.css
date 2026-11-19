@@ -78,3 +78,10 @@ body.mlock{overflow:hidden}
 .hbtn .pill:active,.tbtn .pill:active,.cta .ctl .pill:active,.md .pill:active{transform:scale(.97);transition-duration:.15s}
 @media (prefers-reduced-motion:reduce){.hbtn .pill::after,.tbtn .pill::after,.cta .ctl .pill::after,.md .pill::after{animation:none;display:none}.hbtn .pill:hover,.tbtn .pill:hover,.cta .ctl .pill:hover,.md .pill:hover,.hbtn .pill:active,.tbtn .pill:active,.cta .ctl .pill:active,.md .pill:active{transform:none}}
 .hpf{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+
+/* лёгкий режим для слабых устройств: без размытия фона и бегущих эффектов */
+html.lite .notch a{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:rgba(20,20,22,.94)!important;will-change:auto}
+html.lite .md:not(.mi){-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:linear-gradient(160deg,#232124,#141415)!important}
+html.lite .hbtn .pill::after,html.lite .tbtn .pill::after,html.lite .cta .ctl .pill::after,html.lite .md .pill::after,html.lite .lead .pill::after{display:none!important}
+html.lite .hdown i{animation:none}
+html.lite .grain{display:none}

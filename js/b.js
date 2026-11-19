@@ -92,7 +92,7 @@ const text=lines.join("\n");
 if(!LEAD_URL)return;
 goal("lead_submit");// пока только визуал: отправка будет позже
 const btn=f.querySelector("button[type=submit]");btn.disabled=true;
-try{const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),8000);const r=await fetch(LEAD_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text,hp:f.site.value}),signal:ac.signal});clearTimeout(tm);if(!r.ok)throw 0;
+try{const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),8000);const r=await fetch(LEAD_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text,hp:f.hpx.value}),signal:ac.signal});clearTimeout(tm);if(!r.ok)throw 0;
 const sentWay=w;f.reset();badAgree(false);w="";way.querySelectorAll("button").forEach(x=>x.setAttribute("aria-checked","false"));wtg.hidden=wph.hidden=true;
 f.querySelector(".selv").textContent="Выберите услугу";f.querySelector("#svc").classList.remove("has");
 f.style.height=f.getBoundingClientRect().height+"px";f.classList.add("leave");
@@ -129,7 +129,7 @@ fit();addEventListener("resize",fit);addEventListener("orientationchange",()=>se
 (()=>{const root=document.documentElement;
 if("IntersectionObserver"in window){const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle("off",!e.isIntersecting)),{rootMargin:"60px"});
 document.querySelectorAll(".hero,.contact").forEach(e=>io.observe(e))}
-if(!root.classList.contains("lite")&&!/[?&]nolite/.test(location.search)){setTimeout(()=>{let n=0,t0=0,last=0,bad=0;const f=t=>{if(!t0)t0=t;else{n++;if(t-last>40)bad++}last=t;if(t-t0<1500)requestAnimationFrame(f);else if(n>10&&((t-t0)/n>30||bad/n>.3))root.classList.add("lite")};requestAnimationFrame(f)},2500)}})();
+if(/[?&]nolite/.test(location.search))root.classList.remove("lite")})();
 // кнопки «Оставить заявку» в прайсе и переход со страниц услуг: сразу выбирают услугу в форме
 (()=>{const NAMES={sajt:"Сайт",app:"Приложение в Telegram",ads:"Реклама",logo:"Логотип"};
 const pick=n=>{const b=document.querySelector('#svc .selm button[data-v="'+n+'"]');if(b)b.click()};
