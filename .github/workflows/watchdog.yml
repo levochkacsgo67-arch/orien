@@ -17,6 +17,6 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - run: cd .github/scripts && python3 watchdog.py
         env:
-          TG_TOKEN: ${{ secrets.TG_TOKEN }}
-          TG_CHAT: ${{ vars.TG_CHAT }}
+          PANEL_URL: ${{ vars.PANEL_URL }}
+          PANEL_INGEST_KEY: ${{ secrets.PANEL_INGEST_KEY }}
           REPORT: ${{ inputs.report }}

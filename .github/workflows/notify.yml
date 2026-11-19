@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       text:
-        description: "Текст сообщения"
+        description: "Текст уведомления (первая строка - заголовок)"
         required: true
 permissions:
   contents: read
@@ -13,9 +13,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          curl -sS --fail -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendMessage" \
-            --data-urlencode "chat_id=${TG_CHAT}" --data-urlencode "text=${TEXT}"
+          python3 - <<'PY'
+          import json, os, urllib.request
+          t = os.environ["TEXT"]
+          title, _, rest = t.partition("\n")
+          rq = urllib.request.Request(os.environ["PANEL_URL"] + "/api/notify", method="POST",
+              data=json.dumps({"title": title[:80], "body": (rest.strip() or title)[:160]}).encode(),
+              headers={"Content-Type": "application/json", "X-Ingest-Key": os.environ["KEY"], "User-Agent": "ORIEN-notify"})
+          print(urllib.request.urlopen(rq, timeout=30).read().decode())
+          PY
         env:
-          TG_TOKEN: ${{ secrets.TG_TOKEN }}
-          TG_CHAT: ${{ vars.TG_CHAT }}
+          PANEL_URL: ${{ vars.PANEL_URL }}
+          KEY: ${{ secrets.PANEL_INGEST_KEY }}
           TEXT: ${{ inputs.text }}

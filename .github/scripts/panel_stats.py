@@ -7,7 +7,7 @@ GOALS = [("Переход в мессенджер", "680362933"), ("Клик п�
 
 
 def metrika(params):
-    q = urllib.parse.urlencode({"ids": COUNTER, "accuracy": "full", **params})
+    q = urllib.parse.urlencode({"ids": COUNTER, "accuracy": "full", "lang": "ru", **params})
     rq = urllib.request.Request("https://api-metrika.yandex.net/stat/v1/data?" + q, headers={"Authorization": "OAuth " + MT})
     with urllib.request.urlopen(rq, timeout=40) as r:
         return json.loads(r.read().decode())

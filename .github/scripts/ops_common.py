@@ -1,14 +1,18 @@
 import base64, gzip, json, os, time, urllib.parse, urllib.request
 
-TG = os.environ["TG_TOKEN"]
-CHAT = os.environ["TG_CHAT"]
+PANEL = os.environ.get("PANEL_URL", "")
+KEY = os.environ.get("PANEL_INGEST_KEY", "")
 
 
 def send(text):
-    body = urllib.parse.urlencode({"chat_id": CHAT, "text": text[:4000], "disable_web_page_preview": "true"}).encode()
-    with urllib.request.urlopen(f"https://api.telegram.org/bot{TG}/sendMessage", body, timeout=30) as r:
+    """Уведомление приходит в личную панель (приложение на экране «Домой»), а не в Telegram."""
+    title, _, rest = text.partition("\n")
+    body = json.dumps({"title": title[:80], "body": (rest.strip() or title)[:160]}).encode()
+    rq = urllib.request.Request(PANEL + "/api/notify", data=body, method="POST",
+                                headers={"Content-Type": "application/json", "X-Ingest-Key": KEY, "User-Agent": "ORIEN-ops"})
+    with urllib.request.urlopen(rq, timeout=30) as r:
         if not json.loads(r.read().decode()).get("ok"):
-            raise SystemExit("Telegram не принял сообщение")
+            print("Панель не смогла показать уведомление (нет подписанных устройств?)")
     time.sleep(1)
 
 
