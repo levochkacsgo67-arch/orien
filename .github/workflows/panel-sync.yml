@@ -1,0 +1,29 @@
+name: panel-sync
+on:
+  schedule:
+    - cron: "5 */3 * * *"   # раз в 3 часа
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Данные Метрики
+        run: python3 .github/scripts/panel_stats.py
+        env:
+          METRIKA_TOKEN: ${{ secrets.METRIKA_TOKEN }}
+          PANEL_URL: ${{ vars.PANEL_URL }}
+          PANEL_INGEST_KEY: ${{ secrets.PANEL_INGEST_KEY }}
+      - name: Проверка кнопок и сайта
+        if: always()
+        run: |
+          python3 -m pip install -q playwright
+          python3 -m playwright install --with-deps chromium
+          python3 .github/scripts/panel_health.py
+        env:
+          PANEL_URL: ${{ vars.PANEL_URL }}
+          PANEL_INGEST_KEY: ${{ secrets.PANEL_INGEST_KEY }}
