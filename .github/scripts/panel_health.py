@@ -123,7 +123,7 @@ def run_page(browser, name, path):
             f.locator("#way button[data-w='WhatsApp']").click()
             f.locator("input[name=pm]").fill("9990000000"); f.locator("input[name=nm]").fill("Проверка")
             f.locator("input[name=ok]").check(force=True)
-            f.evaluate("el=>{el.site.value='healthcheck'}")
+            f.evaluate("el=>{el.hpx.value='healthcheck'}")
             f.locator("button[type=submit]").click()
             page.wait_for_selector("#lead.sent", timeout=9000)
             return "показывает «Спасибо за заявку»"
@@ -145,7 +145,7 @@ def run_page(browser, name, path):
             m.locator("button[data-w='MAX']").click()
             m.locator("input[name=pm]").fill("9990000000"); m.locator("input[name=nm]").fill("Проверка")
             m.locator("input[name=ok]").check(force=True)
-            m.locator("form").evaluate("el=>{el.site.value='healthcheck'}")
+            m.locator("form").evaluate("el=>{el.hpx.value='healthcheck'}")
             m.locator("button[type=submit]").click()
             page.wait_for_selector(".mo .md.sent", timeout=9000)
             page.locator(".mo .mx").click(); page.wait_for_timeout(1000)
@@ -159,7 +159,7 @@ def run_page(browser, name, path):
             box.locator("button[data-w='Telegram']").click()
             box.locator("input[name=u]").fill("@healthcheck_user"); box.locator("input[name=pt]").fill("9990000000")
             box.locator("input[name=ok]").check(force=True)
-            box.locator("form").evaluate("el=>{el.site.value='healthcheck'}")
+            box.locator("form").evaluate("el=>{el.hpx.value='healthcheck'}")
             box.locator("button[type=submit]").click()
             page.wait_for_selector("#ctf .md.sent", timeout=9000)
             return "форма внизу отправляет и показывает «Спасибо»"
