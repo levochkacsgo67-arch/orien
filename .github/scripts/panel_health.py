@@ -60,7 +60,7 @@ check(G, "Приём заявок отвечает", worker)
 def bot():
     r = json.loads(urllib.request.urlopen(urllib.request.Request(LEADS + "/health", headers={"User-Agent": "ORIEN-panel-check"}), timeout=25).read())
     assert r.get("ok"), "бот Telegram не отвечает"
-check(G, "Бот Telegram на связи (заявки дойдут)", bot)
+check(G, "Бот Telegram на связи (приходят коды входа)", bot)
 
 # ---------- браузер ----------
 INIT = "try{sessionStorage.setItem('orien-seen','1')}catch(e){}"
