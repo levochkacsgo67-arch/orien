@@ -115,7 +115,7 @@ def run_page(browser, name, path):
             assert ok, "переход не произошёл"
             return "«Подробнее» ведёт на " + href
         check(g, "Кнопка «Подробнее» открывает страницу (со звездой)", more)
-        check(g, "Блок «Примеры работ»: три кадра", lambda: page.locator(".wks .wk").count() == 3 or (_ for _ in ()).throw(AssertionError("кадров не три")))
+        check(g, "Блок «Примеры работ»: пять сайтов и два приложения", lambda: page.locator(".wks .wk:not([aria-hidden])").count() == 7 or (_ for _ in ()).throw(AssertionError("кадров не семь")))
         def form():
             f = page.locator("#lead")
             f.scroll_into_view_if_needed()
