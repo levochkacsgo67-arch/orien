@@ -755,3 +755,20 @@ h2,section[id],.hero{scroll-margin-top:96px}
 @media (min-width:701px){.wks.auto{-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}}
 /* окно cookie на телефоне: компактное, первая кнопка не закрыта */
 @media (max-width:640px){html.ck-on .hin{padding-bottom:150px}html.ck-on .hero{padding-bottom:150px}}
+
+/* прайс на главной, телефон: карточки услуг рядом, листаются вбок */
+@media (max-width:760px){
+.scs{display:flex;flex-wrap:nowrap;align-items:stretch;gap:12px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;margin:0 calc(var(--pad)*-1);padding:0 var(--pad) 10px;scroll-padding-inline:var(--pad);scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.scs::-webkit-scrollbar{display:none}
+.scs .sc{flex:none;width:min(80vw,310px);scroll-snap-align:start}
+}
+.swh{display:none}
+@media (max-width:760px){
+.swh{display:flex;align-items:center;justify-content:center;gap:10px;margin:2px 0 0;font:500 14px 'GL',sans-serif;color:rgba(12,12,12,.62);transition:opacity .4s ease,max-height .4s ease;max-height:30px}
+.swh i{display:inline-block;width:22px;height:10px;position:relative;animation:swh 1.6s ease-in-out infinite}
+.swh i::before{content:"";position:absolute;left:0;right:3px;top:4px;height:2px;border-radius:2px;background:currentColor}
+.swh i::after{content:"";position:absolute;right:0;top:1px;width:7px;height:7px;border-top:2px solid currentColor;border-right:2px solid currentColor;transform:rotate(45deg)}
+@keyframes swh{0%,100%{transform:translateX(0)}50%{transform:translateX(7px)}}
+.swh.gone{opacity:0;max-height:0;margin:0;overflow:hidden}
+}
+@media (prefers-reduced-motion:reduce){.swh i{animation:none}}

@@ -93,6 +93,16 @@
       if(vis&&!document.hidden&&hold<t&&setW>0&&!(lb&&lb.classList.contains("on"))){pos+=dt*0.035;if(pos>=setW)pos-=setW;w.scrollLeft=pos}
       requestAnimationFrame(tick)})(performance.now());
   });
+  // подсказка «Листайте» под рядами, которые на телефоне листаются вбок
+  addEventListener("DOMContentLoaded",function(){
+    if(!matchMedia("(max-width:760px)").matches)return;
+    [].forEach.call(document.querySelectorAll(".tars,.steps,.scs"),function(row){
+      var h=document.createElement("div");h.className="swh";h.setAttribute("aria-hidden","true");h.innerHTML="<span>Листайте</span><i></i>";
+      row.insertAdjacentElement("afterend",h);
+      var done=function(){if(row.scrollLeft>24){h.classList.add("gone");row.removeEventListener("scroll",done)}};
+      row.addEventListener("scroll",done,{passive:true});
+    });
+  });
   var going=false,lenis=null;
   if(window.Lenis&&!reduce&&!d.classList.contains("lite")&&matchMedia("(hover:hover) and (pointer:fine)").matches){
     lenis=new Lenis({duration:1.1,easing:function(t){return 1-Math.pow(1-t,4)}});

@@ -291,3 +291,29 @@ body[data-s="app"] .grps{padding-left:0;padding-right:0}
 .hero:has(.hart) h1{max-width:calc(100% - min(41vw,720px) - 40px)}
 }
 @media (min-width:1100px){.hero:has(.hart) h1{font-size:clamp(38px,4.6vw,70px)}}
+
+/* пакеты на телефоне: рядом, листаются вбок */
+@media (max-width:760px){
+.tars{display:flex;flex-wrap:nowrap;align-items:stretch;gap:12px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;margin:0 calc(var(--pad)*-1);padding:0 var(--pad) 10px;scroll-padding-inline:var(--pad);scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.tars::-webkit-scrollbar{display:none}
+.tars .tar{flex:none;width:min(82vw,330px);scroll-snap-align:start}
+}
+
+/* «Как это проходит» на телефоне: карточки рядом, листаются вбок */
+@media (max-width:760px){
+.steps{display:flex;flex-wrap:nowrap;align-items:stretch;gap:12px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;margin:0 calc(var(--pad)*-1);padding:0 var(--pad) 10px;scroll-padding-inline:var(--pad);scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.steps::-webkit-scrollbar{display:none}
+.steps li{flex:none;width:min(72vw,280px);scroll-snap-align:start}
+}
+/* подсказка «листайте» под рядами (только телефон, исчезает после первого листания) */
+.swh{display:none}
+@media (max-width:760px){
+.swh{display:flex;align-items:center;justify-content:center;gap:10px;margin:2px 0 0;font:500 14px 'GL',sans-serif;color:rgba(12,12,12,.62);transition:opacity .4s ease,max-height .4s ease;max-height:30px}
+.band.dark .swh{color:rgba(244,241,236,.7)}
+.swh i{display:inline-block;width:22px;height:10px;position:relative;animation:swh 1.6s ease-in-out infinite}
+.swh i::before{content:"";position:absolute;left:0;right:3px;top:4px;height:2px;border-radius:2px;background:currentColor}
+.swh i::after{content:"";position:absolute;right:0;top:1px;width:7px;height:7px;border-top:2px solid currentColor;border-right:2px solid currentColor;transform:rotate(45deg)}
+@keyframes swh{0%,100%{transform:translateX(0)}50%{transform:translateX(7px)}}
+.swh.gone{opacity:0;max-height:0;margin:0;overflow:hidden}
+}
+@media (prefers-reduced-motion:reduce){.swh i{animation:none}}
