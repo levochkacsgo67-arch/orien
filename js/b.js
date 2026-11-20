@@ -29,12 +29,12 @@ const fmt=n=>n.toLocaleString("ru-RU").replace(/ | /g," ");
 const W=n=>`img/works/${n}`;
 const SPEED=55;
 const PRICES=[
-{name:"Сайт",slug:"sajt",sub:"Три пакета на выбор",items:["Информационный сайт, сайт с заявками или каталог","Кнопки связи: Telegram, MAX, WhatsApp","Первая версия простого сайта через 2 дня"],price:9990,note:"Первая версия простого сайта через 2 дня, оплата после согласования",short:"Сайт под ваше дело: от простой страницы с кнопками связи до каталога с поиском и онлайн-помощником. Три пакета на выбор."},
-{name:"Приложение в Telegram",slug:"prilozhenie-telegram",sub:"Три пакета на выбор",items:["Каталог, заявки и онлайн-запись","Напоминания клиентам в Telegram","Открывается прямо в Telegram"],price:11990,note:"Открывается прямо в Telegram, установка не нужна",short:"Запись, заявки и каталог прямо в Telegram. Клиентам ничего не нужно скачивать."},
+{name:"Сайт",slug:"sajt",sub:"Три пакета на выбор",items:["Информационный сайт, сайт с заявками или каталог","Кнопки связи: Telegram, MAX, WhatsApp","Свой адрес сайта: первый год входит в цену"],price:9990,note:"Простой сайт за 2 дня, сложнее - срок называем заранее. Оплата после согласования",short:"Сайт под ваше дело: от простой страницы с кнопками связи до каталога с поиском и онлайн-помощником. Три пакета на выбор."},
+{name:"Приложение в Telegram",slug:"prilozhenie-telegram",sub:"Три пакета на выбор",items:["Каталог, заявки и онлайн-запись","Напоминания клиентам в Telegram","Личный кабинет: сколько заявок и записей пришло"],price:11990,note:"Открывается прямо в Telegram, установка не нужна",short:"Запись, заявки и каталог прямо в Telegram. Клиентам ничего не нужно скачивать."},
 {name:"Реклама",slug:"reklama",sub:"ВКонтакте и Яндекс",items:["Картинки и тексты для рекламы","Выбор, кому показывать: город, возраст, интересы","Понятный расчёт: сколько стоит одна заявка"],price:6990,note:"Деньги на показ рекламы оплачиваются отдельно",short:"Картинки, тексты и настройка показа во ВКонтакте и в Яндексе."},
-{name:"Логотип",slug:"logotip",sub:"Три варианта на выбор",items:["Три варианта на выбор и доработка","Светлая и тёмная версии","Памятка по стилю"],price:10990,note:"Знак и фирменный стиль",short:"Знак, по которому вас узнают, и памятка, как им пользоваться. Три варианта на выбор."}];
+{name:"Логотип",slug:"logotip",sub:"Три варианта на выбор",items:["Доработка выбранного варианта до утверждения","Светлая и тёмная версии","Памятка по стилю"],price:10990,note:"Знак и фирменный стиль",short:"Знак, по которому вас узнают, и памятка, как им пользоваться. Три варианта на выбор."}];
 (()=>{const box=document.getElementById("prows");if(!box)return;if(box.children.length)return;// карточки уже есть в HTML (для поисковых роботов): seo-cards.py
-box.innerHTML=PRICES.map((p,i)=>`<article class="sc${i===0?" dark":""}"><h3>${p.name}</h3><p class="sub">${p.sub}</p><div class="tp"><small>от</small> ${fmt(p.price)} ₽</div><em class="per">${p.note}</em><ul class="lst">${p.items.map(t=>`<li>${t}</li>`).join("")}</ul><a class="pill ${i===0?"red":"ink"}" href="uslugi/${p.slug}.html">Подробнее <span>→</span></a></article>`).join("")})();
+box.innerHTML=PRICES.map((p,i)=>`<article class="sc"><h3>${p.name}</h3><p class="sub">${p.sub}</p><div class="tp"><small>от</small> ${fmt(p.price)} ₽</div><em class="per">${p.note}</em><ul class="lst">${p.items.map(t=>`<li>${t}</li>`).join("")}</ul><a class="pill ink" href="uslugi/${p.slug}.html">Подробнее <span>→</span></a></article>`).join("")})();
 // калькулятор
 (()=>{if(!document.getElementById("chips"))return;const C=[{n:"Сайт",p:9990,on:1},{n:"Приложение в Telegram",p:11990},{n:"Запуск рекламных кампаний",p:6990,t:"без бюджета"},{n:"Логотип",p:10990},{n:"Оформление карточек в 2ГИС и Яндекс Картах",p:1990},{n:"Ведение рекламных кампаний",p:4990,m:1,t:"без бюджета"},{n:"Техническая поддержка сайта",p:990,m:1,t:"до 3 правок"}];
 const chips=document.getElementById("chips"),sum=document.getElementById("cSum"),mo=document.getElementById("cMo"),btn=document.getElementById("cBtn");let shown=0,raf=0;
@@ -135,3 +135,21 @@ if(/[?&]nolite/.test(location.search))root.classList.remove("lite")})();
 const pick=n=>{const b=document.querySelector('#svc .selm button[data-v="'+n+'"]');if(b)b.click()};
 document.addEventListener("click",e=>{const a=e.target.closest("a[data-svc]");if(a)pick(a.dataset.svc)});
 try{const s=new URLSearchParams(location.search).get("s");if(s&&NAMES[s])pick(NAMES[s])}catch(_){}})();
+
+// примеры работ на главной: лента сама едет по кругу; рукой тоже можно листать, после касания пауза
+(()=>{const w=document.querySelector(".wks");if(!w||reduce||document.documentElement.classList.contains("lite"))return;
+if(!matchMedia("(hover:hover) and (pointer:fine)").matches||innerWidth<=900)return;// на телефоне и планшете лента только листается рукой
+const first=[...w.children];if(first.length<2)return;
+const copies=[];for(let k=0;k<2;k++)first.forEach(e=>{const c=e.cloneNode(true);c.setAttribute("aria-hidden","true");c.tabIndex=-1;w.append(c);copies.push(c)});
+w.classList.add("auto");
+let pos=0,paused=0,vis=true,last=0,loop=0;
+const calc=()=>{loop=copies[0].offsetLeft-first[0].offsetLeft};calc();addEventListener("resize",calc);addEventListener("load",calc);
+new IntersectionObserver(es=>{vis=es[0].isIntersecting}).observe(w);
+const hold=ms=>{paused=performance.now()+ms;pos=w.scrollLeft};
+["pointerdown","touchstart","wheel"].forEach(n=>w.addEventListener(n,()=>hold(3500),{passive:true}));
+w.addEventListener("pointerenter",e=>{if(e.pointerType==="mouse")paused=Infinity});w.addEventListener("pointerleave",()=>{paused=performance.now()+300;pos=w.scrollLeft});
+w.addEventListener("scroll",()=>{if(paused>performance.now())pos=w.scrollLeft},{passive:true});
+const tick=t=>{const dt=Math.min(64,t-last);last=t;
+if(vis&&!document.hidden&&paused<t&&loop>0){pos+=dt*0.035;if(pos>=loop)pos-=loop;w.scrollLeft=pos}
+else if(loop>0&&w.scrollLeft>=loop)w.scrollLeft-=loop;
+requestAnimationFrame(tick)};requestAnimationFrame(t=>{last=t;tick(t)})})();

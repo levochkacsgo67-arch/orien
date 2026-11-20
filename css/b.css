@@ -706,8 +706,8 @@ a,button,[role=button],input,select,textarea,label,summary{-webkit-tap-highlight
 .lead .pill::after{content:"";position:absolute;top:0;bottom:0;left:0;width:60%;z-index:-1;pointer-events:none;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.34) 50%,transparent 70%);transform:translateX(-130%) skewX(-12deg);animation:btnsheen 6.5s cubic-bezier(.4,0,.2,1) 1.8s infinite}
 @keyframes btnsheen{0%{transform:translateX(-130%) skewX(-12deg)}22%,100%{transform:translateX(260%) skewX(-12deg)}}
 @media (hover:hover){.lead .pill:hover{transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(229,52,43,.75)}}
-.lead .pill:active{transform:scale(.97);transition-duration:.15s}
-@media (prefers-reduced-motion:reduce){.lead .pill::after{animation:none;display:none}.lead .pill:hover,.lead .pill:active{transform:none}}
+@media (hover:hover){.lead .pill:active{transform:scale(.97);transition-duration:.15s}}
+@media (prefers-reduced-motion:reduce){.lead .pill::after{animation:none;display:none}}
 
 /* примеры работ на главной: три кадра в ряд */
 .wk-h{margin-top:clamp(64px,8vw,120px)}
@@ -733,3 +733,25 @@ html.lite .grain{display:none}
 html,body{touch-action:pan-x pan-y;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .grps,.wks{overflow-y:hidden!important;overscroll-behavior-x:contain}
 .grps *,.wks *{-webkit-user-drag:none}
+
+/* остров: плотнее, прячется при прокрутке вниз; заголовки не прячутся под ним */
+.notch{transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .3s ease}
+html.nh .notch{transform:translate(-50%,-160%);opacity:0;pointer-events:none}
+.notch a{background:radial-gradient(70% 90% at 20% 0%,rgba(255,255,255,.2),transparent 70%),linear-gradient(140deg,rgba(255,255,255,.12),rgba(255,255,255,.02) 45%,rgba(255,255,255,.06)),rgba(14,14,16,.9)!important}
+h2,section[id],.hero{scroll-margin-top:96px}
+/* галочка согласия: видна на тёмном */
+.md input[type=checkbox],.lead input[type=checkbox]{box-shadow:inset 0 0 0 1.5px rgba(244,241,236,.6)!important;background-color:rgba(255,255,255,.06)!important}
+.md input[type=checkbox]:checked,.lead input[type=checkbox]:checked{background-color:var(--ac,#e5342b)!important;box-shadow:none!important;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5l3.2 3.2L13 5'/%3E%3C/svg%3E")!important}
+/* окно заявки: фон за ним темнее */
+.mo.on{background:rgba(8,8,10,.72)!important}
+
+/* карточки прайса одного вида; подзаголовок и подсказка на главной */
+.sc .pill,.sc .pill.ink{background:#0c0c0c;color:#f4f1ec}
+.hsub{margin-top:clamp(12px,1.4vw,20px);max-width:32em;font-size:clamp(15px,1.3vw,18px);line-height:1.5;color:rgba(255,255,255,.92);text-shadow:0 1px 14px rgba(0,0,0,.35)}
+/* лента примеров на главной: во всю ширину экрана, едет сама */
+.wks.auto{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;scroll-snap-type:none;gap:clamp(20px,3vw,48px);margin-left:calc(var(--pad)*-1);margin-right:calc(var(--pad)*-1);padding:0 var(--pad) 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.wks.auto::-webkit-scrollbar{display:none}
+.wks.auto .wk{flex:none}
+@media (min-width:701px){.wks.auto{-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}}
+/* окно cookie на телефоне: компактное, первая кнопка не закрыта */
+@media (max-width:640px){html.ck-on .hin{padding-bottom:150px}html.ck-on .hero{padding-bottom:150px}}

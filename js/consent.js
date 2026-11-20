@@ -17,11 +17,11 @@
     });
     try { Object.keys(localStorage).forEach(function (k) { if (k.indexOf("_ym") === 0) localStorage.removeItem(k); }); } catch (e) {}
   }
-  function hide() { box.hidden = true; if (back) { back.focus(); back = null; } }
+  function hide() { box.hidden = true; document.documentElement.classList.remove("ck-on"); if (back) { back.focus(); back = null; } }
   function build() {
     box = document.createElement("section");
     box.className = "ck"; box.hidden = true; box.setAttribute("aria-label", "Согласие на cookie");
-    box.innerHTML = '<p>Яндекс Метрика считает посещения и записывает действия на сайте. Включится, только если вы согласитесь. <a href="' + root + 'legal/cookies.html">Подробнее о cookie</a></p>' +
+    box.innerHTML = '<p>Яндекс Метрика считает посещения и записывает действия на сайте. <span class="ck-x">Включится, только если вы согласитесь.</span> <a href="' + root + 'legal/cookies.html">Подробнее о cookie</a></p>' +
       '<div class="ck-btns"><button type="button" data-v="denied">Отклонить</button><button type="button" data-v="granted">Принять</button></div>';
     box.addEventListener("click", function (e) {
       var v = e.target.getAttribute && e.target.getAttribute("data-v");
@@ -35,10 +35,10 @@
   }
   build();
   var c = read();
-  if (c === "granted") metrika(); else if (c !== "denied") box.hidden = false;
+  if (c === "granted") metrika(); else if (c !== "denied") { box.hidden = false; document.documentElement.classList.add("ck-on"); }
   document.addEventListener("click", function (e) {
     var b = e.target.closest && e.target.closest("[data-cookie-settings]");
     if (!b) return;
-    e.preventDefault(); back = b; box.hidden = false; box.querySelector("button").focus();
+    e.preventDefault(); back = b; box.hidden = false; document.documentElement.classList.add("ck-on"); box.querySelector("button").focus();
   });
 })();

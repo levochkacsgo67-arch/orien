@@ -75,8 +75,8 @@ body.mlock{overflow:hidden}
 .hbtn .pill::after,.tbtn .pill::after,.cta .ctl .pill::after,.md .pill::after{content:"";position:absolute;top:0;bottom:0;left:0;width:60%;z-index:-1;pointer-events:none;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.34) 50%,transparent 70%);transform:translateX(-130%) skewX(-12deg);animation:btnsheen 6.5s cubic-bezier(.4,0,.2,1) 1.8s infinite}
 @keyframes btnsheen{0%{transform:translateX(-130%) skewX(-12deg)}22%,100%{transform:translateX(260%) skewX(-12deg)}}
 @media (hover:hover){.hbtn .pill:hover,.tbtn .pill:hover,.cta .ctl .pill:hover,.md .pill:hover{transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(229,52,43,.75)}}
-.hbtn .pill:active,.tbtn .pill:active,.cta .ctl .pill:active,.md .pill:active{transform:scale(.97);transition-duration:.15s}
-@media (prefers-reduced-motion:reduce){.hbtn .pill::after,.tbtn .pill::after,.cta .ctl .pill::after,.md .pill::after{animation:none;display:none}.hbtn .pill:hover,.tbtn .pill:hover,.cta .ctl .pill:hover,.md .pill:hover,.hbtn .pill:active,.tbtn .pill:active,.cta .ctl .pill:active,.md .pill:active{transform:none}}
+@media (hover:hover){.hbtn .pill:active,.tbtn .pill:active,.cta .ctl .pill:active,.md .pill:active{transform:scale(.97);transition-duration:.15s}}
+@media (prefers-reduced-motion:reduce){.hbtn .pill::after,.tbtn .pill::after,.cta .ctl .pill::after,.md .pill::after{animation:none;display:none}}
 .hpf{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
 
 /* лёгкий режим для слабых устройств: без размытия фона и бегущих эффектов */
@@ -85,3 +85,8 @@ html.lite .md:not(.mi){-webkit-backdrop-filter:none!important;backdrop-filter:no
 html.lite .hbtn .pill::after,html.lite .tbtn .pill::after,html.lite .cta .ctl .pill::after,html.lite .md .pill::after,html.lite .lead .pill::after{display:none!important}
 html.lite .hdown i{animation:none}
 html.lite .grain{display:none}
+
+/* галочка согласия: видна на тёмном */
+.md input[type=checkbox]{box-shadow:inset 0 0 0 1.5px rgba(244,241,236,.6)!important;background-color:rgba(255,255,255,.06)!important}
+.md input[type=checkbox]:checked{background-color:#e5342b!important;box-shadow:none!important;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5l3.2 3.2L13 5'/%3E%3C/svg%3E")!important}
+.mo.on{background:rgba(8,8,10,.72)!important}

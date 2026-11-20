@@ -17,8 +17,8 @@
     'html.tout #tc{opacity:1;pointer-events:all}html.tin #tc{opacity:1;transition:none;pointer-events:all}'+
     '#tc .tcs{position:absolute;left:50%;top:50%;width:clamp(150px,20vw,260px);aspect-ratio:1;transform:translate(-50%,-50%) scale(.9);opacity:0}'+
     'html.tout #tc .tcs,html.tin #tc .tcs{transform:translate(-50%,-50%) scale(1);opacity:1}html.tin #tc .tcs{transition:none}'+
-    '#tc .tcs::before{content:"";position:absolute;inset:-60%;background:radial-gradient(closest-side,rgba(229,52,43,.3),transparent);pointer-events:none}'+
-    '#tc img{position:relative;display:block;width:100%;height:100%;object-fit:contain;filter:brightness(.5)}'+
+    '#tc .tcs::before{content:"";position:absolute;inset:-60%;background:radial-gradient(closest-side,rgba(229,52,43,.16),transparent);pointer-events:none}'+
+    '#tc img{position:relative;display:block;width:100%;height:100%;object-fit:contain;filter:brightness(.9)}'+
     '#tc i{position:absolute;inset:0;opacity:0;mix-blend-mode:screen;-webkit-mask:url('+STAR+') center/contain no-repeat;mask:url('+STAR+') center/contain no-repeat;background:linear-gradient(110deg,transparent 34%,rgba(255,255,255,1) 50%,transparent 66%) 100% 0/300% 100% no-repeat}'+
     'html.tout #tc i{opacity:1;animation:tcsw .55s cubic-bezier(.45,0,.25,1) .3s both}@keyframes tcsw{to{background-position:0 0}}'+
     '#tc .tcb{position:absolute;left:50%;top:calc(50% + clamp(75px,10vw,130px) + 38px);width:clamp(120px,14vw,180px);height:2px;margin-left:calc(clamp(120px,14vw,180px) / -2);background:rgba(244,241,236,.14);border-radius:2px;overflow:hidden;opacity:0;transition:opacity .4s}'+
@@ -52,6 +52,47 @@
   ["gesturestart","gesturechange","gestureend"].forEach(function(n){document.addEventListener(n,function(e){e.preventDefault()},{passive:false})});
   document.addEventListener("touchmove",function(e){if(e.touches&&e.touches.length>1&&e.cancelable)e.preventDefault()},{passive:false});
   var lastT=0;document.addEventListener("touchend",function(e){var t=Date.now();if(t-lastT<300&&e.cancelable&&!(e.target.closest&&e.target.closest("input,textarea,a,button,label")))e.preventDefault();lastT=t},{passive:false});
+  // остров прячется при прокрутке вниз и возвращается при прокрутке вверх
+  var ly=scrollY||0;
+  addEventListener("scroll",function(){var y=scrollY||0;
+    if(y>140&&y>ly+8)d.classList.add("nh");else if(y<ly-8||y<90)d.classList.remove("nh");ly=y},{passive:true});
+  // крупный просмотр примеров работ на страницах услуг: нажать на картинку, нажать ещё раз, чтобы закрыть
+  document.addEventListener("click",function(e){
+    var im=e.target.closest&&e.target.closest("#primery .shots img");
+    var lb=document.getElementById("lb");
+    if(im){
+      if(!lb){lb=document.createElement("div");lb.id="lb";lb.setAttribute("role","dialog");lb.setAttribute("aria-label","Крупный просмотр");lb.innerHTML='<img alt=""><button type="button" aria-label="Закрыть">\u00d7</button>';document.body.appendChild(lb)}
+      var big=lb.querySelector("img");big.src=im.currentSrc||im.src;big.alt=im.alt||"";lb.classList.toggle("lg",im.classList.contains("lg"));
+      requestAnimationFrame(function(){lb.classList.add("on")});
+      if(window.__lenis)window.__lenis.stop();d.style.overflow="hidden";e.preventDefault();return;
+    }
+    if(lb&&lb.classList.contains("on")&&e.target.closest("#lb")){lb.classList.remove("on");d.style.overflow="";if(window.__lenis&&!document.querySelector(".mo.on"))window.__lenis.start()}
+  });
+  document.addEventListener("keydown",function(e){var lb=document.getElementById("lb");if(e.key==="Escape"&&lb&&lb.classList.contains("on")){lb.classList.remove("on");d.style.overflow="";if(window.__lenis&&!document.querySelector(".mo.on"))window.__lenis.start()}});
+  // примеры работ на страницах услуг: на компьютере лента едет сама по кругу, на телефоне и планшете только листается рукой
+  addEventListener("DOMContentLoaded",function(){
+    var w=document.querySelector("#primery .grps");
+    if(true||!w||(document.body.getAttribute("data-s")==="app"||document.body.getAttribute("data-s")==="sajt")||reduce||d.classList.contains("lite")||!matchMedia("(min-width:901px) and (hover:hover) and (pointer:fine)").matches)return;
+    var first=[].slice.call(w.children);if(!first.length)return;
+    var cw=w.clientWidth,setW=0;
+    var calc=function(){var f=w.children[first.length];setW=f?f.offsetLeft-first[0].offsetLeft:0};
+    var need=2;
+    // достраиваем копии, чтобы лента была длиннее экрана
+    var tw=first[first.length-1].offsetLeft+first[first.length-1].offsetWidth-first[0].offsetLeft+40;
+    need=Math.max(2,Math.ceil(cw/Math.max(tw,1))+1);
+    for(var k=0;k<need;k++)first.forEach(function(e){var c=e.cloneNode(true);c.setAttribute("aria-hidden","true");w.appendChild(c)});
+    w.classList.add("auto");calc();addEventListener("resize",calc);addEventListener("load",calc);
+    var pos=0,hold=0,vis=true,last=0;
+    new IntersectionObserver(function(es){vis=es[0].isIntersecting}).observe(w);
+    w.addEventListener("pointerenter",function(){hold=Infinity});
+    w.addEventListener("pointerleave",function(){hold=performance.now()+300;pos=w.scrollLeft});
+    w.addEventListener("wheel",function(){hold=performance.now()+3000;pos=w.scrollLeft},{passive:true});
+    w.addEventListener("scroll",function(){if(hold>performance.now())pos=w.scrollLeft},{passive:true});
+    (function tick(t){var dt=Math.min(64,t-last);last=t;
+      var lb=document.getElementById("lb");
+      if(vis&&!document.hidden&&hold<t&&setW>0&&!(lb&&lb.classList.contains("on"))){pos+=dt*0.035;if(pos>=setW)pos-=setW;w.scrollLeft=pos}
+      requestAnimationFrame(tick)})(performance.now());
+  });
   var going=false,lenis=null;
   if(window.Lenis&&!reduce&&!d.classList.contains("lite")&&matchMedia("(hover:hover) and (pointer:fine)").matches){
     lenis=new Lenis({duration:1.1,easing:function(t){return 1-Math.pow(1-t,4)}});
@@ -72,7 +113,7 @@
     if(reduce){location.href=href;return}
     try{sessionStorage.setItem(KEY,"1")}catch(e){}
     d.classList.add("tout");
-    setTimeout(function(){location.href=href},d.classList.contains("lite")?450:1000);
+    setTimeout(function(){location.href=href},d.classList.contains("lite")?450:850);
     setTimeout(function(){going=false;d.classList.remove("tout")},4500); // если переход не случился, ничего не зависает
   }
   document.addEventListener("click",function(e){

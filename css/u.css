@@ -183,3 +183,111 @@ html.lite .grain{display:none}
 html,body{touch-action:pan-x pan-y;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .grps,.wks{overflow-y:hidden!important;overscroll-behavior-x:contain}
 .grps *,.wks *{-webkit-user-drag:none}
+
+/* остров: плотнее, прячется при прокрутке вниз; заголовки не прячутся под ним */
+.notch{transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .3s ease}
+html.nh .notch{transform:translate(-50%,-160%);opacity:0;pointer-events:none}
+.notch a{background:radial-gradient(70% 90% at 20% 0%,rgba(255,255,255,.2),transparent 70%),linear-gradient(140deg,rgba(255,255,255,.12),rgba(255,255,255,.02) 45%,rgba(255,255,255,.06)),rgba(14,14,16,.9)!important}
+h2,section[id],.hero{scroll-margin-top:96px}
+/* галочка согласия: видна на тёмном */
+.md input[type=checkbox],.lead input[type=checkbox]{box-shadow:inset 0 0 0 1.5px rgba(244,241,236,.6)!important;background-color:rgba(255,255,255,.06)!important}
+.md input[type=checkbox]:checked,.lead input[type=checkbox]:checked{background-color:var(--ac,#e5342b)!important;box-shadow:none!important;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5l3.2 3.2L13 5'/%3E%3C/svg%3E")!important}
+/* окно заявки: фон за ним темнее */
+.mo.on{background:rgba(8,8,10,.72)!important}
+
+/* работа крупно справа на первом экране (компьютер) */
+.hart{display:none}
+@media (min-width:1100px){
+.hart{display:block;position:absolute;right:clamp(20px,3vw,60px);top:50%;width:min(33vw,500px);height:min(66vh,600px);transform:translateY(-50%);pointer-events:none;z-index:0}
+.hart img{position:absolute;display:block;height:auto;border-radius:clamp(16px,2vw,26px);box-shadow:0 40px 80px -30px rgba(0,0,0,.85),0 0 0 1px rgba(244,241,236,.1)}
+.hart.k-ph .ha0{width:38%;left:8%;top:4%;transform:rotate(-6deg)}.hart.k-ph .ha1{width:38%;left:48%;top:20%;transform:rotate(5deg)}
+.hart.k-ad .ha0{width:42%;left:4%;top:6%;transform:rotate(-6deg)}.hart.k-ad .ha1{width:42%;left:46%;top:24%;transform:rotate(5deg)}
+.hart.k-lg .ha0{width:76%;left:0;top:4%;transform:rotate(-7deg)}.hart.k-lg .ha1{width:76%;left:24%;top:42%;transform:rotate(5deg)}
+.hero .wrap{position:relative;z-index:1}
+}
+html.lite .hart img{box-shadow:0 20px 40px -20px rgba(0,0,0,.8)}
+@media (max-width:640px){html.ck-on .hero{padding-bottom:150px}}
+@media (min-width:1100px){.hero h1{font-size:clamp(38px,5.6vw,84px)}}
+@media (min-width:1100px){.hero:has(.hart) h1{max-width:calc(100% - min(33vw,500px) - 50px)}}
+/* реклама: крупнее, чтобы текст читался без приближения */
+.grps .shots.ad{grid-template-columns:minmax(0,clamp(300px,30vw,440px))}
+@media (max-width:760px){.grps .grp:has(.ad){width:min(74vw,310px)}.grps .grp:has(.ad) .gh b{font-size:16px}}
+
+/* три телефона на первом экране страницы «Сайт» */
+@media (min-width:1100px){
+.hart.n3.k-ph .ha0{width:31%;left:0;top:16%;transform:rotate(-8deg)}
+.hart.n3.k-ph .ha1{width:31%;left:34%;top:0;transform:rotate(2deg);z-index:2}
+.hart.n3.k-ph .ha2{width:31%;left:68%;top:22%;transform:rotate(8deg)}
+}
+
+/* ===== примеры работ: ровная сетка, крупно, читаются без приближения ===== */
+.grps{display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(250px,21vw,310px),1fr));gap:clamp(28px,3vw,48px) clamp(20px,2.4vw,36px);align-items:start;justify-content:start}
+.grps .grp{display:grid;grid-template-rows:auto 1fr;justify-items:center;width:auto}
+.grps .gh{width:100%;min-width:0;justify-content:center;text-align:center;white-space:normal;min-height:0;margin-bottom:16px}
+.grps .shots,.grps .shots.ph,.grps .shots.ad,.grps .shots.lg{display:block;width:100%;max-width:100%;margin:0;padding:0}
+.grps .shots img{width:100%;height:auto;cursor:zoom-in}
+.grps .shots.lg{grid-column:auto}
+@media (min-width:1100px){.grps:has(.lg){grid-template-columns:repeat(auto-fill,minmax(clamp(320px,28vw,420px),1fr))}.grps:has(.ad){grid-template-columns:repeat(auto-fill,minmax(clamp(280px,24vw,360px),1fr))}}
+@media (max-width:760px){
+.grps{display:flex;flex-wrap:nowrap;gap:14px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;margin:0 calc(var(--pad)*-1);padding:0 var(--pad) 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-padding-inline:var(--pad)}
+.grps::-webkit-scrollbar{display:none}
+.grps .grp,.grps .grp:has(.ph){flex:none;scroll-snap-align:start;width:min(68vw,280px)}
+.grps .grp:has(.ad){width:min(76vw,320px)}
+.grps .grp:has(.lg){width:min(82vw,340px)}
+.grps .gh{min-height:2.6em;align-items:flex-end;margin-bottom:12px}
+.grps .gh b{font-size:16px}
+}
+/* крупный просмотр по нажатию */
+#lb{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:16px;background:rgba(8,8,10,.88);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s;cursor:zoom-out}
+#lb.on{opacity:1;visibility:visible;transition:opacity .35s ease}
+#lb img{max-width:min(94vw,560px);max-height:calc(100svh - 32px);width:auto;height:auto;border-radius:18px;box-shadow:0 30px 80px -20px rgba(0,0,0,.8);transform:scale(.96);transition:transform .45s cubic-bezier(.22,1,.36,1)}
+#lb.on img{transform:none}
+#lb.lg img{max-width:min(94vw,900px)}
+#lb button{position:absolute;top:max(14px,env(safe-area-inset-top));right:14px;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:26px;line-height:1}
+@media (prefers-reduced-motion:reduce){#lb,#lb img{transition:none}}
+
+/* три рекламные картинки на первом экране страницы «Реклама» */
+@media (min-width:1100px){
+.hart.n3.k-ad .ha0{width:32%;left:0;top:14%;transform:rotate(-8deg)}
+.hart.n3.k-ad .ha1{width:32%;left:34%;top:0;transform:rotate(2deg);z-index:2}
+.hart.n3.k-ad .ha2{width:32%;left:68%;top:22%;transform:rotate(8deg)}
+}
+
+/* ===== примеры работ: всегда один ряд; на компьютере едет сама, на телефоне листается рукой ===== */
+@media (min-width:761px){
+.grps{display:flex;flex-wrap:nowrap;align-items:flex-start;gap:clamp(24px,3vw,44px);overflow-x:auto;overflow-y:hidden;margin:0 calc(var(--pad)*-1);padding:0 var(--pad) 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch;grid-template-columns:none}
+.grps::-webkit-scrollbar{display:none}
+.grps .grp{flex:none;width:clamp(250px,20vw,300px)}
+.grps .grp:has(.ad){width:clamp(280px,22vw,340px)}
+.grps .grp:has(.lg){width:clamp(320px,26vw,400px)}
+.grps:has(.lg),.grps:has(.ad){grid-template-columns:none}
+}
+@media (min-width:901px) and (hover:hover) and (pointer:fine){
+.grps.auto{-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+}
+
+/* «Приложение в Telegram»: два примера, на компьютере по центру страницы без прокрутки */
+@media (min-width:761px){body[data-s="app"] .grps{justify-content:center;overflow:visible;margin:0;padding:0}}
+
+/* примеры работ: если помещаются, стоят по центру; если нет, листаются рукой */
+@media (min-width:761px){.grps{justify-content:safe center}}
+/* примеры работ: ряд всегда по центру страницы; если не помещается, карточки сжимаются (не меньше 200 px) */
+@media (min-width:761px){
+.grps{justify-content:safe center;padding-left:var(--pad);padding-right:var(--pad)}
+.grps .grp{flex:0 1 clamp(250px,20vw,300px);min-width:200px}
+.grps .grp:has(.ad){flex-basis:clamp(280px,22vw,340px)}
+.grps .grp:has(.lg){flex-basis:clamp(320px,26vw,400px)}
+body[data-s="app"] .grps{padding:0}
+}
+/* примеры работ: отступы по бокам, чтобы ряд не липнул к краям страницы */
+@media (min-width:761px){
+.grps{padding-left:clamp(48px,6vw,96px);padding-right:clamp(48px,6vw,96px);scroll-padding-inline:clamp(48px,6vw,96px)}
+.grps .grp{min-width:180px}
+body[data-s="app"] .grps{padding-left:0;padding-right:0}
+}
+/* работы на первом экране крупнее */
+@media (min-width:1100px){
+.hart{width:min(41vw,720px);height:min(80vh,740px);right:clamp(16px,2.4vw,48px)}
+.hero:has(.hart) h1{max-width:calc(100% - min(41vw,720px) - 40px)}
+}
+@media (min-width:1100px){.hero:has(.hart) h1{font-size:clamp(38px,4.6vw,70px)}}
