@@ -48,6 +48,10 @@
   }
   addEventListener("pageshow",function(e){going=false;if(window.__lenis&&!document.querySelector(".mo.on"))window.__lenis.start();if(e.persisted||d.classList.contains("tout")){d.classList.add("tlift");d.classList.remove("tout","tin");setTimeout(function(){d.classList.remove("tlift")},1200)}});
   // плавная прокрутка
+  // запрет приближения щипком и двойным касанием (iOS игнорирует user-scalable)
+  ["gesturestart","gesturechange","gestureend"].forEach(function(n){document.addEventListener(n,function(e){e.preventDefault()},{passive:false})});
+  document.addEventListener("touchmove",function(e){if(e.touches&&e.touches.length>1&&e.cancelable)e.preventDefault()},{passive:false});
+  var lastT=0;document.addEventListener("touchend",function(e){var t=Date.now();if(t-lastT<300&&e.cancelable&&!(e.target.closest&&e.target.closest("input,textarea,a,button,label")))e.preventDefault();lastT=t},{passive:false});
   var going=false,lenis=null;
   if(window.Lenis&&!reduce&&!d.classList.contains("lite")&&matchMedia("(hover:hover) and (pointer:fine)").matches){
     lenis=new Lenis({duration:1.1,easing:function(t){return 1-Math.pow(1-t,4)}});
